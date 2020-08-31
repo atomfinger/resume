@@ -3,7 +3,7 @@ name: Compiling
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   convert_resume:
