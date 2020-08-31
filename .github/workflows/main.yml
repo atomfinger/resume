@@ -8,17 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          sudo apt-get install xvfb libfontconfig wkhtmltopdf
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
-          args:
-            --include-in-header style.css 
-            --output=output/resume.html 
+          args: --include-in-header style.css
+            --output=output/resume.html
             resume.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: 
-            -t html --css style.css resume.md -o output/resume.pdf
+          args: -t html --css style.css resume.md -o output/resume.pdf
       - uses: actions/upload-artifact@master
         with:
           name: output
