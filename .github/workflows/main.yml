@@ -12,7 +12,7 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x' 
+          python-version: "3.x"
 
       - uses: actions/checkout@v2
       - run: |
@@ -29,13 +29,11 @@ jobs:
       - name: HTML -> DOCX
         uses: docker://pandoc/latex:2.9
         with:
-          args:
-            --output=output/resume.docx
+          args: --output=output/resume.docx
             output/resume.html
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
-
 
       - name: Bump version and push tag
         id: version_bump
@@ -44,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           RELEASE_BRANCHES: main
-      
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
