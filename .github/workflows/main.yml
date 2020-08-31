@@ -15,7 +15,10 @@ jobs:
           args: 
             --include-in-header style.css 
             --output=output/resume.html resume.md
-      - run: wkhtmltopdf ./output/resume.html ./output/resume.pdf
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: 
+            --output=output/resume.pdf output/resume.html
       - uses: actions/upload-artifact@master
         with:
           name: output
