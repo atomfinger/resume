@@ -17,7 +17,7 @@ jobs:
             resume.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: -t html --css style.css resume.md -o output/resume.pdf
+          args: -t context --css style.css resume.md -o output/resume.pdf
       - uses: actions/upload-artifact@master
         with:
           name: output
