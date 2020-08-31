@@ -12,14 +12,14 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: 
+            -- standalone
             --include-in-header style.css 
-            --output=output/resume.html resume.md
+            --output=output/resume.html 
+            resume.md
       - uses: docker://pandoc/latex:2.9
         with:
           args: 
-            --template style.tex
-            --variable papersize=A4
-            --output=output/resume.pdf resume.md
+            -t html --css style.css resume.md -o output/resume.pdf
       - uses: actions/upload-artifact@master
         with:
           name: output
