@@ -11,18 +11,18 @@ Experience
 
 Made banking systems for some of the biggest banks in the nordic region.
 
- * Made and maintained core web systems for banks
+ * Made and maintained core web systems for multiple banks
  * Improved the development process by
     * Creating new systems for integration testing
     * Authoring developer guidelines for cleaner more maintainable code
-    * Improving CI/CD pipelines to automate commong developer tasks
- * Team lead managing the team responsible for the the core bonus systems and the PCI compliant systems
- * Project architect where we guide new banks into the solution, and was responsible for the technical aspects of that solution
+    * Improving CI/CD pipelines
+ * I was a team lead managing the team responsible for our PCI compliant systems
+ * I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
 
 **Senior system developer**; Aspit AS (09.2013 - 05.2018)
 
-Made journaling systems for the privatized healthcare sector in Norway. Started out as a system, developer, later made into a senior developer and a team lead.
+Made journaling systems for the privatized healthcare sector in Norway. Started out as a system developer for the first 3 years, eventually got promoted to senior team lead.
 
  * Was responsible for the development of the core product
  * Worked closely with the business by planning and implementing new features
