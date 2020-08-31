@@ -8,16 +8,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          sudo apt-get install context
           mkdir output
+      - name: md to html
       - uses: docker://pandoc/latex:2.9
         with:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
-      - uses: docker://pandoc/latex:2.9
+      - name: html to pdf
+      - uses: fifsky/html-to-pdf-action@master
         with:
-          args: -t context --css style.css resume.md -o output/resume.pdf
+          htmlFile: ./output/resume.html
+          outputFile: ./output/resume.pdf
+          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
       - uses: actions/upload-artifact@master
         with:
           name: output
