@@ -3,8 +3,8 @@ John Mikael Gundersen
 
 Experience
 ---------
-05.2018 - 12.2020 
-:    **Senior Consultant**; TietoEvry
+05.2018 - 12.2020
+:                  **Senior Consultant**; TietoEvry
 
 Made banking systems for some of the biggest banks in the nordic region.
 
@@ -18,7 +18,7 @@ Made banking systems for some of the biggest banks in the nordic region.
  * Worked closely with partners in India
 
 09.2013 - 05.2018
-:     **Senior developer**; Aspit AS
+:                  **Senior developer**; Aspit AS
 
 Made journaling systems for the privatized healthcare sector in Norway. Started out as a developer, later made into a senior developre and a team lead.
 

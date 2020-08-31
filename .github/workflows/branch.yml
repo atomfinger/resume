@@ -15,7 +15,8 @@ jobs:
           python-version: "3.x"
 
       - uses: actions/checkout@v2
-      - run: |
+      - name: Install dependencies
+        run: |
           pip install weasyprint
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
