@@ -37,11 +37,11 @@ jobs:
 
       - name: Bump version and push tag
         id: version_bump
-        uses: ChloePlanet/github-tag-action@master
+        uses: anothrNick/github-tag-action@1.17.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
           RELEASE_BRANCHES: main
+          WITH_V: true
 
       - name: Create Release
         id: create_release
@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.version_bump.outputs.new_tag }}
-          release_name: Resume - ${{ steps.version_bump.outputs.new_tag }}
+          tag_name: ${{ steps.version_bump.outputs.tag  }}
+          release_name: Resume - ${{ steps.version_bump.outputs.tag  }}
           draft: false
           prerelease: false
 
