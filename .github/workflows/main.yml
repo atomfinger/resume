@@ -23,6 +23,13 @@ jobs:
             --output=output/resume.html
             resume.md
 
+      - name: HTML to DOCX
+        uses: docker://pandoc/latex:2.9
+        with:
+          args:
+            --output=output/resume.docx
+            output/resume.html
+
       - name: HTML to PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
