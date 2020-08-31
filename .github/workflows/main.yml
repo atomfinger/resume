@@ -8,20 +8,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          pip install weasyprint
           mkdir output
-      - name: md to html
+
+      - name: Markdown to HTML
         uses: docker://pandoc/latex:2.9
         with:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
-      - name: html to pdf
-        uses: fifsky/html-to-pdf-action@master
-        with:
-          htmlFile: ./output/resume.html
-          outputFile: ./output/resume.pdf
-          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
-      - uses: actions/upload-artifact@master
+
+      - name: HTML to PDF
+        run: weasyprint ./output/resume.html ./output/resume.pdf
+
+      - name: Publish
+        uses: actions/upload-artifact@master
         with:
           name: output
           path: output
