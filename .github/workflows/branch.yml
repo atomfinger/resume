@@ -43,3 +43,6 @@ jobs:
         with:
           name: resume
           path: output
+
+      - name: Verify number of PDF pages
+        run: ./test/pdf-page-test.sh
