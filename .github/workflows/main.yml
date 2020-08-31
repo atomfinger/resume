@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          apt-get install context
+          sudo apt-get install context
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
