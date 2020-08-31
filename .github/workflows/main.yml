@@ -11,8 +11,7 @@ jobs:
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
-          args: 
-            -- standalone
+          args:
             --include-in-header style.css 
             --output=output/resume.html 
             resume.md
