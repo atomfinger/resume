@@ -1,0 +1,36 @@
+name: Branch build
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  convert_resume:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - uses: actions/checkout@v2
+      - run: |
+          pip install weasyprint
+          mkdir output
+
+      - name: Markdown -> HTML
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --include-in-header style.css
+            --output=output/resume.html
+            resume.md
+
+      - name: HTML -> DOCX
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.docx
+            output/resume.html
+
+      - name: HTML -> PDF
+        run: weasyprint ./output/resume.html ./output/resume.pdf
