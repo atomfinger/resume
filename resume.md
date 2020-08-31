@@ -2,12 +2,12 @@ John Mikael Gundersen
 =====================
 
 #### Developer with a passion for automated testing, clean code and pipelines
-###### [jmgundersen.net](https://www.jmgundersen.net/) - john@jmgundersen.com - [github.com/atomfinger/](https://github.com/atomfinger/)
+###### [jmgundersen.net](https://www.jmgundersen.net/) - john@jmgundersen.com - [github.com/atomfinger](https://github.com/atomfinger/)
 
 Experience
 ----------
 
-**Senior Consultant**, TietoEvry (05.2018 - 12.2020)
+**Senior Consultant**, TietoEvry (05.2018 - current)
 
 Made banking systems for some of the biggest banks in the nordic region.
 
@@ -20,9 +20,9 @@ Made banking systems for some of the biggest banks in the nordic region.
  * Project architect where we guide new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
 
-**Senior developer**; Aspit AS (09.2013 - 05.2018)
+**Senior system developer**; Aspit AS (09.2013 - 05.2018)
 
-Made journaling systems for the privatized healthcare sector in Norway. Started out as a developer, later made into a senior developre and a team lead.
+Made journaling systems for the privatized healthcare sector in Norway. Started out as a system, developer, later made into a senior developer and a team lead.
 
  * Was responsible for the development of the core product
  * Worked closely with the business by planning and implementing new features
