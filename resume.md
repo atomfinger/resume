@@ -1,9 +1,13 @@
 John Mikael Gundersen
 =====================
 
+#### Developer with a passion for testing, clean code and automation
+###### [ [jmgundersen.net](https://www.jmgundersen.net/) ] . [ john@jmgundersen.com ]
+
 Experience
----------
-05.2018 - 12.2020 : **Senior Consultant**; TietoEvry
+----------
+
+**Senior Consultant**, TietoEvry (05.2018 - 12.2020)
 
 Made banking systems for some of the biggest banks in the nordic region.
 
@@ -16,7 +20,7 @@ Made banking systems for some of the biggest banks in the nordic region.
  * Project architect where we guide new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
 
-09.2013 - 05.2018 : **Senior developer**; Aspit AS
+**Senior developer**; Aspit AS (09.2013 - 05.2018)
 
 Made journaling systems for the privatized healthcare sector in Norway. Started out as a developer, later made into a senior developre and a team lead.
 
@@ -26,14 +30,12 @@ Made journaling systems for the privatized healthcare sector in Norway. Started 
  * Worked closely with an outsourcing team in Vietnam
 
 Education
----------
-2010 - 2014 : **Bachelor of science, Computer Science**; Aberystwyth University
+----------
+**Bachelor of science, Computer Science**, Aberystwyth University (2010 - 2014)
 
-2009 - 2010
-:   **Data Media**; Birkeland Folkehøgskole
+**Data Media**, Birkeland Folkehøgskole (2009 - 2010)
 
-2006 - 2008
-:   **Studiespesialiserende**; Bø Vgs
+**Studiespesialiserende**, Bø Vgs (2006 - 2008)
 
 Skills
 -------
