@@ -13,9 +13,8 @@ Made banking systems for some of the biggest banks in the nordic region.
 
  * Made and maintained core web systems for multiple banks
  * Improved the development process by
-    * Creating new systems for integration testing
+    * Creating new systems for integration testing and improved CI/CD pipelines
     * Authoring developer guidelines for cleaner more maintainable code
-    * Improving CI/CD pipelines
  * I was a team lead managing the team responsible for our PCI compliant systems
  * I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
@@ -26,7 +25,6 @@ Made journaling systems for the privatized healthcare sector in Norway. Started 
 
  * Was responsible for the development of the core product
  * Worked closely with the business by planning and implementing new features
- * Team lead for the one development team
  * Worked closely with an outsourcing team in Vietnam
 
 Education
