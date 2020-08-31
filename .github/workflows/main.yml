@@ -38,14 +38,30 @@ jobs:
 
 
       - name: Bump version and push tag
+        id: version_bump
         uses: ChloePlanet/github-tag-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           RELEASE_BRANCHES: main
       
-      - name: Publish
-        uses: actions/upload-artifact@master
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: output
-          path: output
+          tag_name: ${{ steps.version_bump_new_tag }}
+          release_name: Resume ${{ steps.version_bump_new_tag }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset PDF
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./output/resume.pdf
+          asset_name: resume.pdf
+          asset_content_type: application/pdf
