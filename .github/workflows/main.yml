@@ -8,18 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          sudo apt-get install xvfb libfontconfig wkhtmltopdf
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
           args: 
             --include-in-header style.css 
             --output=output/resume.html resume.md
-      - name: html to pdf
-        uses: fifsky/html-to-pdf-action@master
-        with:
-          htmlFile: ./output/resume.html
-          outputFile: ./output/resume.pdf
-          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
+      - run: wkhtmltopdf ./output/resume.html ./output/resume.pdf
       - uses: actions/upload-artifact@master
         with:
           name: output
