@@ -32,6 +32,13 @@ jobs:
       - name: HTML -> DOCX
         run: |
           libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
+          mv resume.docx ./output/resume.docx
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
+
+      - name: Generate artifacts 
+        uses: actions/upload-artifact@v2
+        with:
+          name: resume
+          path: output
