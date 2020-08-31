@@ -6,6 +6,11 @@ jobs:
   convert_resume:
     runs-on: ubuntu-18.04
     steps:
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' 
+
       - uses: actions/checkout@v2
       - run: |
           pip install weasyprint
