@@ -11,7 +11,9 @@ jobs:
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/resume.pdf resume.md
+          args: |
+            --include-in-header style.css 
+            --output=output/resume.html resume.md
       - uses: actions/upload-artifact@master
         with:
           name: output
