@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  convert_resume:
+  release_resume:
     runs-on: ubuntu-18.04
     steps:
       - name: Set up Python 3.x
