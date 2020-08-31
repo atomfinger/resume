@@ -12,6 +12,7 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: |
+            |
             --include-in-header style.css 
             --output=output/resume.html resume.md
       - uses: actions/upload-artifact@master
