@@ -31,7 +31,7 @@ jobs:
 
       - name: HTML -> DOCX
         run: |
-          ibreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
+          libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
