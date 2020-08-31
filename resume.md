@@ -1,8 +1,8 @@
 John Mikael Gundersen
 =====================
 
-#### Developer with a passion for testing, clean code and automation
-###### [ [jmgundersen.net](https://www.jmgundersen.net/) ] . [ john@jmgundersen.com ]
+#### Developer with a passion for automated testing, clean code and pipelines
+###### [jmgundersen.net](https://www.jmgundersen.net/) - john@jmgundersen.com - [github.com/atomfinger/](https://github.com/atomfinger/)
 
 Experience
 ----------
@@ -38,7 +38,7 @@ Education
 **Studiespesialiserende**, Bø Vgs (2006 - 2008)
 
 Skills
--------
+----------
 **Primary languages:** Java, C#, Kotlin
 
 **Secondary languages:** Python, Groovy, C/C++, PHP, Ruby, JS/TS
@@ -46,8 +46,6 @@ Skills
 **Primary technologies:** k8s, ICP, Docker, Jenkins, Spring, JUnit, Spock, .net/.net core, DevExpress
 
 Other
-------
+----------
  * Speaks and writes Norwegian and English fluently
- * Am a nerd, collects retro game consoles and plays D&D
- * Has too many headphones
  * Writes about programming on his blog
