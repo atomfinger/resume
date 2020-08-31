@@ -10,13 +10,13 @@ jobs:
       - run: |
           mkdir output
       - name: md to html
-      - uses: docker://pandoc/latex:2.9
+        uses: docker://pandoc/latex:2.9
         with:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
       - name: html to pdf
-      - uses: fifsky/html-to-pdf-action@master
+        uses: fifsky/html-to-pdf-action@master
         with:
           htmlFile: ./output/resume.html
           outputFile: ./output/resume.pdf
