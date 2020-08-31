@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  convert_resume:
+  release_resume:
     runs-on: ubuntu-18.04
     steps:
       - name: Set up Python 3.x
@@ -15,8 +15,12 @@ jobs:
           python-version: "3.x"
 
       - uses: actions/checkout@v2
-      - run: |
+      - name: Install dependencies
+        run: |
           pip install weasyprint
+          sudo add-apt-repository ppa:libreoffice/ppa
+          sudo apt-get update
+          sudo apt-get install libreoffice
           mkdir output
 
       - name: Markdown -> HTML
@@ -27,10 +31,9 @@ jobs:
             resume.md
 
       - name: HTML -> DOCX
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: --output=output/resume.docx
-            output/resume.html
+        run: |
+          libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
+          mv resume.docx ./output/resume.docx
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
