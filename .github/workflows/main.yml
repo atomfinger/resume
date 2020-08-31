@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           mkdir output
-      - uses: docker://pandoc/core
+      - uses: docker://pandoc/latex:2.9
         with:
           args: --output=output/resume.pdf resume.md
       - uses: actions/upload-artifact@master
