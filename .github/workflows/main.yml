@@ -1,6 +1,9 @@
 name: Compiling
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   convert_resume:
@@ -33,6 +36,13 @@ jobs:
       - name: HTML to PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
+
+      - name: Bump version and push tag
+        uses: ChloePlanet/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+      
       - name: Publish
         uses: actions/upload-artifact@master
         with:
