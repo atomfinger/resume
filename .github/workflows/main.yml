@@ -86,3 +86,15 @@ jobs:
           asset_path: ./output/resume.docx
           asset_name: resume.docx
           asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+      - name: Copy HTML file to public
+        run: |
+          mkdir public
+          cp ./output/resume.html ./public/index.html
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        publish_branch: github-page 
