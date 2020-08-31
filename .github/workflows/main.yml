@@ -19,21 +19,21 @@ jobs:
           pip install weasyprint
           mkdir output
 
-      - name: Markdown to HTML
+      - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
 
-      - name: HTML to DOCX
+      - name: HTML -> DOCX
         uses: docker://pandoc/latex:2.9
         with:
           args:
             --output=output/resume.docx
             output/resume.html
 
-      - name: HTML to PDF
+      - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
 
