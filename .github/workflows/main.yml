@@ -8,7 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          sudo apt-get install xvfb libfontconfig wkhtmltopdf
           mkdir output
       - uses: docker://pandoc/latex:2.9
         with:
@@ -18,7 +17,9 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: 
-            --output=output/resume.pdf output/resume.html
+            --template style.tex
+            --variable papersize=A4
+            --output=output/resume.pdf resume.md
       - uses: actions/upload-artifact@master
         with:
           name: output
