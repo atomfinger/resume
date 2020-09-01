@@ -1,6 +1,8 @@
 #!/bin/sh
+cd output;
 echo $(pwd)
-NUM_OF_PAGES=$(exiftool -T -filename -PageCount -s3 -ext pdf ./output/resume.pdf);
+echo $(ls)
+NUM_OF_PAGES=$(exiftool -T -filename -PageCount -s3 -ext pdf resume.pdf);
 if (( $NUM_OF_PAGES > 1 )); then
     return 1;
 fi
