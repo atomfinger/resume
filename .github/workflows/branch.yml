@@ -14,6 +14,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
+
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
@@ -22,15 +25,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install libreoffice
           sudo apt-get install poppler-utils
-          sudo apt-get install -y ispell
           mkdir output
-
-      - name: Markdown -> txt
-        uses: docker://pandoc/latex:2.9
-        with:
-          args:
-            --output=output/resume.txt
-            resume.md
 
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
@@ -47,13 +42,11 @@ jobs:
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
-      - name: Generate artifacts 
+      - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
           name: resume
           path: output
 
       - name: Verify number of PDF pages
-        run: |
-          sudo bash ./test/pdf-page-test.sh
-          ispell ./output/resume.txt
+        run: sudo bash ./test/pdf-page-test.sh
