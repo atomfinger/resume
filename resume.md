@@ -46,4 +46,4 @@ Skills
 Other
 ----------
  * Speaks and writes Norwegian and English fluently
- * Writes about programming on his blog
+ * Writes about programming on his [blog](https://www.jmgundersen.net/blog)
