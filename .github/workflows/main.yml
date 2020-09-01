@@ -14,14 +14,14 @@ jobs:
         with:
           python-version: "3.x"
 
+      - uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           pip install weasyprint
           sudo apt-get install poppler-utils
           sudo apt-get install -y aspell
           mkdir output
-
-      - uses: actions/checkout@v2
 
       - name: Check spelling
         uses: sbates130272/spellcheck-github-actions@v0.6.0
