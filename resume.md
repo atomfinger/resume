@@ -19,6 +19,18 @@ Made banking systems for some of the biggest banks in the nordic region.
  * I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
 
+**Senior Consultant**, TietoEvry (05.2018 - current)
+
+Made banking systems for some of the biggest banks in the nordic region.
+
+ * Made and maintained core web systems for multiple banks
+ * Improved the development process by
+    * Creating new systems for integration testing and improved CI/CD pipelines
+    * Authoring developer guidelines for cleaner more maintainable code
+ * I was a team lead managing the team responsible for our PCI compliant systems
+ * I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution
+ * Worked closely with partners in India
+
 **Senior system developer**; Aspit AS (09.2013 - 05.2018)
 
 Made journaling systems for the privatized healthcare sector in Norway. Started out as a system developer for the first 3 years, eventually got promoted to senior team lead.
