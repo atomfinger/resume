@@ -14,18 +14,23 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
-
-      - uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: Install light dependencies
         run: |
           pip install weasyprint
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
-          sudo apt-get install libreoffice
           sudo apt-get install poppler-utils
+          sudo apt-get install -y aspell
           mkdir output
+
+      - uses: actions/checkout@v2
+
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
+
+      - name: Install heave dependencies
+        run: |
+          sudo apt-get install libreoffice
 
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
