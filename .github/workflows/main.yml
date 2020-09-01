@@ -38,6 +38,9 @@ jobs:
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
+      - name: Verify number of PDF pages
+        run: sudo bash ./test/pdf-page-test.sh
+
       - name: Bump version and push tag
         id: version_bump
         uses: anothrNick/github-tag-action@1.17.2

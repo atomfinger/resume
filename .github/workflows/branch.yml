@@ -21,6 +21,7 @@ jobs:
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
           sudo apt-get install libreoffice
+          sudo apt-get install poppler-utils 
           mkdir output
 
       - name: Markdown -> HTML
@@ -43,3 +44,6 @@ jobs:
         with:
           name: resume
           path: output
+
+      - name: Verify number of PDF pages
+        run: sudo bash ./test/pdf-page-test.sh
