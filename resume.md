@@ -19,7 +19,7 @@ Made banking systems for some of the biggest banks in the nordic region.
  * I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution
  * Worked closely with partners in India
 
-**Senior system developer**; Aspit AS (09.2013 - 05.2018)
+**Senior system developer**, Aspit AS (09.2013 - 05.2018)
 
 Made journaling systems for the privatized healthcare sector in Norway. Started out as a system developer for the first 3 years, eventually got promoted to senior team lead.
 
