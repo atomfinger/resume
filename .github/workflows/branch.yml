@@ -15,14 +15,16 @@ jobs:
           python-version: "3.x"
 
       - uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           pip install weasyprint
-          sudo add-apt-repository ppa:libreoffice/ppa
-          sudo apt-get update
-          sudo apt-get install libreoffice
-          sudo apt-get install poppler-utils 
+          sudo apt-get install poppler-utils
+          sudo apt-get install -y aspell
           mkdir output
+
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
 
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
@@ -31,15 +33,21 @@ jobs:
             --output=output/resume.html
             resume.md
 
+      - name: HTML -> PDF
+        run: weasyprint ./output/resume.html ./output/resume.pdf
+
+      - name: Install libreoffice
+        run: |
+          sudo add-apt-repository ppa:libreoffice/ppa
+          sudo apt-get update
+          sudo apt-get install libreoffice
+
       - name: HTML -> DOCX
         run: |
           libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
           mv resume.docx ./output/resume.docx
 
-      - name: HTML -> PDF
-        run: weasyprint ./output/resume.html ./output/resume.pdf
-
-      - name: Generate artifacts 
+      - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
           name: resume
