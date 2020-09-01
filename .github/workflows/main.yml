@@ -26,6 +26,11 @@ jobs:
       - name: Check spelling
         uses: sbates130272/spellcheck-github-actions@v0.6.0
 
+      - name: Verify URLs
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          file-path: ./resume.md
+
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:
