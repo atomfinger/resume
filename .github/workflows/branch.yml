@@ -24,6 +24,13 @@ jobs:
           sudo apt-get install poppler-utils 
           mkdir output
 
+      - name: Markdown -> txt
+        uses: docker://pandoc/latex:2.9
+        with:
+          args:
+            --output=output/resume.txt
+            resume.md
+
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:
@@ -46,4 +53,6 @@ jobs:
           path: output
 
       - name: Verify number of PDF pages
-        run: sudo bash ./test/pdf-page-test.sh
+        run: |
+          sudo bash ./test/pdf-page-test.sh
+          ispell ./output/resume.txt
