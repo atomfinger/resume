@@ -14,6 +14,8 @@ jobs:
         with:
           python-version: "3.x"
 
+      - uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           pip install weasyprint
@@ -21,7 +23,8 @@ jobs:
           sudo apt-get install -y aspell
           mkdir output
 
-      - uses: actions/checkout@v2
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
 
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
@@ -29,9 +32,6 @@ jobs:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
-
-      - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
