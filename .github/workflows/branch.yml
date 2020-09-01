@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install light dependencies
+      - name: Install dependencies
         run: |
           pip install weasyprint
           sudo apt-get install poppler-utils
@@ -23,15 +23,15 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
-
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:
           args: --include-in-header style.css
             --output=output/resume.html
             resume.md
+
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
 
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
