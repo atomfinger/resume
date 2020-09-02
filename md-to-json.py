@@ -1,5 +1,6 @@
 
 import re
+from enum import Enum
 
 
 def isEmptyLine(line):
@@ -11,89 +12,145 @@ def matchMarkupCharacter(line, markupCharacter):
 
 
 def isMarkupLine(line):
-    for markupCharacter in markupCharacters:
-        if matchMarkupCharacter(line, markupCharacter):
+    markupLineTypes = [
+        LineType.TITLE,
+        LineType.SECTION,
+    ]
+    map = getLineTypeMap()
+    for key in map.keys():
+        if key in markupLineTypes and re.compile(map[key]).match(line):
             return True
     return False
 
 
-def isTitleMarkup(line):
-    return not isEmptyLine(line) and matchMarkupCharacter(line, titleMarkupCharacter)
+class SectionTypes(Enum):
+    EXPERIENCE = 1
+    EDUCATION = 2
+    SKILLS = 3
+    OTHER = 4
 
 
-def isCategoryMarkup(line):
-    return not isEmptyLine(line) and matchMarkupCharacter(line, categoryMarkupCharacter)
+class LineType(Enum):
+    TITLE = 1
+    SUBTITLE = 2
+    CONTACT = 3
+    SECTION = 4
+    SUBSECTION_TITLE = 5
+    LIST = 7
+    SUBLIST = 8
+    TEXT = 9
+    NOTHING = 98
+    UNKNOWN = 99
 
 
-def isTaglineLine(line):
-    p = re.compile('^#{4} ')
-    return p.match(line)
+def getLineTypeMap():
+    return {
+        LineType.TITLE: "^={1,} *$",
+        LineType.SUBTITLE: "^#{4} .*$",
+        LineType.CONTACT: "^#{6} .*$",
+        LineType.SECTION: "^-{1,} *$",
+        LineType.SUBSECTION_TITLE: "^\*{2}(.*(\)))|(\*{2}.*)$",
+        LineType.LIST: "^ \* .*",
+        LineType.SUBLIST: "^( ){4,}\* .*",
+        LineType.TEXT: "^.{1,}$"
+    }
 
 
-def isContactInformationLine(line):
-    p = re.compile('^#{6} ')
-    return p.match(line)
+def readExperiences(content, indexFrom, indexTo):
+    list = []
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType is LineType.SUBSECTION_TITLE:
+            nextSubSectionTitle = getNextSubsectionTitleIndex(content, i + 1)
+            list.append(readExperience(content, i, nextSubSectionTitle))
+    return list
 
 
-def parseContactInformation(line):
-    return line  # TODO
+def readExperience(content, indexFrom, indexTo):
+    dict = {}
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType is LineType.NOTHING or lineType is LineType.UNKNOWN:
+            continue
+        if lineType is LineType.SUBSECTION_TITLE:
+            dict['title'] = value
+        if lineType is LineType.TEXT:
+            dict['description'] = value
+    return dict
 
 
-def parseCategoryContent(content, i, dict):
-    if (i == len(content)):
-        return {'dictionary': dict, 'index': i}
-    line = content[i]
-    if (len(content) == i):
-        return {'dictionary': dict, 'index': i}
-    if isEmptyLine(line):
-        return parseCategoryContent(content, i + 1, dict)
-    if (i + 1) < len(content) and isMarkupLine(content[i+1]):
-        nextLine = content[i + 1]
-        if isCategoryMarkup(nextLine):
-            return {'dictionary': dict, 'index': i}
-    return parseCategoryContent(content, i + 1, dict)
+def categorizeLine(line):
+    map = getLineTypeMap()
+    for key in map.keys():
+        if re.compile(map[key]).match(line):
+            return key
+    if not line.strip():
+        return LineType.NOTHING
+    return LineType.UNKNOWN
 
 
-def parseContent(content, i, dict):
-    if (i == len(content)):
-        return dict
-    line = content[i]
-    if isEmptyLine(line) or isMarkupLine(line):
-        return parseContent(content, i+1, dict)
+def parseContent(content):
+    lines = []
+    for i in range(len(content)):
+        line = content[i]
+        lineToCategorize = line
+        if i+1 < len(content) and isMarkupLine(content[i+1]):
+            lineToCategorize = content[i+1]
+        category = categorizeLine(lineToCategorize)
+        if isMarkupLine(line):
+            category = LineType.NOTHING
+        lines.append({
+            "value": line.strip(),
+            "type": category
+        })
+    return lines
 
-    if (i + 1) < len(content) and isMarkupLine(content[i+1]):
-        nextLine = content[i + 1]
-        if isTitleMarkup(nextLine):
-            dict["title"] = line
-            return parseContent(content, i + 1, dict)
-        if isCategoryMarkup(nextLine):
-            if not 'categories' in dict.keys():
-                dict['categories'] = []
-            categoryDict = {'categoryTitle': line}
-            result = parseCategoryContent(content, i + 1, categoryDict)
-            print(result)
-            dict['categories'].append(result['dictionary'])
-            return parseContent(content, result['index'], dict)
 
-    if isTaglineLine(line):
-        dict['tagline'] = line.replace('#', '').strip()
+def getNextSubsectionTitleIndex(content, currentIndex):
+    return getNextLineTypeSection(content, currentIndex, LineType.SUBSECTION_TITLE)
 
-    if isContactInformationLine(line):
-        dict['contactInformation'] = line.replace('#', '').strip()
 
-    return parseContent(content, i+1, dict)
+def getNextSectionIndex(content, currentIndex):
+    return getNextLineTypeSection(content, currentIndex, LineType.SECTION)
+
+
+def getNextLineTypeSection(content, currentIndex, lineType):
+    if currentIndex == len(content):
+        return currentIndex
+    if content[currentIndex]['type'] == lineType:
+        return currentIndex
+    return getNextLineTypeSection(content, currentIndex+1, lineType)
 
 
 with open('resume.md') as f:
     content = f.readlines()
 
-content = [x.strip() for x in content]
+content = content
 
-titleMarkupCharacter = '='
-categoryMarkupCharacter = '-'
-markupCharacters = [titleMarkupCharacter, categoryMarkupCharacter, "_"]
+dict = {}
+parsedContent = parseContent(content)
 
-dict = {'resume': {}}
-parseContent(content, 0, dict['resume'])
+for i in range(len(parsedContent)):
+    line = parsedContent[i]
+    lineType = line['type']
+    value = line['value']
+    if lineType is LineType.NOTHING or lineType is LineType.UNKNOWN:
+        continue
+
+    if lineType is LineType.TITLE:
+        dict['title'] = value
+    if lineType is LineType.SUBTITLE:
+        dict['subtitle'] = value
+    if lineType is LineType.CONTACT:
+        dict['contact'] = value
+
+    if lineType is LineType.SECTION:
+        nextSectionIndex = getNextSectionIndex(parsedContent, i + 1)
+        if value.lower() == 'experience':
+            dict['experience'] = readExperiences(parsedContent, i, nextSectionIndex)
 
 print(dict)
