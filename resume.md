@@ -6,7 +6,6 @@ John Mikael Gundersen
 
 Experience
 ----------
-
 **Senior Consultant**, TietoEvry (05.2018 - current)
 
 Made banking systems for some of the biggest banks in the nordic region.
