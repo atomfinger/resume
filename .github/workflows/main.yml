@@ -41,6 +41,12 @@ jobs:
             --output=output/resume.html
             resume.md
 
+      - name: Markdown -> TXT
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.txt
+            resume.md
+
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
@@ -106,7 +112,7 @@ jobs:
           asset_path: ./output/resume.docx
           asset_name: resume.docx
           asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
-      
+
       - name: Upload JSON
         uses: actions/upload-release-asset@v1
         env:
@@ -117,11 +123,22 @@ jobs:
           asset_name: resume.json
           asset_content_type: application/json
 
+      - name: Upload TXT
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output/resume.txt
+          asset_name: resume.txt
+          asset_content_type: application/text
+
       - name: Copy HTML file to public
         run: |
           mkdir public
           cp ./output/resume.html ./public/index.html
           cp ./output/resume.json ./public/resume.json
+          cp ./output/resume.txt ./public/resume.txt
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

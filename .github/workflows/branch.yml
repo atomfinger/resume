@@ -41,6 +41,12 @@ jobs:
             --output=output/resume.html
             resume.md
 
+      - name: Markdown -> TXT
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.txt
+            resume.md
+
       - name: HTML -> PDF
         run: weasyprint ./output/resume.html ./output/resume.pdf
 
