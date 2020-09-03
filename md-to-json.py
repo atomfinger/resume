@@ -9,13 +9,6 @@ import json
 #
 
 
-class SectionTypes(Enum):
-    EXPERIENCE = 1
-    EDUCATION = 2
-    SKILLS = 3
-    OTHER = 4
-
-
 class LineType(Enum):
     TITLE = 1
     SUBTITLE = 2
