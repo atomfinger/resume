@@ -1,14 +1,8 @@
 
 import re
 from enum import Enum
-
-
-def isEmptyLine(line):
-    return not line.strip()
-
-
-def matchMarkupCharacter(line, markupCharacter):
-    return isEmptyLine(line.replace(markupCharacter, ""))
+import sys
+import json
 
 
 def isMarkupLine(line):
@@ -74,12 +68,20 @@ def readExperience(content, indexFrom, indexTo):
         line = content[i]
         lineType = line['type']
         value = line['value']
-        if lineType is LineType.NOTHING or lineType is LineType.UNKNOWN:
-            continue
         if lineType is LineType.SUBSECTION_TITLE:
             dict['title'] = value
         if lineType is LineType.TEXT:
             dict['description'] = value
+        if lineType is LineType.LIST:
+            if 'responsibilities' not in dict.keys():
+                dict['responsibilities'] = []
+            dict['responsibilities'].append(
+                {'description': parseListLine(value)})
+        if lineType is LineType.SUBLIST:
+            if 'clarifications' not in dict['responsibilities'][-1].keys():
+                dict['responsibilities'][-1]['clarifications'] = []
+            dict['responsibilities'][-1]['clarifications'].append(
+                parseListLine(value))
     return dict
 
 
@@ -91,6 +93,10 @@ def categorizeLine(line):
     if not line.strip():
         return LineType.NOTHING
     return LineType.UNKNOWN
+
+
+def parseListLine(line):
+    return line.replace("*", "").strip()
 
 
 def parseContent(content):
@@ -126,31 +132,89 @@ def getNextLineTypeSection(content, currentIndex, lineType):
     return getNextLineTypeSection(content, currentIndex+1, lineType)
 
 
-with open('resume.md') as f:
-    content = f.readlines()
+def readEducations(content, indexFrom, indexTo):
+    list = []
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType != LineType.SUBSECTION_TITLE:
+            continue
+        list.append(value)
+    return list
 
-content = content
 
-dict = {}
-parsedContent = parseContent(content)
+def readSkills(content, indexFrom, indexTo):
+    list = []
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType != LineType.SUBSECTION_TITLE:
+            continue
+        list.append(value)
+    return list
 
-for i in range(len(parsedContent)):
-    line = parsedContent[i]
+
+def readOther(content, indexFrom, indexTo):
+    list = []
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType != LineType.LIST:
+            continue
+        list.append(parseListLine(value))
+    return list
+
+
+def parseSection(content, indexFrom):
+    line = parsedContent[indexFrom]
     lineType = line['type']
     value = line['value']
-    if lineType is LineType.NOTHING or lineType is LineType.UNKNOWN:
-        continue
+    nextSectionIndex = getNextSectionIndex(parsedContent, indexFrom + 1)
+    if value.lower() == 'experience':
+        result = readExperiences(parsedContent, indexFrom, nextSectionIndex)
+    elif value.lower() == 'education':
+        result = readEducations(parsedContent, indexFrom, nextSectionIndex)
+    elif value.lower() == 'skills':
+        result = readSkills(parsedContent, indexFrom, nextSectionIndex)
+    elif value.lower() == 'other':
+        result = readOther(parsedContent, indexFrom, nextSectionIndex)
+    else:
+        raise Exception("Unsupported section type: " + value)
+    return {
+        'title': value.lower(),
+        'value': result
+    }
 
-    if lineType is LineType.TITLE:
-        dict['title'] = value
-    if lineType is LineType.SUBTITLE:
-        dict['subtitle'] = value
-    if lineType is LineType.CONTACT:
-        dict['contact'] = value
 
-    if lineType is LineType.SECTION:
-        nextSectionIndex = getNextSectionIndex(parsedContent, i + 1)
-        if value.lower() == 'experience':
-            dict['experience'] = readExperiences(parsedContent, i, nextSectionIndex)
+def generateJson(content):
+    dict = {}
+    for i in range(len(content)):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
 
-print(dict)
+        if lineType is LineType.TITLE:
+            dict['title'] = value
+        if lineType is LineType.SUBTITLE:
+            dict['subtitle'] = value
+        if lineType is LineType.CONTACT:
+            dict['contact'] = value
+
+        if lineType is LineType.SECTION:
+            result = parseSection(content, i)
+            dict[result['title']] = result['value']
+    return dict
+
+file = sys.argv[1]
+with open(file) as f:
+    content = f.readlines()
+parsedContent = [x for x in parseContent(content) if (
+    x['type'] != LineType.NOTHING and x['type'] != LineType.UNKNOWN
+)]
+dict = generateJson(parsedContent)
+json_string = json.dumps(dict, ensure_ascii=False).encode('utf8')
+print(json_string.decode())
+sys.exit(0)
