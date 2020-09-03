@@ -1,12 +1,11 @@
 John Mikael Gundersen
-=====================
+===================
 
 #### Developer with a passion for automated testing, clean code and pipelines
 ###### [jmgundersen.net](https://www.jmgundersen.net/) - john@jmgundersen.com - [github.com/atomfinger](https://github.com/atomfinger/)
 
 Experience
 ----------
-
 **Senior Consultant**, TietoEvry (05.2018 - current)
 
 Made banking systems for some of the biggest banks in the nordic region.

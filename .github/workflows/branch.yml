@@ -31,6 +31,9 @@ jobs:
         with:
           file-path: ./resume.md
 
+      - name: Markdown -> JSON
+        run: python md-to-json.py resume.md > ./output/resume.json
+
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:

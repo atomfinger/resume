@@ -31,6 +31,9 @@ jobs:
         with:
           file-path: ./resume.md
 
+      - name: Markdown -> JSON
+        run: python md-to-json.py resume.md > ./output/resume.json
+
       - name: Markdown -> HTML
         uses: docker://pandoc/latex:2.9
         with:
@@ -103,11 +106,22 @@ jobs:
           asset_path: ./output/resume.docx
           asset_name: resume.docx
           asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      
+      - name: Upload JSON
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./output/resume.json
+          asset_name: resume.json
+          asset_content_type: application/json
 
       - name: Copy HTML file to public
         run: |
           mkdir public
           cp ./output/resume.html ./public/index.html
+          cp ./output/resume.json ./public/resume.json
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
