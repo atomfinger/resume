@@ -4,16 +4,9 @@ import sys
 import json
 
 
-def isMarkupLine(line):
-    markupLineTypes = [
-        LineType.TITLE,
-        LineType.SECTION,
-    ]
-    map = getLineTypeMap()
-    for key in map.keys():
-        if key in markupLineTypes and re.compile(map[key]).match(line):
-            return True
-    return False
+#
+#   CLASS DEFINITIONS
+#
 
 
 class SectionTypes(Enum):
@@ -36,66 +29,9 @@ class LineType(Enum):
     UNKNOWN = 99
 
 
-def getLineTypeMap():
-    return {
-        LineType.TITLE: "^={1,} *$",
-        LineType.SUBTITLE: "^#{4} .*$",
-        LineType.CONTACT: "^#{6} .*$",
-        LineType.SECTION: "^-{1,} *$",
-        LineType.SUBSECTION_TITLE: "^\*{2}(.*(\)))|(\*{2}.*)$",
-        LineType.LIST: "^ \* .*",
-        LineType.SUBLIST: "^( ){4,}\* .*",
-        LineType.TEXT: "^.{1,}$"
-    }
-
-
-def readExperiences(content, indexFrom, indexTo):
-    list = []
-    for i in range(indexFrom, indexTo):
-        line = content[i]
-        lineType = line['type']
-        value = line['value']
-        if lineType is LineType.SUBSECTION_TITLE:
-            nextSubSectionTitle = getNextSubsectionTitleIndex(content, i + 1)
-            list.append(readExperience(content, i, nextSubSectionTitle))
-    return list
-
-
-def readExperience(content, indexFrom, indexTo):
-    dict = {}
-    for i in range(indexFrom, indexTo):
-        line = content[i]
-        lineType = line['type']
-        value = line['value']
-        if lineType is LineType.SUBSECTION_TITLE:
-            experienceInfo = parseExperienceHeadingLine(value)
-            dict['title'] = experienceInfo['title']
-            dict['employer'] = experienceInfo['employer']
-            dict['start'] = experienceInfo['start']
-            dict['end'] = experienceInfo['end']
-        if lineType is LineType.TEXT:
-            dict['description'] = value
-        if lineType is LineType.LIST:
-            if 'responsibilities' not in dict.keys():
-                dict['responsibilities'] = []
-            dict['responsibilities'].append(
-                {'description': parseListLine(value)})
-        if lineType is LineType.SUBLIST:
-            if 'clarifications' not in dict['responsibilities'][-1].keys():
-                dict['responsibilities'][-1]['clarifications'] = []
-            dict['responsibilities'][-1]['clarifications'].append(
-                parseListLine(value))
-    return dict
-
-
-def categorizeLine(line):
-    map = getLineTypeMap()
-    for key in map.keys():
-        if re.compile(map[key]).match(line):
-            return key
-    if not line.strip():
-        return LineType.NOTHING
-    return LineType.UNKNOWN
+#
+#   DUMB PARSING PURE TEXT
+#
 
 
 def parseListLine(line):
@@ -166,20 +102,48 @@ def parseContent(content):
     return lines
 
 
-def getNextSubsectionTitleIndex(content, currentIndex):
-    return getNextLineTypeSection(content, currentIndex, LineType.SUBSECTION_TITLE)
+#
+#   READERS
+#
 
 
-def getNextSectionIndex(content, currentIndex):
-    return getNextLineTypeSection(content, currentIndex, LineType.SECTION)
+def readExperiences(content, indexFrom, indexTo):
+    list = []
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType is LineType.SUBSECTION_TITLE:
+            nextSubSectionTitle = getNextSubsectionTitleIndex(content, i + 1)
+            list.append(readExperience(content, i, nextSubSectionTitle))
+    return list
 
 
-def getNextLineTypeSection(content, currentIndex, lineType):
-    if currentIndex == len(content):
-        return currentIndex
-    if content[currentIndex]['type'] == lineType:
-        return currentIndex
-    return getNextLineTypeSection(content, currentIndex+1, lineType)
+def readExperience(content, indexFrom, indexTo):
+    dict = {}
+    for i in range(indexFrom, indexTo):
+        line = content[i]
+        lineType = line['type']
+        value = line['value']
+        if lineType is LineType.SUBSECTION_TITLE:
+            experienceInfo = parseExperienceHeadingLine(value)
+            dict['title'] = experienceInfo['title']
+            dict['employer'] = experienceInfo['employer']
+            dict['start'] = experienceInfo['start']
+            dict['end'] = experienceInfo['end']
+        if lineType is LineType.TEXT:
+            dict['description'] = value
+        if lineType is LineType.LIST:
+            if 'responsibilities' not in dict.keys():
+                dict['responsibilities'] = []
+            dict['responsibilities'].append(
+                {'description': parseListLine(value)})
+        if lineType is LineType.SUBLIST:
+            if 'clarifications' not in dict['responsibilities'][-1].keys():
+                dict['responsibilities'][-1]['clarifications'] = []
+            dict['responsibilities'][-1]['clarifications'].append(
+                parseListLine(value))
+    return dict
 
 
 def readEducations(content, indexFrom, indexTo):
@@ -218,7 +182,7 @@ def readOther(content, indexFrom, indexTo):
     return list
 
 
-def parseSection(content, indexFrom):
+def readSection(content, indexFrom):
     line = parsedContent[indexFrom]
     lineType = line['type']
     value = line['value']
@@ -239,6 +203,62 @@ def parseSection(content, indexFrom):
     }
 
 
+#
+# NIFTY HELPER FUNCTIONS
+#
+
+
+def categorizeLine(line):
+    map = getLineTypeMap()
+    for key in map.keys():
+        if re.compile(map[key]).match(line):
+            return key
+    if not line.strip():
+        return LineType.NOTHING
+    return LineType.UNKNOWN
+
+
+def isMarkupLine(line):
+    markupLineTypes = [
+        LineType.TITLE,
+        LineType.SECTION,
+    ]
+    map = getLineTypeMap()
+    for key in map.keys():
+        if key in markupLineTypes and re.compile(map[key]).match(line):
+            return True
+    return False
+
+
+def getLineTypeMap():
+    return {
+        LineType.TITLE: "^={1,} *$",
+        LineType.SUBTITLE: "^#{4} .*$",
+        LineType.CONTACT: "^#{6} .*$",
+        LineType.SECTION: "^-{1,} *$",
+        LineType.SUBSECTION_TITLE: "^\*{2}(.*(\)))|(\*{2}.*)$",
+        LineType.LIST: "^ \* .*",
+        LineType.SUBLIST: "^( ){4,}\* .*",
+        LineType.TEXT: "^.{1,}$"
+    }
+
+
+def getNextSubsectionTitleIndex(content, currentIndex):
+    return getNextLineTypeSection(content, currentIndex, LineType.SUBSECTION_TITLE)
+
+
+def getNextSectionIndex(content, currentIndex):
+    return getNextLineTypeSection(content, currentIndex, LineType.SECTION)
+
+
+def getNextLineTypeSection(content, currentIndex, lineType):
+    if currentIndex == len(content):
+        return currentIndex
+    if content[currentIndex]['type'] == lineType:
+        return currentIndex
+    return getNextLineTypeSection(content, currentIndex+1, lineType)
+
+
 def generateJson(content):
     dict = {}
     for i in range(len(content)):
@@ -254,7 +274,7 @@ def generateJson(content):
             dict['contact'] = parseContactLine(value)
 
         if lineType is LineType.SECTION:
-            result = parseSection(content, i)
+            result = readSection(content, i)
             dict[result['title']] = result['value']
     return dict
 
