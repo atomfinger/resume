@@ -1,4 +1,3 @@
-
 import re
 from enum import Enum
 import sys
@@ -69,7 +68,11 @@ def readExperience(content, indexFrom, indexTo):
         lineType = line['type']
         value = line['value']
         if lineType is LineType.SUBSECTION_TITLE:
-            dict['title'] = value
+            experienceInfo = parseExperienceHeadingLine(value)
+            dict['title'] = experienceInfo['title']
+            dict['employer'] = experienceInfo['employer']
+            dict['start'] = experienceInfo['start']
+            dict['end'] = experienceInfo['end']
         if lineType is LineType.TEXT:
             dict['description'] = value
         if lineType is LineType.LIST:
@@ -108,6 +111,18 @@ def parseEducationLine(line):
         'institution': schoolAndDates[0].strip(),
         'started': dates[0].strip(),
         'graduated': dates[1].replace(")", "").strip()
+    }
+
+
+def parseExperienceHeadingLine(line):
+    arr = line.split('**,')
+    schoolAndDates = arr[1].split("(")
+    dates = schoolAndDates[1].split("-")
+    return {
+        "title": arr[0].replace("*", "").strip(),
+        'employer': schoolAndDates[0].strip(),
+        'start': dates[0].strip(),
+        'end': dates[1].replace(")", "").strip()
     }
 
 
