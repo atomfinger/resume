@@ -99,6 +99,41 @@ def parseListLine(line):
     return line.replace("*", "").strip()
 
 
+def parseEducationLine(line):
+    arr = line.split('**,')
+    schoolAndDates = arr[1].split("(")
+    dates = schoolAndDates[1].split("-")
+    return {
+        "degree": arr[0].replace("*", "").strip(),
+        'institution': schoolAndDates[0].strip(),
+        'started': dates[0].strip(),
+        'graduated': dates[1].replace(")", "").strip()
+    }
+
+
+def parseSkillsLine(line):
+    arr = line.split(":**")
+    return {
+        'skillCategory': arr[0].replace("*", "").strip(),
+        'skills': [x.strip() for x in arr[1].split(",")]
+    }
+
+
+def parseTitleLines(line):
+    return line.replace("#", "").strip()
+
+
+def parseContactLine(line):
+    list = []
+    arr = parseTitleLines(line).split("-")
+    for contact in arr:
+        if "](" in contact:
+            list.append(contact.split("](")[1].strip(")").strip())
+        else:
+            list.append(contact.strip())
+    return list
+
+
 def parseContent(content):
     lines = []
     for i in range(len(content)):
@@ -140,7 +175,7 @@ def readEducations(content, indexFrom, indexTo):
         value = line['value']
         if lineType != LineType.SUBSECTION_TITLE:
             continue
-        list.append(value)
+        list.append(parseEducationLine(value))
     return list
 
 
@@ -152,7 +187,7 @@ def readSkills(content, indexFrom, indexTo):
         value = line['value']
         if lineType != LineType.SUBSECTION_TITLE:
             continue
-        list.append(value)
+        list.append(parseSkillsLine(value))
     return list
 
 
@@ -199,9 +234,9 @@ def generateJson(content):
         if lineType is LineType.TITLE:
             dict['title'] = value
         if lineType is LineType.SUBTITLE:
-            dict['subtitle'] = value
+            dict['subtitle'] = parseTitleLines(value)
         if lineType is LineType.CONTACT:
-            dict['contact'] = value
+            dict['contact'] = parseContactLine(value)
 
         if lineType is LineType.SECTION:
             result = parseSection(content, i)
