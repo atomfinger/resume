@@ -208,6 +208,7 @@ def generateJson(content):
             dict[result['title']] = result['value']
     return dict
 
+
 file = sys.argv[1]
 with open(file) as f:
     content = f.readlines()
