@@ -18,7 +18,7 @@ jobs:
       
       - run: npm install -g npm@latest
 
-      - run: npm install
+      - run: npm ci --prefer-offline --no-audit --no-optional
       
       - name: Verify JSON schema
         run: resume validate
