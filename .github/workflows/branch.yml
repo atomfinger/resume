@@ -18,7 +18,9 @@ jobs:
       
       - run: npm install -g npm@latest
 
-      - run: npm ci --prefer-offline --no-audit --no-optional
+      - run: npm install
+
+      - run: npm install resume
       
       - name: Verify JSON schema
         run: resume validate
@@ -27,7 +29,7 @@ jobs:
         run: resume export resume.html --format html
       
       - name: Generate PDF resume
-        run: resume export resume.html --format html
+        run: resume export resume.pdf --format pdf
 
 ##      - name: Check spelling
 ##        uses: sbates130272/spellcheck-github-actions@v0.6.0

@@ -3,9 +3,6 @@
   "version": "1.11.0",
   "description": "John's resume",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
