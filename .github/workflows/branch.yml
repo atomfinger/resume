@@ -35,6 +35,7 @@ jobs:
   
   convert_resume_doc:
     name: Convert to Doc
+    runs-on: ubuntu-latest
     needs: convert_resume
     steps:      
       - uses: actions/checkout@v2
