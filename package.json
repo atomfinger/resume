@@ -1,0 +1,25 @@
+{
+  "name": "john-resume",
+  "version": "1.11.0",
+  "description": "John's resume",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atomfinger/resume.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atomfinger/resume/issues"
+  },
+  "homepage": "https://github.com/atomfinger/resume#readme",
+  "dependencies": {
+    "resumed": "^1.0.0"
+  }
+}

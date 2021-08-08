@@ -8,7 +8,7 @@ Experience
 ----------
 **Senior Consultant**, TietoEvry (05.2018 - current)
 
-Made banking systems for some of the biggest banks in the nordic region.
+Made banking systems for some of the biggest banks in the Nordic region.
 
  * Made and maintained core web systems for multiple banks
  * Improved the development process by
@@ -20,7 +20,7 @@ Made banking systems for some of the biggest banks in the nordic region.
 
 **Senior system developer**, Aspit AS (09.2013 - 05.2018)
 
-Made journaling systems for the privatized healthcare sector in Norway. Started out as a system developer for the first 3 years, eventually got promoted to senior team lead.
+Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.
 
  * Was responsible for the development of the core product
  * Worked closely with the business by planning and implementing new features
@@ -28,7 +28,7 @@ Made journaling systems for the privatized healthcare sector in Norway. Started 
 
 Education
 ----------
-**Bachelor of science, Computer Science**, Aberystwyth University (2010 - 2014)
+**Bachelor of Science, Computer Science**, Aberystwyth University (2010 - 2014)
 
 **Data Media**, Birkeland Folkehøgskole (2009 - 2010)
 

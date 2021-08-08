@@ -1,0 +1,126 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "basics": {
+        "name": "John Mikael Gundersen",
+        "label": "Programmer",
+        "image": "",
+        "email": "john@jmgundersen.com",
+        "url": "https://jmgundersen.com",
+        "summary": "Developer with a passion for automated testing, clean code and pipelines",
+        "profiles": [
+            {
+                "network": "Github",
+                "username": "atomfinger",
+                "url": "https://github.com/atomfinger/"
+            }
+        ]
+    },
+    "work": [
+        {
+            "name": "Protector",
+            "position": "Tech Lead",
+            "url": "https://protectorforsikring.no/",
+            "startDate": "2020-12-01",
+            "summary": "Primarily I'm concerned with code quality and best practices.",
+            "highlights": [
+                "Implemented project initializer to make it easier to create new solutions",
+                "Created a framework to efficiently deal with system testing"
+            ]
+        },
+        {
+            "name": "TietoEvry",
+            "position": "Senior Consultant",
+            "url": "https://www.tietoevry.com/",
+            "startDate": "2018-05-01",
+            "endDate": "2020-11-30",
+            "summary": "Made banking systems for some of the biggest banks in the Nordic region.",
+            "highlights": [
+                "Made and maintained core web systems for multiple banks",
+                "Improved the development process by",
+                "Creating new systems for integration testing and improved CI/CD pipelines",
+                "Authoring developer guidelines for cleaner more maintainable code",
+                "I was a team lead managing the team responsible for our PCI compliant systems",
+                "I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution",
+                "Worked closely with partners in India"
+            ]
+        },
+        {
+            "name": "Aspit",
+            "position": "Senior system developer",
+            "url": "https://www.aspit.no/",
+            "startDate": "2013-09-01",
+            "endDate": "2018-05-01",
+            "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
+            "highlights": [
+                "Was responsible for the development of the core product",
+                "Worked closely with the business by planning and implementing new features",
+                "Worked closely with an outsourcing team in Vietnam"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Aberystwyth University",
+            "url": "https://institution.com/",
+            "area": "Computer Science",
+            "studyType": "Bachelor",
+            "startDate": "2010-08-01",
+            "endDate": "2014-05-01"
+        }
+    ],
+    "skills": [
+        {
+            "name": "Backend developer",
+            "keywords": [
+                "Java/Kotlin",
+                "C#",
+                "Python",
+                "MSSQL, OracleSQL",
+                "Microservices"
+            ]
+        },
+        {
+            "name": "DevOps",
+            "keywords": [
+                "TeamCity, Jenkins, Github Actions",
+                "Groovy",
+                "Docker, K8s, Swarm"
+            ]
+        }
+    ],
+    "languages": [
+        {
+            "language": "English",
+            "fluency": "Native speaker"
+        },
+        {
+            "language": "Norwegian",
+            "fluency": "Native speaker"
+        }
+    ],
+    "interests": [
+        {
+            "name": "Wildlife",
+            "keywords": [
+                "Ferrets",
+                "Unicorns"
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "name": "toUUID",
+            "description": "A very simple project that makes it easier to generate predictable UUIDs for testing purposes.",
+            "keywords": [
+                "Kotlin/Java"
+            ],
+            "url": "https://github.com/atomfinger/toUUID",
+            "type": "Library"
+        }
+    ],
+    "meta": {
+        "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
+        "version": "v1.0.0",
+        "lastModified": "2017-12-24T15:53:00"
+    }
+}

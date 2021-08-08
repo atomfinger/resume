@@ -7,65 +7,68 @@ on:
 
 jobs:
   convert_resume:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-
       - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          pip install weasyprint
-          sudo apt-get install poppler-utils
-          sudo apt-get install -y aspell
-          mkdir output
-
-      - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
       
-      - name: Verify URLs
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
+      - uses: actions/setup-node@v2
         with:
-          file-path: ./resume.md
+          node-version: '14'
+      
+      - run: npm install
+      
+      - name: Verify JSON schema
+        run: resume verify
 
-      - name: Markdown -> JSON
-        run: python md-to-json.py resume.md > ./output/resume.json
+      - name: Generate HTML resume
+        run: resume export resume.html --format html
+      
+      - name: Generate PDF resume
+        run: resume export resume.html --format html
 
-      - name: Markdown -> HTML
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: --include-in-header style.css
-            --output=output/resume.html
-            resume.md
-
-      - name: Markdown -> TXT
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: --output=output/resume.txt
-            resume.md
-
-      - name: HTML -> PDF
-        run: weasyprint ./output/resume.html ./output/resume.pdf
-
-      - name: Install libreoffice
-        run: |
-          sudo add-apt-repository ppa:libreoffice/ppa
-          sudo apt-get update
-          sudo apt-get install libreoffice
-
-      - name: HTML -> DOCX
-        run: |
-          libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
-          mv resume.docx ./output/resume.docx
-
-      - name: Generate artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: resume
-          path: output
-
-      - name: Verify number of PDF pages
-        run: sudo bash ./test/pdf-page-test.sh
+##      - name: Check spelling
+##        uses: sbates130272/spellcheck-github-actions@v0.6.0
+##      
+##      - name: Verify URLs
+##        uses: gaurav-nelson/github-action-markdown-link-check@v1
+##        with:
+##          file-path: ./resume.md
+##
+##      - name: Markdown -> JSON
+##        run: python md-to-json.py resume.md > ./output/resume.json
+##
+##      - name: Markdown -> HTML
+##        uses: docker://pandoc/latex:2.9
+##        with:
+##          args: --include-in-header style.css
+##            --output=output/resume.html
+##            resume.md
+##
+##      - name: Markdown -> TXT
+##        uses: docker://pandoc/latex:2.9
+##        with:
+##          args: --output=output/resume.txt
+##            resume.md
+##
+##      - name: HTML -> PDF
+##        run: weasyprint ./output/resume.html ./output/resume.pdf
+##
+##      - name: Install libreoffice
+##        run: |
+##          sudo add-apt-repository ppa:libreoffice/ppa
+##          sudo apt-get update
+##          sudo apt-get install libreoffice
+##
+##      - name: HTML -> DOCX
+##        run: |
+##          libreoffice --headless --convert-to "docx:Office Open XML Text" ./output/resume.html
+##          mv resume.docx ./output/resume.docx
+##
+##      - name: Generate artifacts
+##        uses: actions/upload-artifact@v2
+##        with:
+##          name: resume
+##          path: output
+##
+##      - name: Verify number of PDF pages
+##        run: sudo bash ./test/pdf-page-test.sh
