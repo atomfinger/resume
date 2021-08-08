@@ -43,11 +43,12 @@ jobs:
         with:
           go-version: '^1.13.1'
       - name: Checking out ResumeFodder
-        run: git clone https://gitlab.com/steve-perkins/ResumeFodder.git
-      - name: Building ResumeFodder
         run: |
-          cd ResumeFodder
-          go build -o ResumeFodder
+          go get gitlab.com/steve-perkins/ResumeFodder-cli
+          cd $GOPATH/gitlab.com/steve-perkins/ResumeFodder-cli
+          git submodule init
+          git submodule update
+          go build -o ResumeFodder 
       - run: mkdir output
       - name: Converting resume to Doc
         run: ./ResumeFodder/ResumeFodder convert resume.json output/resume.doc
