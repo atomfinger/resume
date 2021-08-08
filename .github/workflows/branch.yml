@@ -46,11 +46,11 @@ jobs:
         run: git clone https://gitlab.com/steve-perkins/ResumeFodder.git
       - name: Building ResumeFodder
         run: |
-          cd ResumeFodder-cli
+          cd ResumeFodder
           go build -o ResumeFodder
       - run: mkdir output
       - name: Converting resume to Doc
-        run: ./ResumeFodder-cli/ResumeFodder convert resume.json output/resume.doc
+        run: ./ResumeFodder/ResumeFodder convert resume.json output/resume.doc
       
 
 
