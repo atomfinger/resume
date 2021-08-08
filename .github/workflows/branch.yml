@@ -43,7 +43,7 @@ jobs:
         with:
           go-version: '^1.13.1'
       - name: Checking out ResumeFodder
-        run: git clone git@gitlab.com:steve-perkins/ResumeFodder-cli.git
+        run: git clone https://gitlab.com/steve-perkins/ResumeFodder.git
       - name: Building ResumeFodder
         run: |
           cd ResumeFodder-cli
