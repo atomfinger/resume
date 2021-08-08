@@ -45,7 +45,7 @@ jobs:
       - name: Checking out ResumeFodder
         run: |
           go get gitlab.com/steve-perkins/ResumeFodder-cli
-          cd $GOPATH/gitlab.com/steve-perkins/ResumeFodder-cli
+          cd $GOPATH/gitlab.com/steve-perkins/ResumeFodder
           git submodule init
           git submodule update
           go build -o ResumeFodder 
