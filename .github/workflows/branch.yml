@@ -8,6 +8,7 @@ on:
 jobs:
   convert_resume:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
       
@@ -15,6 +16,8 @@ jobs:
         with:
           node-version: '16'
       
+      - run: npm install -g npm@latest
+
       - run: npm install
       
       - name: Verify JSON schema
