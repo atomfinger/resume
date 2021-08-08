@@ -45,7 +45,7 @@ jobs:
       - name: Checking out ResumeFodder
         uses: actions/checkout@v2
         with:
-          repository: 'git@gitlab.com:steve-perkins/ResumeFodder-cli.git'
+          repository: https://gitlab.com/steve-perkins/ResumeFodder-cli.git
           ref: 'master'
       - name: Building ResumeFodder
         run: go build -o ResumeFodder
