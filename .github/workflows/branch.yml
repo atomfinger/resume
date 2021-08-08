@@ -21,9 +21,9 @@ jobs:
       - name: Install
         run: npm ci
 
-      #- run: npm install -g npm@latest
+      - run: npm install -g npm@latest
 
-      #- run: npm install
+      - run: npm install -g resume-cli
 
       #- run: npm install resume
       
