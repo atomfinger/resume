@@ -7,34 +7,51 @@ on:
 
 jobs:
   convert_resume:
+    name: "Convert resume"
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
       
-#     
       - name: Setup Node.js
         uses: actions/setup-node@v2.1.4
         with:
           node-version: 12
 
-      - name: Install
-        run: npm ci
+      - name: Setup
+        run: |
+          npm install -g resume-cli
+          mkdir output
 
-      - run: npm install -g npm@latest
-
-      - run: npm install -g resume-cli
-
-      #- run: npm install resume
-      
       - name: Verify JSON schema
         run: resume validate
 
       - name: Generate HTML resume
-        run: resume export resume.html --format html
+        run: resume export output/resume.html --format html
       
       - name: Generate PDF resume
-        run: resume export resume.pdf --format pdf
+        run: resume export output/resume.pdf --format pdf
+
+  
+  convert_resume_doc:
+    name: Convert to Doc
+    needs: convert_resume
+    steps:      
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+          with:
+            go-version: '^1.13.1'
+      - name: Checking out ResumeFodder
+        uses: actions/checkout@v2
+          with:
+            repository: 'git@gitlab.com:steve-perkins/ResumeFodder-cli.git'
+      - name: Building ResumeFodder
+        run: go build -o ResumeFodder
+      - run: mkdir output
+      - name: Converting resume to Doc
+        run: ./ResumeFodder convert resume.json output/resume.doc
+      
+
 
 ##      - name: Check spelling
 ##        uses: sbates130272/spellcheck-github-actions@v0.6.0
