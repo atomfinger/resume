@@ -50,7 +50,7 @@ jobs:
           from: 'json'
           to: 'yaml'
       - name: Print to YAML file
-        run: echo "${{ steps.json-to-yaml.outputs.data }}" >> output/resume.yml
+        run: echo '${{ steps.json-to-yaml.outputs.data }}' >> output/resume.yml
   
 
 ##      - name: Check spelling
