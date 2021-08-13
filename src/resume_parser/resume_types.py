@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, List, Optional, TypeVar, Callable, Type, cast
-import dateutil.parser
 
+import dateutil.parser
 
 T = TypeVar("T")
 
@@ -140,7 +140,8 @@ class Basics:
     location: Location
     profiles: List[Profile]
 
-    def __init__(self, name: str, label: str, image: str, email: str, phone: str, url: str, summary: str, location: Location, profiles: List[Profile]) -> None:
+    def __init__(self, name: str, label: str, image: str, email: str, phone: str, url: str, summary: str,
+                 location: Location, profiles: List[Profile]) -> None:
         self.name = name
         self.label = label
         self.image = image
@@ -189,7 +190,8 @@ class Education:
     score: str
     courses: List[str]
 
-    def __init__(self, institution: str, url: str, area: str, study_type: str, start_date: datetime, end_date: datetime, score: str, courses: List[str]) -> None:
+    def __init__(self, institution: str, url: str, area: str, study_type: str, start_date: datetime, end_date: datetime,
+                 score: str, courses: List[str]) -> None:
         self.institution = institution
         self.url = url
         self.area = area
@@ -263,9 +265,7 @@ class Language:
         return Language(language, fluency)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["language"] = from_str(self.language)
-        result["fluency"] = from_str(self.fluency)
+        result: dict = {"language": from_str(self.language), "fluency": from_str(self.fluency)}
         return result
 
 
@@ -281,7 +281,8 @@ class Project:
     entity: str
     type: str
 
-    def __init__(self, name: str, description: str, highlights: List[str], keywords: List[str], start_date: datetime, end_date: datetime, url: str, roles: List[str], entity: str, type: str) -> None:
+    def __init__(self, name: str, description: str, highlights: List[str], keywords: List[str], start_date: datetime,
+                 end_date: datetime, url: str, roles: List[str], entity: str, type: str) -> None:
         self.name = name
         self.description = description
         self.highlights = highlights
@@ -309,17 +310,12 @@ class Project:
         return Project(name, description, highlights, keywords, start_date, end_date, url, roles, entity, type)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["name"] = from_str(self.name)
-        result["description"] = from_str(self.description)
-        result["highlights"] = from_list(from_str, self.highlights)
-        result["keywords"] = from_list(from_str, self.keywords)
-        result["startDate"] = self.start_date.isoformat()
-        result["endDate"] = self.end_date.isoformat()
-        result["url"] = from_str(self.url)
-        result["roles"] = from_list(from_str, self.roles)
-        result["entity"] = from_str(self.entity)
-        result["type"] = from_str(self.type)
+        result: dict = {"name": from_str(self.name), "description": from_str(self.description),
+                        "highlights": from_list(from_str, self.highlights),
+                        "keywords": from_list(from_str, self.keywords), "startDate": self.start_date.isoformat(),
+                        "endDate": self.end_date.isoformat(), "url": from_str(self.url),
+                        "roles": from_list(from_str, self.roles), "entity": from_str(self.entity),
+                        "type": from_str(self.type)}
         return result
 
 
@@ -348,12 +344,9 @@ class Publication:
         return Publication(name, publisher, release_date, url, summary)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["name"] = from_str(self.name)
-        result["publisher"] = from_str(self.publisher)
-        result["releaseDate"] = self.release_date.isoformat()
-        result["url"] = from_str(self.url)
-        result["summary"] = from_str(self.summary)
+        result: dict = {"name": from_str(self.name), "publisher": from_str(self.publisher),
+                        "releaseDate": self.release_date.isoformat(), "url": from_str(self.url),
+                        "summary": from_str(self.summary)}
         return result
 
 
@@ -373,9 +366,7 @@ class Reference:
         return Reference(name, reference)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["name"] = from_str(self.name)
-        result["reference"] = from_str(self.reference)
+        result: dict = {"name": from_str(self.name), "reference": from_str(self.reference)}
         return result
 
 
@@ -398,10 +389,8 @@ class Skill:
         return Skill(name, level, keywords)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["name"] = from_str(self.name)
-        result["level"] = from_str(self.level)
-        result["keywords"] = from_list(from_str, self.keywords)
+        result: dict = {"name": from_str(self.name), "level": from_str(self.level),
+                        "keywords": from_list(from_str, self.keywords)}
         return result
 
 
@@ -415,7 +404,8 @@ class Volunteer:
     highlights: List[str]
     name: Optional[str]
 
-    def __init__(self, organization: Optional[str], position: str, url: str, start_date: datetime, end_date: datetime, summary: str, highlights: List[str], name: Optional[str]) -> None:
+    def __init__(self, organization: Optional[str], position: str, url: str, start_date: datetime, end_date: datetime,
+                 summary: str, highlights: List[str], name: Optional[str]) -> None:
         self.organization = organization
         self.position = position
         self.url = url
@@ -439,15 +429,11 @@ class Volunteer:
         return Volunteer(organization, position, url, start_date, end_date, summary, highlights, name)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["organization"] = from_union([from_str, from_none], self.organization)
-        result["position"] = from_str(self.position)
-        result["url"] = from_str(self.url)
-        result["startDate"] = self.start_date.isoformat()
-        result["endDate"] = self.end_date.isoformat()
-        result["summary"] = from_str(self.summary)
-        result["highlights"] = from_list(from_str, self.highlights)
-        result["name"] = from_union([from_str, from_none], self.name)
+        result: dict = {"organization": from_union([from_str, from_none], self.organization),
+                        "position": from_str(self.position), "url": from_str(self.url),
+                        "startDate": self.start_date.isoformat(), "endDate": self.end_date.isoformat(),
+                        "summary": from_str(self.summary), "highlights": from_list(from_str, self.highlights),
+                        "name": from_union([from_str, from_none], self.name)}
         return result
 
 
@@ -464,7 +450,9 @@ class Resume:
     references: List[Reference]
     projects: List[Project]
 
-    def __init__(self, basics: Basics, work: List[Volunteer], volunteer: List[Volunteer], education: List[Education], awards: List[Award], publications: List[Publication], skills: List[Skill], languages: List[Language], interests: List[Interest], references: List[Reference], projects: List[Project]) -> None:
+    def __init__(self, basics: Basics, work: List[Volunteer], volunteer: List[Volunteer], education: List[Education],
+                 awards: List[Award], publications: List[Publication], skills: List[Skill], languages: List[Language],
+                 interests: List[Interest], references: List[Reference], projects: List[Project]) -> None:
         self.basics = basics
         self.work = work
         self.volunteer = volunteer
@@ -491,21 +479,21 @@ class Resume:
         interests = from_list(Interest.from_dict, obj.get("interests"))
         references = from_list(Reference.from_dict, obj.get("references"))
         projects = from_list(Project.from_dict, obj.get("projects"))
-        return Resume(basics, work, volunteer, education, awards, publications, skills, languages, interests, references, projects)
+        return Resume(basics, work, volunteer, education, awards, publications, skills, languages, interests,
+                      references, projects)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["basics"] = to_class(Basics, self.basics)
-        result["work"] = from_list(lambda x: to_class(Volunteer, x), self.work)
-        result["volunteer"] = from_list(lambda x: to_class(Volunteer, x), self.volunteer)
-        result["education"] = from_list(lambda x: to_class(Education, x), self.education)
-        result["awards"] = from_list(lambda x: to_class(Award, x), self.awards)
-        result["publications"] = from_list(lambda x: to_class(Publication, x), self.publications)
-        result["skills"] = from_list(lambda x: to_class(Skill, x), self.skills)
-        result["languages"] = from_list(lambda x: to_class(Language, x), self.languages)
-        result["interests"] = from_list(lambda x: to_class(Interest, x), self.interests)
-        result["references"] = from_list(lambda x: to_class(Reference, x), self.references)
-        result["projects"] = from_list(lambda x: to_class(Project, x), self.projects)
+        result: dict = {"basics": to_class(Basics, self.basics),
+                        "work": from_list(lambda x: to_class(Volunteer, x), self.work),
+                        "volunteer": from_list(lambda x: to_class(Volunteer, x), self.volunteer),
+                        "education": from_list(lambda x: to_class(Education, x), self.education),
+                        "awards": from_list(lambda x: to_class(Award, x), self.awards),
+                        "publications": from_list(lambda x: to_class(Publication, x), self.publications),
+                        "skills": from_list(lambda x: to_class(Skill, x), self.skills),
+                        "languages": from_list(lambda x: to_class(Language, x), self.languages),
+                        "interests": from_list(lambda x: to_class(Interest, x), self.interests),
+                        "references": from_list(lambda x: to_class(Reference, x), self.references),
+                        "projects": from_list(lambda x: to_class(Project, x), self.projects)}
         return result
 
 
