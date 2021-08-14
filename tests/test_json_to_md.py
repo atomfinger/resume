@@ -1,8 +1,8 @@
 from typing import List
 from unittest import TestCase
 
-from json_to_md.json_to_md import get_header_information
-from resume_parser.resume_types import Basics, Profile, Location
+from src.json_to_md import get_header_information
+from src.resume_types import Basics, Location, Profile
 
 
 class Test(TestCase):
