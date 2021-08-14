@@ -2,7 +2,7 @@ import json
 import os
 from typing import List
 
-from src.resume_types import Basics, Resume, resume_from_dict
+from resume.resume_types import Basics, Resume, resume_from_dict
 
 NEW_LINE = ''
 
