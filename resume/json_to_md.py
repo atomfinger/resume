@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from typing import List, Optional
 
-from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award
+from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication
 
 NEW_LINE = ''
 DASH_LINE = '----------'
@@ -34,6 +34,8 @@ def convert_to_markdown(resume: Resume) -> str:
         content.append(convert_volunteers("Volunteer", resume.volunteer))
     if resume.skills:
         content.append(convert_skills(resume.skills))
+    if resume.publications:
+        content.append(convert_publications(resume.publications))
     return os.linesep.join([item_line for category in content for item_line in category])
 
 
@@ -125,4 +127,23 @@ def convert_awards(awards: List[Award]) -> List[str]:
         DASH_LINE
     ]
     [content.append(convert_award(award)) and content.append(NEW_LINE) for award in awards]
+    return content
+
+
+def convert_publication(publication: Publication) -> str:
+    publisher_text = ''
+    if publication.publisher:
+        publisher_text = f' - {publication.publisher}'
+    return f'**[{publication.name} ({publication.release_date.strftime("%d.%m.%Y")})]({publication.url})**' \
+           f'{publisher_text}  {publication.summary}'
+
+
+def convert_publications(publications: List[Publication]) -> List[str]:
+    if len(publications) == 0:
+        return []
+    content = [
+        "Publications",
+        DASH_LINE
+    ]
+    [content.append(convert_publication(publication)) and content.append(NEW_LINE) for publication in publications]
     return content

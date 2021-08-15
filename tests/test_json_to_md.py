@@ -5,8 +5,8 @@ from unittest import TestCase
 from parameterized import parameterized
 
 from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education, convert_skill, \
-    convert_award
-from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award
+    convert_award, convert_publication
+from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication
 
 
 class Test(TestCase):
@@ -83,6 +83,30 @@ class Test(TestCase):
         award = Award('Coolest boy', datetime.datetime(1982, 8, 2), 'My mom', 'Got the coolest boy award')
         self.assertEqual(convert_award(award), '**Coolest boy (My mom - 02.08.1982):** Got the coolest boy award')
 
+    def test_convert_publication(self):
+        publication = Publication('1984', 'Secker & Warburg', datetime.datetime(1949, 6, 8),
+                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
+                                  'The story takes place in an imagined future, the year 1984, when much of the world '
+                                  'has fallen victim to perpetual war, omnipresent government surveillance, historical '
+                                  'negationism, and propaganda.')
+        result = convert_publication(publication)
+        self.assertEqual(result, '**[1984 (08.06.1949)](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)** - '
+                                 'Secker & Warburg  The story takes place in an imagined future, the year 1984, '
+                                 'when much of the world has fallen victim to perpetual war, omnipresent government '
+                                 'surveillance, historical negationism, and propaganda.')
+
+    def test_convert_publication_when_no_publisher(self):
+        publication = Publication('1984', None, datetime.datetime(1949, 6, 8),
+                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
+                                  'The story takes place in an imagined future, the year 1984, when much of the world '
+                                  'has fallen victim to perpetual war, omnipresent government surveillance, historical '
+                                  'negationism, and propaganda.')
+        result = convert_publication(publication)
+        self.assertEqual(result, '**[1984 (08.06.1949)](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)**  The '
+                                 'story takes place in an imagined future, the year 1984, '
+                                 'when much of the world has fallen victim to perpetual war, omnipresent government '
+                                 'surveillance, historical negationism, and propaganda.')
+
 
 def create_education() -> Education:
     return Education(
@@ -93,7 +117,7 @@ def create_education() -> Education:
         start_date=datetime.datetime(420, 3, 21),
         end_date=datetime.datetime(1337, 4, 21),
         score='N/A',
-        courses= [
+        courses=[
             'Being chill: The fundamentals',
             'Swag 101',
             'Dabbing'
