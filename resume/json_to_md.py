@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from typing import List
 
-from resume.resume_types import Basics, Resume, resume_from_dict, Volunteer, Education, Skill
+from resume.resume_types import Basics, Resume, resume_from_dict, Volunteer, Education, Skill, Award
 
 NEW_LINE = ''
 DASH_LINE = '----------'
@@ -107,6 +107,21 @@ def convert_skills(skills: List[Skill]) -> List[str]:
         DASH_LINE
     ]
     [content.append(convert_skill(skill)) and content.append(NEW_LINE) for skill in skills]
+    return content
+
+
+def convert_award(award: Award) -> str:
+    return f'**{award.title} ({award.awarder} - {award.date.strftime("%d.%m.%Y")}):** {award.summary}'
+
+
+def convert_awards(awards: List[Award]) -> List[str]:
+    if len(awards) == 0:
+        return []
+    content = [
+        "Awards",
+        DASH_LINE
+    ]
+    [content.append(convert_award(award)) and content.append(NEW_LINE) for award in awards]
     return content
 
 
