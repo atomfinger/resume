@@ -38,7 +38,9 @@ class Test(TestCase):
         self.assertEqual(parse_date(datetime.datetime(1988, 6, 21), 'Current'), '06.1988')
 
     def test_convert_volunteer_verify_title_line(self):
-        self.assertEqual(convert_volunteer(create_volunteer())[0], '**Iron man**, The avengers(06.1988 - Current)')
+        self.assertEqual(convert_volunteer(create_volunteer())[0],
+                         '**Iron man**, '
+                         '[The avengers](https://en.wikipedia.org/wiki/The_Avengers_(2012_film))(06.1988 - Current)')
 
     @parameterized.expand([[1], [3]])
     def test_convert_volunteer_verify_empty_lines(self, index: int):
