@@ -307,9 +307,8 @@ class Reference:
         return Reference(name, reference)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["name"] = from_union([from_str, from_none], self.name)
-        result["reference"] = from_union([from_str, from_none], self.reference)
+        result: dict = {"name": from_union([from_str, from_none], self.name),
+                        "reference": from_union([from_str, from_none], self.reference)}
         return result
 
 

@@ -5,8 +5,8 @@ from unittest import TestCase
 from parameterized import parameterized
 
 from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education, convert_skill, \
-    convert_award, convert_publication
-from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication
+    convert_award, convert_publication, convert_languages
+from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication, Language
 
 
 class Test(TestCase):
@@ -106,6 +106,11 @@ class Test(TestCase):
                                  'story takes place in an imagined future, the year 1984, '
                                  'when much of the world has fallen victim to perpetual war, omnipresent government '
                                  'surveillance, historical negationism, and propaganda.')
+
+    def test_convert_languages(self):
+        languages = [Language('English', 'Master'), Language('Elvish'), Language('Klingon', 'Beginner')]
+        result = convert_languages(languages)
+        self.assertEqual(result[2], 'English, Elvish, Klingon')
 
 
 def create_education() -> Education:

@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from typing import List, Optional
 
-from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication
+from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language
 
 NEW_LINE = ''
 DASH_LINE = '----------'
@@ -146,4 +146,15 @@ def convert_publications(publications: List[Publication]) -> List[str]:
         DASH_LINE
     ]
     [content.append(convert_publication(publication)) and content.append(NEW_LINE) for publication in publications]
+    return content
+
+
+def convert_languages(languages: List[Language]) -> List[str]:
+    if len(languages) == 0:
+        return []
+    content = [
+        "Languages",
+        DASH_LINE,
+        ', '.join([language.language for language in languages])
+    ]
     return content
