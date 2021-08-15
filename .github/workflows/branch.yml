@@ -21,7 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt
-      - name: Test with pytest
+      - name: Run unit tests
         run: |
           python setup.py install
           pytest
@@ -53,25 +53,15 @@ jobs:
       - name: Generate PDF resume
         run: resume export output/resume.pdf --format pdf
 
-#      - name: Generate XML resume
-#        uses: fabasoad/yaml-json-xml-converter-action@main
-#        id: json-to-xml
-#        with:
-#          path: 'resume.json'
-#          from: 'json'
-#          to: 'xml'
-#      - name: Print to XML file
-#        run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
-
-      - name: Generate YAML resume
+      - name: Generate XML resume
         uses: fabasoad/yaml-json-xml-converter-action@main
-        id: json-to-yaml
+        id: json-to-xml
         with:
           path: 'resume.json'
           from: 'json'
-          to: 'yaml'
-      - name: Print to YAML file
-        run: echo '${{ steps.json-to-yaml.outputs.data }}' >> output/resume.yml
+          to: 'xml'
+      - name: Print to XML file
+        run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
 
 
 ##      - name: Check spelling
