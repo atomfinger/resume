@@ -53,15 +53,15 @@ jobs:
       - name: Generate PDF resume
         run: resume export output/resume.pdf --format pdf
 
-      - name: Generate XML resume
-        uses: fabasoad/yaml-json-xml-converter-action@main
-        id: json-to-xml
-        with:
-          path: 'resume.json'
-          from: 'json'
-          to: 'xml'
-      - name: Print to XML file
-        run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
+#      - name: Generate XML resume
+#        uses: fabasoad/yaml-json-xml-converter-action@main
+#        id: json-to-xml
+#        with:
+#          path: 'resume.json'
+#          from: 'json'
+#          to: 'xml'
+#      - name: Print to XML file
+#        run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
 
       - name: Generate YAML resume
         uses: fabasoad/yaml-json-xml-converter-action@main
