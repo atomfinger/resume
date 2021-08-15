@@ -2,7 +2,8 @@ import os
 from datetime import datetime
 from typing import List, Optional
 
-from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language
+from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
+    Project, Reference
 
 NEW_LINE = ''
 DASH_LINE = '----------'
@@ -36,6 +37,12 @@ def convert_to_markdown(resume: Resume) -> str:
         content.append(convert_skills(resume.skills))
     if resume.publications:
         content.append(convert_publications(resume.publications))
+    if resume.languages:
+        content.append(convert_languages(resume.languages))
+    if resume.interests:
+        content.append(convert_interests(resume.interests))
+    if resume.projects:
+        content.append(convert_projects(resume.projects))
     return os.linesep.join([item_line for category in content for item_line in category])
 
 
@@ -158,3 +165,47 @@ def convert_languages(languages: List[Language]) -> List[str]:
         ', '.join([language.language for language in languages])
     ]
     return content
+
+
+def convert_interests(interests: List[Interest]) -> List[str]:
+    if len(interests) == 0:
+        return []
+    content = [
+        "Interests",
+        DASH_LINE
+    ]
+    for interest in interests:
+        content.append(f' - {interest.name}: {", ".join(interest.keywords)}')
+    return content
+
+
+def convert_project(project: Project) -> List[str]:
+    start_date = parse_date(project.start_date)
+    end_date = parse_date(project.end_date, "Current")
+    content = [
+        f'**[{project.name}]({project.url})**  {", ".join(project.roles)}({start_date} - {end_date})',
+        NEW_LINE,
+        project.description,
+        NEW_LINE
+    ]
+    if project.highlights:
+        [content.append(f' * {highlight}') for highlight in project.highlights]
+    return content
+
+
+def convert_projects(projects: List[Project]) -> List[str]:
+    if not projects or len(projects) == 0:
+        return []
+    content = [
+        "Projects",
+        DASH_LINE
+    ]
+    for project in projects:
+        for line in convert_project(project):
+            content.append(line)
+        content.append(NEW_LINE)
+    return content
+
+
+def convert_references(references: List[Reference]) -> List[str]:
+    raise NotImplementedError('Not yet implemented')

@@ -5,8 +5,9 @@ from unittest import TestCase
 from parameterized import parameterized
 
 from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education, convert_skill, \
-    convert_award, convert_publication, convert_languages
-from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication, Language
+    convert_award, convert_publication, convert_languages, convert_interests
+from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication, Language, \
+    Interest
 
 
 class Test(TestCase):
@@ -111,6 +112,11 @@ class Test(TestCase):
         languages = [Language('English', 'Master'), Language('Elvish'), Language('Klingon', 'Beginner')]
         result = convert_languages(languages)
         self.assertEqual(result[2], 'English, Elvish, Klingon')
+
+    def test_convert_interests(self):
+        interests = [Interest('Being dope', ['Dabbing', 'Pawning noobs', 'Loving my mum'])]
+        result = convert_interests(interests)
+        self.assertEqual(result[2], ' - Being dope: Dabbing, Pawning noobs, Loving my mum')
 
 
 def create_education() -> Education:
