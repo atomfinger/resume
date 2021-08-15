@@ -3,10 +3,10 @@ import os
 from datetime import datetime
 from typing import List
 
-from resume.resume_types import Basics, Resume, resume_from_dict, Volunteer, Education
+from resume.resume_types import Basics, Resume, resume_from_dict, Volunteer, Education, Skill
 
 NEW_LINE = ''
-DASH_LINE = ''
+DASH_LINE = '----------'
 
 
 def get_contact_and_social_line(basics: Basics) -> List[str]:
@@ -29,7 +29,9 @@ def convert_resume(resume: Resume) -> str:
         get_header_information(resume.basics),
         get_contact_and_social_line(resume.basics),
         convert_volunteers("Experience", resume.work),
-        convert_educations(resume.education)
+        convert_educations(resume.education),
+        convert_volunteers("Volunteer", resume.volunteer),
+        convert_skills(resume.skills)
     ]
     return os.linesep.join([item_line for category in content for item_line in category])
 
@@ -90,6 +92,21 @@ def convert_volunteers(title: str, volunteers: List[Volunteer]) -> List[str]:
         for line in convert_volunteer(volunteer):
             content.append(line)
         content.append(NEW_LINE)
+    return content
+
+
+def convert_skill(skill: Skill) -> str:
+    return f'**{skill.name}:** {", ".join(skill.keywords)}'
+
+
+def convert_skills(skills: List[Skill]) -> List[str]:
+    if len(skills) == 0:
+        return []
+    content = [
+        "Skills",
+        DASH_LINE
+    ]
+    [content.append(convert_skill(skill)) and content.append(NEW_LINE) for skill in skills]
     return content
 
 

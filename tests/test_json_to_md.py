@@ -4,8 +4,8 @@ from unittest import TestCase
 
 from parameterized import parameterized
 
-from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education
-from resume.resume_types import Basics, Location, Profile, Volunteer, Education
+from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education, convert_skill
+from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill
 
 
 class Test(TestCase):
@@ -71,6 +71,10 @@ class Test(TestCase):
     def test_convert_education_verify_courses(self, index: int, expected_result: str):
         result = convert_education(create_education())
         self.assertTrue(result[index], expected_result)
+
+    def test_convert_skills(self):
+        skill = Skill('Programming languages', "Master", ['HTML', 'CSS', 'BRAINFUCK', 'Rockstar'])
+        self.assertEqual(convert_skill(skill), f'**Programming languages:** HTML, CSS, BRAINFUCK, Rockstar')
 
 
 def create_education() -> Education:
