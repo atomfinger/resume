@@ -198,7 +198,7 @@ def convert_project(project: Project) -> List[str]:
     if project.roles:
         roles = f' - {", ".join(project.roles)}'
     content = [
-        f'**[{project.name}({start_date} - {end_date})]({project.url})**{roles}',
+        f'**[{project.name} ({start_date} - {end_date})]({project.url})**{roles}',
         NEW_LINE,
         project.description,
         NEW_LINE
