@@ -36,3 +36,7 @@ def do_conversion(source: str, dest: str):
     markdown = convert_resume(resume)
     with open(dest, 'w') as f:
         f.write(markdown)
+
+
+class JsonToMarkDownConverter:
+    pass
