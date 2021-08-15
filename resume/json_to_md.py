@@ -5,12 +5,12 @@ from typing import List, Optional
 from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
     Project, Reference
 
-NEW_LINE = ''
+NEW_LINE = '  '
 DASH_LINE = '----------'
 
 
 def get_contact_and_social_line(basics: Basics) -> List[str]:
-    contact_and_links = [basics.email, basics.phone, f'[{basics.url}]({basics.url}']
+    contact_and_links = [basics.email, basics.phone, f'[{basics.url}]({basics.url})']
     [contact_and_links.append(f'[{profile.username}@{profile.network}]({profile.url})') for profile in basics.profiles]
     return [f'###### {" - ".join([i for i in contact_and_links if i])}']
 
@@ -29,20 +29,31 @@ def convert_to_markdown(resume: Resume) -> str:
     if resume.basics:
         content.append(get_header_information(resume.basics))
         content.append(get_contact_and_social_line(resume.basics))
+        content.append(NEW_LINE)
     if resume.work:
         content.append(convert_volunteers("Experience", resume.work))
+        content.append(NEW_LINE)
+    if resume.education:
+        content.append(convert_educations(resume.education))
+        content.append(NEW_LINE)
     if resume.volunteer:
         content.append(convert_volunteers("Volunteer", resume.volunteer))
+        content.append(NEW_LINE)
     if resume.skills:
         content.append(convert_skills(resume.skills))
+        content.append(NEW_LINE)
     if resume.publications:
         content.append(convert_publications(resume.publications))
+        content.append(NEW_LINE)
     if resume.languages:
         content.append(convert_languages(resume.languages))
+        content.append(NEW_LINE)
     if resume.interests:
         content.append(convert_interests(resume.interests))
+        content.append(NEW_LINE)
     if resume.projects:
         content.append(convert_projects(resume.projects))
+        content.append(NEW_LINE)
     return os.linesep.join([item_line for category in content for item_line in category])
 
 
@@ -59,7 +70,7 @@ def convert_education(education: Education) -> List[str]:
     end_date = parse_date(education.end_date, "Current")
     content = [
         f'**{education.study_type}, {education.area}**, '
-        f'[{education.institution}]({education.url}({start_date} - {end_date}) '
+        f'[{education.institution}]({education.url}) ({start_date} - {end_date}) '
     ]
     if education.courses:
         for course in education.courses:
@@ -68,7 +79,7 @@ def convert_education(education: Education) -> List[str]:
 
 
 def convert_educations(educations: List[Education]) -> List[str]:
-    if not educations or len(educations) == 0:
+    if len(educations) == 0:
         return []
     content = [
         "Education",
@@ -78,13 +89,14 @@ def convert_educations(educations: List[Education]) -> List[str]:
         for line in convert_education(education):
             content.append(line)
         content.append(NEW_LINE)
+    return content
 
 
 def convert_volunteer(volunteer: Volunteer) -> List[str]:
     start_date = parse_date(volunteer.start_date)
     end_date = parse_date(volunteer.end_date, "Current")
     content = [
-        f'**{volunteer.position}**, [{volunteer.name}]({volunteer.url})({start_date} - {end_date})',
+        f'**{volunteer.position}**, [{volunteer.name}]({volunteer.url}) ({start_date} - {end_date})',
         NEW_LINE,
         volunteer.summary,
         NEW_LINE
@@ -108,7 +120,7 @@ def convert_volunteers(title: str, volunteers: List[Volunteer]) -> List[str]:
 
 
 def convert_skill(skill: Skill) -> str:
-    return f'**{skill.name}:** {", ".join(skill.keywords)}'
+    return f' - **{skill.name}:** {", ".join(skill.keywords)}'
 
 
 def convert_skills(skills: List[Skill]) -> List[str]:
@@ -118,7 +130,7 @@ def convert_skills(skills: List[Skill]) -> List[str]:
         "Skills",
         DASH_LINE
     ]
-    [content.append(convert_skill(skill)) and content.append(NEW_LINE) for skill in skills]
+    [content.append(convert_skill(skill)) for skill in skills]
     return content
 
 
@@ -182,8 +194,11 @@ def convert_interests(interests: List[Interest]) -> List[str]:
 def convert_project(project: Project) -> List[str]:
     start_date = parse_date(project.start_date)
     end_date = parse_date(project.end_date, "Current")
+    roles = ''
+    if project.roles:
+        roles = f' - {", ".join(project.roles)}'
     content = [
-        f'**[{project.name}]({project.url})**  {", ".join(project.roles)}({start_date} - {end_date})',
+        f'**[{project.name}({start_date} - {end_date})]({project.url})**{roles}',
         NEW_LINE,
         project.description,
         NEW_LINE

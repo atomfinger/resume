@@ -21,7 +21,7 @@ class Test(TestCase):
 
     def test_get_header_information_verify_newline_string(self):
         result = get_header_information(create_basics())
-        self.assertEqual(result[2], '')
+        self.assertEqual(result[2], '  ')
 
     def test_get_header_information_verify_label(self):
         result = get_header_information(create_basics())
@@ -41,12 +41,12 @@ class Test(TestCase):
     def test_convert_volunteer_verify_title_line(self):
         self.assertEqual(convert_volunteer(create_volunteer())[0],
                          '**Iron man**, '
-                         '[The avengers](https://en.wikipedia.org/wiki/The_Avengers_(2012_film))(06.1988 - Current)')
+                         '[The avengers](https://en.wikipedia.org/wiki/The_Avengers_(2012_film)) (06.1988 - Current)')
 
     @parameterized.expand([[1], [3]])
     def test_convert_volunteer_verify_empty_lines(self, index: int):
         result = convert_volunteer(create_volunteer())
-        self.assertEqual(result[index], '')
+        self.assertEqual(result[index], '  ')
 
     def test_convert_volunteer_verify_summary_line(self):
         result = convert_volunteer(create_volunteer())
@@ -78,7 +78,7 @@ class Test(TestCase):
 
     def test_convert_skills(self):
         skill = Skill('Programming languages', "Master", ['HTML', 'CSS', 'BRAINFUCK', 'Rockstar'])
-        self.assertEqual(convert_skill(skill), f'**Programming languages:** HTML, CSS, BRAINFUCK, Rockstar')
+        self.assertEqual(convert_skill(skill), f' - **Programming languages:** HTML, CSS, BRAINFUCK, Rockstar')
 
     def test_convert_award(self):
         award = Award('Coolest boy', datetime.datetime(1982, 8, 2), 'My mom', 'Got the coolest boy award')
