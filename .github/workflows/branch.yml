@@ -98,12 +98,12 @@ jobs:
           args: --output=output/resume.txt
             ./output/resume.md
 
-      - name: HTML -> DOCX
+      - name: JSON -> HTML -> DOCX
         run: |
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
           sudo apt-get install libreoffice
-          mkdir temp
+          mkdir tmp
           npm install jsonresume-theme-spartan
           resume export tmp/resume.html --format html --theme spartan
           libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume.html
