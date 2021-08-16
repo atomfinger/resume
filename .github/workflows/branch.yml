@@ -29,11 +29,16 @@ jobs:
           pytest
 
       - name: Converting JSON to Markdown
-      - run: |
+        run: |
           python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
 
       - name: Check spelling
         uses: sbates130272/spellcheck-github-actions@v0.6.0
+
+      - name: Verify URLs
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          file-path: ./output/resume.md
 
 
   convert_resume:
