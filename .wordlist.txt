@@ -23,3 +23,15 @@ nordic
 www
 ul
 li
+tietoevry
+toUUID
+protectorforsikring
+initializer
+aspit
+UUIDs
+TeamCity
+OracleSQL
+Microservices
+MSSQL
+DevOps
+Backend
