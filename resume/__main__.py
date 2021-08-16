@@ -4,6 +4,7 @@ from argparse import Namespace
 from typing import Optional
 
 from resume.json_to_md import convert_to_markdown
+from resume.json_to_xml import convert_to_xml
 from resume.json_to_yaml import convert_to_yaml
 from resume.resume_types import resume_from_dict
 
@@ -12,7 +13,7 @@ def parse_arguments() -> Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', metavar='path', type=str, help='Input JSON file', required=True)
     parser.add_argument('--output', metavar='path', type=str, help='Output file', required=True)
-    parser.add_argument('--format', type=str, choices=['markdown', 'yaml'], required=True)
+    parser.add_argument('--format', type=str, choices=['markdown', 'yaml', 'xml'], required=True)
     return parser.parse_args()
 
 
@@ -25,6 +26,8 @@ def main():
         new_file_content = convert_to_markdown(resume)
     elif args.format.lower() == 'yaml':
         convert_to_yaml(resume, args.output)
+    elif args.format.lower() == 'xml':
+        new_file_content = convert_to_xml(resume)
     else:
         raise ValueError(f'{args.format} is not a supported format')
     if new_file_content:

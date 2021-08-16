@@ -83,25 +83,20 @@ jobs:
       - name: JSON -> PDF
         run: resume export output/resume.pdf --format pdf
 
-      - name: JSON -> MarkDown
+      - name: JSON -> Markdown
         run:  python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
 
-      - name: JSON -> XML (Generating)
-        uses: fabasoad/yaml-json-xml-converter-action@main
-        id: json-to-xml
-        with:
-          path: 'resume.json'
-          from: 'json'
-          to: 'xml'
-
-      - name: JSON -> XML (Write to file)
-        run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
+      - name: JSON -> XML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
 
       - name: JSON -> YAML
         run:  python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
 
       - name: Markdown -> TXT
-        run: echo "TODO" # TODO
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.txt
+            ./output/resume.md
 
       - name: JSON -> DOCX
         run: echo "TODO" # TODO
