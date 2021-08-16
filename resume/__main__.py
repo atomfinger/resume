@@ -23,7 +23,7 @@ def main():
         resume = resume_from_dict(json.loads(f.read()))
     if args.format.lower() == 'markdown':
         new_file_content = convert_to_markdown(resume)
-    if args.format.lower()  == 'yaml':
+    elif args.format.lower() == 'yaml':
         convert_to_yaml(resume, args.output)
     else:
         raise ValueError(f'{args.format} is not a supported format')
