@@ -42,7 +42,10 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 | YAML  | I mean... okay.. but again why?  | [Schema](https://jsonresume.org/schema/) |
 | TXT  | Pure text when nothing else works  | N/A |
 | CSV  | If XML wasn't legacy enough | Don't want to |
-| JPG  | Maybe you're on a device that can only view images. I'm not judging. | Don't want to |
+| JPG  | Maybe you're on a device that can only view images. I'm not judging. | [Schema](www.iso.org/iso/catalogue_detail.htm?csnumber=18902) |
+| Morse code (TXT) | The most legacy format |  |
+| Morse code (Audio) | The most legacy format |  |
+| Text-2-speech | For inclusivity |  |
 
 ## Where to download/View this resume
 

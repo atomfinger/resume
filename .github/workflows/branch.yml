@@ -96,7 +96,9 @@ jobs:
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
 
       - name: PDF -> JPG
-        run: python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
+        run: |
+          sudo apt-get poppler-utils
+          python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
       - name: Markdown -> TXT
         uses: docker://pandoc/latex:2.9
