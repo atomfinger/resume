@@ -103,10 +103,9 @@ jobs:
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
           sudo apt-get install libreoffice
-          mkdir tmp
           npm install jsonresume-theme-spartan
-          resume export tmp/resume.html --format html --theme spartan
-          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume.html
+          resume export resume.html --format html --theme spartan
+          libreoffice --headless --convert-to "docx:Office Open XML Text" resume.html
           mv resume.docx ./output/resume.docx
 
       - name: Generate artifacts
