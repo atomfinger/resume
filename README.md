@@ -31,17 +31,17 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 
 ## Supported formats
 
-| Format  | Description  | Schema |   |   |
-|---|---|---|---|---|
-| JSON  | Resume stored with the schema outlined by [JSON Resume](https://jsonresume.org/) | [Schema](https://jsonresume.org/schema/)  |   |   |
-| HTML  | Resume to be viewed in a browser  | N/A |   |   |
-| PDF  | Resume to be viewed in a PDF reader | N/A |   |   |
-| DOCX  | For those who believes in legacy and proprietary formats  | N/A |   |   |
-| Markdown  | For you with style and class | N/A |   |   |
-| XML  | Why would you want this?  | [Schema](schemas/resume-schema.xsd)  |   |   |
-| YAML  | I mean... okay.. but again why?  | [Schema](https://jsonresume.org/schema/) |   |   |
-| TXT  | Pure text when nothing else works  | N/A |   |   |
-| CSV  | If XML wasn't legacy enough | Don't want to |   |   |
+| Format  | Description  | Schema |
+|---|---|---|
+| JSON  | Resume stored with the schema outlined by [JSON Resume](https://jsonresume.org/) | [Schema](https://jsonresume.org/schema/)  |
+| HTML  | Resume to be viewed in a browser  | N/A |
+| PDF  | Resume to be viewed in a PDF reader | N/A |
+| DOCX  | For those who believes in legacy and proprietary formats  | N/A |
+| Markdown  | For you with style and class | N/A |
+| XML  | Why would you want this?  | [Schema](schemas/resume-schema.xsd)  |
+| YAML  | I mean... okay.. but again why?  | [Schema](https://jsonresume.org/schema/) |
+| TXT  | Pure text when nothing else works  | N/A |
+| CSV  | If XML wasn't legacy enough | Don't want to |
 
 ## Where to download/View this resume
 
