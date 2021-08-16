@@ -16,15 +16,25 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt
+
       - name: Run unit tests
         run: |
           python setup.py install
           pytest
+
+      - name: Converting JSON to Markdown
+      - run: |
+          python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
+
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
+
 
   convert_resume:
     name: Convert resume

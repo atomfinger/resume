@@ -2,6 +2,8 @@ import os
 from datetime import datetime
 from typing import List, Optional
 
+import mdformat
+
 from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
     Project, Reference
 
@@ -54,7 +56,10 @@ def convert_to_markdown(resume: Resume) -> str:
     if resume.projects:
         content.append(convert_projects(resume.projects))
         content.append(NEW_LINE)
-    return os.linesep.join([item_line for category in content for item_line in category])
+    markdown = os.linesep.join([item_line for category in content for item_line in category])
+    return mdformat.text(markdown, options={
+        'wrap': 120
+    })
 
 
 def parse_date(date: Optional[datetime], default: str = None) -> str:
