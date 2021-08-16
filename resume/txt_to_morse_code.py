@@ -28,7 +28,7 @@ def convert_to_morse_code(origin: str, destination: str):
 
 def encrypt(message: str) -> str:
     cipher = ''
-    for letter in message:
+    for letter in message.upper():
         if letter != ' ':
             cipher += MORSE_CODE_DICT[letter] + ' '
         else:
