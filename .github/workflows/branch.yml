@@ -38,7 +38,7 @@ jobs:
       - name: Verify URLs
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
-          file-path: ./output/resume.md
+          file-path: ./resume.md
 
 
   convert_resume:
