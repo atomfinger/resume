@@ -95,16 +95,19 @@ jobs:
       - name: JSON -> CSV
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
 
-      - name: PDF -> JPG
-        run: |
-          sudo apt install poppler-utils
-          python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
-
       - name: Markdown -> TXT
         uses: docker://pandoc/latex:2.9
         with:
           args: --output=output/resume.txt
             ./output/resume.md
+
+      - name: TXT -> Morse Code (TXT)
+        run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
+
+      - name: PDF -> JPG
+        run: |
+          sudo apt install poppler-utils
+          python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
       - name: JSON -> HTML -> DOCX
         run: |
