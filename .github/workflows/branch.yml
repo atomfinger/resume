@@ -96,6 +96,9 @@ jobs:
       - name: JSON -> XML (Write to file)
         run: echo "${{ steps.json-to-xml.outputs.data }}" >> output/resume.xml
 
+      - name: JSON -> YAML
+        run:  python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
+
       - name: Markdown -> TXT
         run: echo "TODO" # TODO
 
