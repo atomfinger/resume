@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import mdformat
 
@@ -26,8 +26,8 @@ def get_header_information(basics: Basics) -> List[str]:
     ]
 
 
-def convert_to_markdown(resume: Resume) -> str:
-    content = []
+def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
+    content: list[Union[list[str], str]] = []
     if resume.basics:
         content.append(get_header_information(resume.basics))
         content.append(get_contact_and_social_line(resume.basics))
@@ -56,10 +56,17 @@ def convert_to_markdown(resume: Resume) -> str:
     if resume.projects:
         content.append(convert_projects(resume.projects))
         content.append(NEW_LINE)
+    return content
+
+
+def convert_to_markdown(resume: Resume, destination: str):
+    content = get_markdown_content(resume)
     markdown = os.linesep.join([item_line for category in content for item_line in category])
-    return mdformat.text(markdown, options={
+    markdown = mdformat.text(markdown, options={
         'wrap': 120
     })
+    with open(destination, 'w+') as f:
+        f.write(markdown)
 
 
 def parse_date(date: Optional[datetime], default: str = None) -> str:

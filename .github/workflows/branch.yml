@@ -92,6 +92,9 @@ jobs:
       - name: JSON -> YAML
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
 
+      - name: JSON -> YAML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
+
       - name: Markdown -> TXT
         uses: docker://pandoc/latex:2.9
         with:
