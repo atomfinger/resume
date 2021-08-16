@@ -84,13 +84,13 @@ jobs:
         run: resume export output/resume.pdf --format pdf
 
       - name: JSON -> Markdown
-        run:  python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
 
       - name: JSON -> XML
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
 
       - name: JSON -> YAML
-        run:  python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
 
       - name: Markdown -> TXT
         uses: docker://pandoc/latex:2.9
@@ -98,8 +98,16 @@ jobs:
           args: --output=output/resume.txt
             ./output/resume.md
 
-      - name: JSON -> DOCX
-        run: echo "TODO" # TODO
+      - name: HTML -> DOCX
+        run: |
+          sudo add-apt-repository ppa:libreoffice/ppa
+          sudo apt-get update
+          sudo apt-get install libreoffice
+          mkdir temp
+          npm install jsonresume-theme-spartan
+          resume export tmp/resume.html --format html --theme spartan
+          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume.html
+          mv resume.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
