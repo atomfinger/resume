@@ -29,14 +29,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt
+          python setup.py install
 
       - name: Validate resume schema
         run: resume validate
 
       - name: Run unit tests
-        run: |
-          python setup.py install
-          pytest
+        run: pytest
 
       - name: Converting JSON to Markdown
         run: |
@@ -74,6 +73,7 @@ jobs:
           npm install -g resume-cli
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          python setup.py install
           mkdir output
 
       - name: JSON -> HTML
