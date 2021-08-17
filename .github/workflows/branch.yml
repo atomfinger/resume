@@ -73,6 +73,7 @@ jobs:
           npm install -g resume-cli
           npm install jsonresume-theme-even
           npm install jsonresume-theme-onepage
+          npm install jsonresume-theme-papser
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
@@ -83,6 +84,7 @@ jobs:
         run: |
           resume export output/resume.html --format html
           resume export ./tmp/resumeonepage.html --format html --theme onepage
+          resume export ./tmp/resumeshort.html --format html --theme short
 
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
@@ -118,12 +120,13 @@ jobs:
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
       - name: HTML -> DOCX
+        timeout-minutes: 5
         run: |
           sudo add-apt-repository ppa:libreoffice/ppa
           sudo apt-get update
           sudo apt-get install libreoffice
-          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeonepage.html
-          mv resumeonepage.docx ./output/resume.docx
+          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeshort.html
+          mv resumeshort.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
