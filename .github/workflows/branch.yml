@@ -82,12 +82,12 @@ jobs:
       - name: JSON -> HTML
         run: |
           resume export output/resume.html --format html
-          resume export ./tmp/resume-onepage.html --format html --theme onepage
+          resume export ./tmp/resumeonepage.html --format html --theme onepage
 
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
-          htmlFile: ./tmp/resume-onepage.html
+          htmlFile: ./tmp/resumeonepage.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
 
@@ -122,7 +122,7 @@ jobs:
       #     sudo add-apt-repository ppa:libreoffice/ppa
       #     sudo apt-get update
       #     sudo apt-get install libreoffice
-      #     libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume-onepage.html
+      #     libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeonepage.html
       #     mv resume-onepage.docx ./output/resume.docx
 
       - name: Generate artifacts
