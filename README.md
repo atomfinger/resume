@@ -43,9 +43,7 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 | TXT  | Pure text when nothing else works  | N/A |
 | CSV  | If XML wasn't legacy enough | Don't want to |
 | JPG  | Maybe you're on a device that can only view images. I'm not judging. | [Schema](https://jpeg.org/jpeg/workplan.html) |
-| Morse code (TXT) | The most legacy format |  |
-| Morse code (Audio) | The most legacy format |  |
-| Text-2-speech | For inclusivity |  |
+| Morse code (TXT) | The most legacy format | N/A |
 
 ## Where to download/View this resume
 
@@ -54,3 +52,45 @@ version [online](https://atomfinger.github.io/resume/), or you can download all 
 formats [here](https://github.com/atomfinger/resume/releases/latest/).
 
 If no format exists that support your needs, do let me know :)
+
+## Build locally
+
+This project uses 3 different technologies for generating the various file types:
+
+- [resume-cli](https://www.npmjs.com/package/resume-cli): The official JSON resume command lined tool.
+- Python: For custom transformations not supported by `resume-cli`.
+- GitHub Actions: For when there's a quick and easy action that does what I need it to do.
+
+### Resume-CLI
+
+`Resume-CLI` is installed through NPM:
+
+```npm install -g resume-cli```
+
+Then you can execute transformation (while being in the root folder) as such:
+
+```resume export resume.html --format html```
+
+For more information head over to the [official repository](https://github.com/jsonresume/resume-cli).
+
+If you get an error you might have to also install the default theme: `npm install jsonresume-theme-even`
+
+### GitHub Actions
+
+Some formats are only generated through various GitHub Actions. If you want to reproduce them you can always see how
+they're executed by going to the [`.github/workflows/` folder](.github/workflows).
+
+### Python
+
+Some formats are dumb, or they don't have a natural way to convert. For these scenarios the application uses Python.
+
+#### How to run
+
+1. You should [start a virtual environment](https://docs.python.org/3/library/venv.html)
+2. Install required packages: `pip install -r requirements.txt`
+3. Install the python package: `python setup.py install`
+4. Run a command, such as `python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'`
+
+#### How to run tests
+
+The same as above, but instead of running `__main__.py` you use this command `pytest` (needs pytest installed).
