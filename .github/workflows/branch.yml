@@ -117,13 +117,13 @@ jobs:
           sudo apt install poppler-utils
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
-      - name: HTML -> DOCX
-        run: |
-          sudo add-apt-repository ppa:libreoffice/ppa
-          sudo apt-get update
-          sudo apt-get install libreoffice
-          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume-onepage.html
-          mv resume-onepage.docx ./output/resume.docx
+      # - name: HTML -> DOCX
+      #   run: |
+      #     sudo add-apt-repository ppa:libreoffice/ppa
+      #     sudo apt-get update
+      #     sudo apt-get install libreoffice
+      #     libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resume-onepage.html
+      #     mv resume-onepage.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
