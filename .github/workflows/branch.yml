@@ -83,7 +83,7 @@ jobs:
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
-          htmlFile: ./output/index.html
+          htmlFile: ./output/resume.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
 
@@ -180,15 +180,15 @@ jobs:
           asset_name: resume.html
           asset_content_type: text/html
 
-      - name: Upload DOCX
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.docx
-          asset_name: resume.docx
-          asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      # - name: Upload DOCX
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./output/resume.docx
+      #     asset_name: resume.docx
+      #     asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
 
       - name: Upload JSON
         uses: actions/upload-release-asset@v1
