@@ -1,130 +1,158 @@
 {
-    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
-    "basics": {
-        "name": "John Mikael Gundersen",
-        "label": "Programmer",
-        "image": "",
-        "email": "john@jmgundersen.com",
-        "url": "https://jmgundersen.com",
-        "summary": "Developer with a passion for automated testing, clean code and pipelines",
-        "profiles": [
-            {
-                "network": "Github",
-                "username": "atomfinger",
-                "url": "https://github.com/atomfinger/"
-            }
-        ]
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "John Mikael Gundersen",
+    "label": "Programmer",
+    "image": "",
+    "email": "john@jmgundersen.com",
+    "url": "https://jmgundersen.com",
+    "summary": "Developer with a passion for automated testing, clean code and excellent developer practices.",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "atomfinger",
+        "url": "https://github.com/atomfinger/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Protector",
+      "name": "Protector",
+      "position": "Tech Lead",
+      "website": "https://protectorforsikring.no/",
+      "startDate": "2020-12-01",
+      "summary": "Currently helping the company by improving development processes",
+      "highlights": [
+        "Authored developer guidelines for a cleaner and more maintainable codebase"
+      ]
     },
-    "work": [
-        {
-            "company": "Protector",
-            "name": "Protector",
-            "position": "Tech Lead",
-            "website": "https://protectorforsikring.no/",
-            "startDate": "2020-12-01",
-            "summary": "Primarily I'm concerned with code quality and best practices.",
-            "highlights": [
-                "Implemented project initializer to make it easier to create new solutions",
-                "Created a framework to efficiently deal with system testing"
-            ]
-        },
-        {
-            "company": "TietoEvry",
-            "name": "TietoEvry",
-            "position": "Senior Consultant",
-            "website": "https://www.tietoevry.com/",
-            "startDate": "2018-05-01",
-            "endDate": "2020-11-30",
-            "summary": "Made banking systems for some of the biggest banks in the Nordic region.",
-            "highlights": [
-                "Made and maintained core web systems for multiple banks",
-                "Improved the development process by",
-                "Creating new systems for integration testing and improved CI/CD pipelines",
-                "Authoring developer guidelines for cleaner more maintainable code",
-                "I was a team lead managing the team responsible for our PCI compliant systems",
-                "I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution",
-                "Worked closely with partners in India"
-            ]
-        },
-        {
-            "company": "Aspit",
-            "name": "Aspit",
-            "position": "Senior system developer",
-            "website": "https://www.aspit.no/",
-            "startDate": "2013-09-01",
-            "endDate": "2018-05-01",
-            "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
-            "highlights": [
-                "Was responsible for the development of the core product",
-                "Worked closely with the business by planning and implementing new features",
-                "Worked closely with an outsourcing team in Vietnam"
-            ]
-        }
-    ],
-    "education": [
-        {
-            "institution": "Aberystwyth University",
-            "url": "https://www.aber.ac.uk/en/",
-            "area": "Computer Science",
-            "studyType": "Bachelor",
-            "startDate": "2010-08-01",
-            "endDate": "2014-05-01"
-        }
-    ],
-    "skills": [
-        {
-            "name": "Backend developer",
-            "keywords": [
-                "Java/Kotlin",
-                "C#",
-                "Python",
-                "MSSQL, OracleSQL",
-                "Microservices"
-            ]
-        },
-        {
-            "name": "DevOps",
-            "keywords": [
-                "TeamCity, Jenkins, Github Actions",
-                "Groovy",
-                "Docker, K8s, Swarm"
-            ]
-        }
-    ],
-    "languages": [
-        {
-            "language": "English",
-            "fluency": "Native speaker"
-        },
-        {
-            "language": "Norwegian",
-            "fluency": "Native speaker"
-        }
-    ],
-    "interests": [
-        {
-            "name": "Wildlife",
-            "keywords": [
-                "Ferrets",
-                "Unicorns"
-            ]
-        }
-    ],
-    "projects": [
-        {
-            "name": "toUUID",
-            "startDate": "2020-10-16",
-            "description": "A very simple project that makes it easier to generate predictable UUIDs for testing purposes.",
-            "keywords": [
-                "Kotlin/Java"
-            ],
-            "url": "https://github.com/atomfinger/toUUID",
-            "type": "Library"
-        }
-    ],
-    "meta": {
-        "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
-        "version": "v1.0.0",
-        "lastModified": "2017-12-24T15:53:00"
+    {
+      "company": "TietoEvry",
+      "name": "TietoEvry",
+      "position": "Senior Consultant",
+      "website": "https://www.tietoevry.com/",
+      "startDate": "2018-05-01",
+      "endDate": "2020-11-30",
+      "summary": "Maintained and created core solutions for major nordic banks.",
+      "highlights": [
+        "Made and maintained core web systems for multiple banks",
+        "Created new systems for integration testing and improved CI/CD pipelines",
+        "Authored developer guidelines for a cleaner and more maintainable codebase",
+        "Was a team lead managing the team responsible for our PCI compliant systems",
+        "Was a project architect that guided new banks, while being responsible for the technical aspect of the project",
+        "Worked closely with partners in India"
+      ]
+    },
+    {
+      "company": "Aspit",
+      "name": "Aspit",
+      "position": "Senior system developer",
+      "website": "https://www.aspit.no/",
+      "startDate": "2013-09-01",
+      "endDate": "2018-05-01",
+      "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
+      "highlights": [
+        "Was responsible for the development of the core product",
+        "Worked closely with the business by planning and implementing new features",
+        "Worked closely with an outsourcing team in Vietnam"
+      ]
     }
+  ],
+  "education": [
+    {
+      "institution": "Aberystwyth University",
+      "url": "https://www.aber.ac.uk/en/",
+      "area": "Computer Science",
+      "studyType": "Bachelor of science",
+      "startDate": "2010-08-01",
+      "endDate": "2014-05-01",
+      "courses": [
+        "CS38010 - Space Robotics",
+        "CS36410 - Intelligent Robotics",
+        "CS38110 - Open Source Development Issues",
+        "CS31310 - Agile Methodologies"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Developer",
+      "keywords": [
+        "Java/Kotlin",
+        "C# .NET",
+        "Python",
+        "SQL of various kinds",
+        "Microservices",
+        "Kafka",
+        "Architecture",
+        "Contract first"
+      ]
+    },
+    {
+      "name": "DevOps",
+      "keywords": [
+        "TeamCity",
+        "Jenkins",
+        "GitHub Actions",
+        "Groovy",
+        "Docker",
+        "K8s",
+        "Swarm",
+        "Solution design"
+      ]
+    },
+    {
+      "name": "Testing",
+      "keywords": [
+        "Testcontainers",
+        "System tests",
+        "Mockserver",
+        "Contract testing",
+        "Narrow & Wide integration tests",
+        "Spock/Junit/Mockito/Nunit/etc"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Norwegian",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Stuff I like in general",
+      "keywords": [
+        "Dungeon & Dragons",
+        "Headphones (Good audio)",
+        "My dog",
+        "Discworld",
+        "Whiskey"
+      ]
+    },
+    {
+      "name": "Shows I like",
+      "keywords": [
+        "Battlestar Galactica",
+        "Firefly",
+        "Red Dwarf",
+        "Doctor Who"
+      ]
+    },
+    {
+      "name": "Developer books I recommend",
+      "keywords": [
+        "Clean Series",
+        "Pragmatic Programmer",
+        "The Phoenix Project/The Unicorn Project",
+        "The Art of Unit Testing",
+        "The Software Craftsman"
+      ]
+    }
+  ]
 }

@@ -32,6 +32,8 @@ def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
         content.append(get_header_information(resume.basics))
         content.append(get_contact_and_social_line(resume.basics))
         content.append(NEW_LINE)
+        content.append(resume.basics.summary)
+        content.append(NEW_LINE)
     if resume.work:
         content.append(convert_works("Experience", resume.work))
         content.append(NEW_LINE)
