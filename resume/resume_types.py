@@ -437,7 +437,7 @@ class Resume:
 
     def to_dict(self) -> dict:
         result: dict = {"basics": from_union([lambda x: to_class(Basics, x), from_none], self.basics),
-                        "work": from_union([lambda x: from_list(lambda x: to_class(Volunteer, x), x), from_none],
+                        "work": from_union([lambda x: from_list(lambda x: to_class(Work, x), x), from_none],
                                            self.work),
                         "volunteer": from_union([lambda x: from_list(lambda x: to_class(Volunteer, x), x), from_none],
                                                 self.volunteer),
