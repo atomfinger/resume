@@ -126,7 +126,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install libreoffice
           libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeshort.html
-          mv resume.docx ./output/resume.docx
+          mv resumeshort.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
