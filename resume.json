@@ -17,9 +17,10 @@
     },
     "work": [
         {
+            "company": "Protector",
             "name": "Protector",
             "position": "Tech Lead",
-            "url": "https://protectorforsikring.no/",
+            "website": "https://protectorforsikring.no/",
             "startDate": "2020-12-01",
             "summary": "Primarily I'm concerned with code quality and best practices.",
             "highlights": [
@@ -28,9 +29,10 @@
             ]
         },
         {
+            "company": "TietoEvry",
             "name": "TietoEvry",
             "position": "Senior Consultant",
-            "url": "https://www.tietoevry.com/",
+            "website": "https://www.tietoevry.com/",
             "startDate": "2018-05-01",
             "endDate": "2020-11-30",
             "summary": "Made banking systems for some of the biggest banks in the Nordic region.",
@@ -45,9 +47,10 @@
             ]
         },
         {
+            "company": "Aspit",
             "name": "Aspit",
             "position": "Senior system developer",
-            "url": "https://www.aspit.no/",
+            "website": "https://www.aspit.no/",
             "startDate": "2013-09-01",
             "endDate": "2018-05-01",
             "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
@@ -61,7 +64,7 @@
     "education": [
         {
             "institution": "Aberystwyth University",
-            "url": "https://www.aber.ac.uk/en/",
+            "website": "https://www.aber.ac.uk/en/",
             "area": "Computer Science",
             "studyType": "Bachelor",
             "startDate": "2010-08-01",

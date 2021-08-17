@@ -138,9 +138,9 @@ def create_education() -> Education:
 
 def create_volunteer() -> Volunteer:
     return Volunteer(
-        name='The avengers',
+        organization='The avengers',
         position='Iron man',
-        url='https://en.wikipedia.org/wiki/The_Avengers_(2012_film)',
+        website='https://en.wikipedia.org/wiki/The_Avengers_(2012_film)',
         start_date=datetime.datetime(1988, 6, 21),
         end_date=None,
         summary='Worked with a group that battles horrors that might threaten earth',
@@ -150,8 +150,7 @@ def create_volunteer() -> Volunteer:
             'Met literal norse gods',
             'Married',
             'Been pretty cool to Spiderman'
-        ],
-        organization=None
+        ]
     )
 
 
@@ -167,7 +166,6 @@ def create_basics() -> Basics:
                 'focus on the underbelly of society and are delivered in his trademark deep, gravelly voice.',
         location=Location('', '', '', '', ''),
         profiles=create_profiles()
-
     )
 
 

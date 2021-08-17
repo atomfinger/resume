@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 import mdformat
 
 from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
-    Project, Reference
+    Project, Reference, Work
 
 NEW_LINE = '  '
 DASH_LINE = '----------'
@@ -33,7 +33,7 @@ def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
         content.append(get_contact_and_social_line(resume.basics))
         content.append(NEW_LINE)
     if resume.work:
-        content.append(convert_volunteers("Experience", resume.work))
+        content.append(convert_works("Experience", resume.work))
         content.append(NEW_LINE)
     if resume.education:
         content.append(convert_educations(resume.education))
@@ -108,7 +108,7 @@ def convert_volunteer(volunteer: Volunteer) -> List[str]:
     start_date = parse_date(volunteer.start_date)
     end_date = parse_date(volunteer.end_date, "Current")
     content = [
-        f'**{volunteer.position}**, [{volunteer.name}]({volunteer.url}) ({start_date} - {end_date})',
+        f'**{volunteer.position}**, [{volunteer.organization}]({volunteer.website}) ({start_date} - {end_date})',
         NEW_LINE,
         volunteer.summary,
         NEW_LINE
@@ -130,6 +130,32 @@ def convert_volunteers(title: str, volunteers: List[Volunteer]) -> List[str]:
         content.append(NEW_LINE)
     return content
 
+
+def convert_work(volunteer: Work) -> List[str]:
+    start_date = parse_date(volunteer.start_date)
+    end_date = parse_date(volunteer.end_date, "Current")
+    content = [
+        f'**{volunteer.position}**, [{volunteer.company}]({volunteer.website}) ({start_date} - {end_date})',
+        NEW_LINE,
+        volunteer.summary,
+        NEW_LINE
+    ]
+    [content.append(f' * {highlight}') for highlight in volunteer.highlights]
+    return content
+
+
+def convert_works(title: str, volunteers: List[Work]) -> List[str]:
+    if not volunteers or len(volunteers) == 0:
+        return []
+    content = [
+        title,
+        DASH_LINE
+    ]
+    for volunteer in volunteers:
+        for line in convert_work(volunteer):
+            content.append(line)
+        content.append(NEW_LINE)
+    return content
 
 def convert_skill(skill: Skill) -> str:
     return f' - **{skill.name}:** {", ".join(skill.keywords)}'
@@ -165,7 +191,7 @@ def convert_publication(publication: Publication) -> str:
     publisher_text = ''
     if publication.publisher:
         publisher_text = f' - {publication.publisher}'
-    return f'**[{publication.name} ({publication.release_date.strftime("%d.%m.%Y")})]({publication.url})**' \
+    return f'**[{publication.name} ({publication.release_date.strftime("%d.%m.%Y")})]({publication.website})**' \
            f'{publisher_text}  {publication.summary}'
 
 

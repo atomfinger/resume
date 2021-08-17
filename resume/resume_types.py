@@ -57,11 +57,10 @@ class Award:
         return Award(title, date, awarder, summary)
 
     def to_dict(self) -> dict:
-        result: dict = {}
-        result["title"] = from_union([from_str, from_none], self.title)
-        result["date"] = from_union([lambda x: x.isoformat(), from_none], self.date)
-        result["awarder"] = from_union([from_str, from_none], self.awarder)
-        result["summary"] = from_union([from_str, from_none], self.summary)
+        result: dict = {"title": from_union([from_str, from_none], self.title),
+                        "date": from_union([lambda x: x.isoformat(), from_none], self.date),
+                        "awarder": from_union([from_str, from_none], self.awarder),
+                        "summary": from_union([from_str, from_none], self.summary)}
         return result
 
 
@@ -272,7 +271,7 @@ class Publication:
     name: Optional[str] = None
     publisher: Optional[str] = None
     release_date: Optional[datetime] = None
-    url: Optional[str] = None
+    website: Optional[str] = None
     summary: Optional[str] = None
 
     @staticmethod
@@ -281,15 +280,15 @@ class Publication:
         name = from_union([from_str, from_none], obj.get("name"))
         publisher = from_union([from_str, from_none], obj.get("publisher"))
         release_date = from_union([from_datetime, from_none], obj.get("releaseDate"))
-        url = from_union([from_str, from_none], obj.get("url"))
+        website = from_union([from_str, from_none], obj.get("website"))
         summary = from_union([from_str, from_none], obj.get("summary"))
-        return Publication(name, publisher, release_date, url, summary)
+        return Publication(name, publisher, release_date, website, summary)
 
     def to_dict(self) -> dict:
         result: dict = {"name": from_union([from_str, from_none], self.name),
                         "publisher": from_union([from_str, from_none], self.publisher),
                         "releaseDate": from_union([lambda x: x.isoformat(), from_none], self.release_date),
-                        "url": from_union([from_str, from_none], self.url),
+                        "website": from_union([from_str, from_none], self.website),
                         "summary": from_union([from_str, from_none], self.summary)}
         return result
 
@@ -337,7 +336,7 @@ class Skill:
 class Volunteer:
     organization: Optional[str] = None
     position: Optional[str] = None
-    url: Optional[str] = None
+    website: Optional[str] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
     summary: Optional[str] = None
@@ -349,18 +348,54 @@ class Volunteer:
         assert isinstance(obj, dict)
         organization = from_union([from_str, from_none], obj.get("organization"))
         position = from_union([from_str, from_none], obj.get("position"))
-        url = from_union([from_str, from_none], obj.get("url"))
+        website = from_union([from_str, from_none], obj.get("website"))
         start_date = from_union([from_datetime, from_none], obj.get("startDate"))
         end_date = from_union([from_datetime, from_none], obj.get("endDate"))
         summary = from_union([from_str, from_none], obj.get("summary"))
         highlights = from_union([lambda x: from_list(from_str, x), from_none], obj.get("highlights"))
         name = from_union([from_str, from_none], obj.get("name"))
-        return Volunteer(organization, position, url, start_date, end_date, summary, highlights, name)
+        return Volunteer(organization, position, website, start_date, end_date, summary, highlights, name)
 
     def to_dict(self) -> dict:
         result: dict = {"organization": from_union([from_str, from_none], self.organization),
                         "position": from_union([from_str, from_none], self.position),
-                        "url": from_union([from_str, from_none], self.url),
+                        "website": from_union([from_str, from_none], self.website),
+                        "startDate": from_union([lambda x: x.isoformat(), from_none], self.start_date),
+                        "endDate": from_union([lambda x: x.isoformat(), from_none], self.end_date),
+                        "summary": from_union([from_str, from_none], self.summary),
+                        "highlights": from_union([lambda x: from_list(from_str, x), from_none], self.highlights),
+                        "name": from_union([from_str, from_none], self.name)}
+        return result
+
+
+@dataclass
+class Work:
+    company: Optional[str] = None
+    position: Optional[str] = None
+    website: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    summary: Optional[str] = None
+    highlights: Optional[List[str]] = None
+    name: Optional[str] = None
+
+    @staticmethod
+    def from_dict(obj: Any) -> 'Work':
+        assert isinstance(obj, dict)
+        company = from_union([from_str, from_none], obj.get("company"))
+        position = from_union([from_str, from_none], obj.get("position"))
+        website = from_union([from_str, from_none], obj.get("website"))
+        start_date = from_union([from_datetime, from_none], obj.get("startDate"))
+        end_date = from_union([from_datetime, from_none], obj.get("endDate"))
+        summary = from_union([from_str, from_none], obj.get("summary"))
+        highlights = from_union([lambda x: from_list(from_str, x), from_none], obj.get("highlights"))
+        name = from_union([from_str, from_none], obj.get("name"))
+        return Work(company, position, website, start_date, end_date, summary, highlights, name)
+
+    def to_dict(self) -> dict:
+        result: dict = {"company": from_union([from_str, from_none], self.company),
+                        "position": from_union([from_str, from_none], self.position),
+                        "website": from_union([from_str, from_none], self.website),
                         "startDate": from_union([lambda x: x.isoformat(), from_none], self.start_date),
                         "endDate": from_union([lambda x: x.isoformat(), from_none], self.end_date),
                         "summary": from_union([from_str, from_none], self.summary),
@@ -372,7 +407,7 @@ class Volunteer:
 @dataclass
 class Resume:
     basics: Optional[Basics] = None
-    work: Optional[List[Volunteer]] = None
+    work: Optional[List[Work]] = None
     volunteer: Optional[List[Volunteer]] = None
     education: Optional[List[Education]] = None
     awards: Optional[List[Award]] = None
@@ -387,7 +422,7 @@ class Resume:
     def from_dict(obj: Any) -> 'Resume':
         assert isinstance(obj, dict)
         basics = from_union([Basics.from_dict, from_none], obj.get("basics"))
-        work = from_union([lambda x: from_list(Volunteer.from_dict, x), from_none], obj.get("work"))
+        work = from_union([lambda x: from_list(Work.from_dict, x), from_none], obj.get("work"))
         volunteer = from_union([lambda x: from_list(Volunteer.from_dict, x), from_none], obj.get("volunteer"))
         education = from_union([lambda x: from_list(Education.from_dict, x), from_none], obj.get("education"))
         awards = from_union([lambda x: from_list(Award.from_dict, x), from_none], obj.get("awards"))
