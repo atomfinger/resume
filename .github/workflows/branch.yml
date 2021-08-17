@@ -73,7 +73,7 @@ jobs:
           npm install -g resume-cli
           npm install jsonresume-theme-even
           npm install jsonresume-theme-onepage
-          npm install jsonresume-theme-paper
+          npm install jsonresume-theme-short
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
@@ -126,7 +126,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install libreoffice
           libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeshort.html
-          mv resumeshort.docx ./output/resume.docx
+          mv resume.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
