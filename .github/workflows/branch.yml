@@ -80,8 +80,12 @@ jobs:
       - name: JSON -> HTML
         run: resume export output/resume.html --format html
 
-      - name: JSON -> PDF
-        run: resume export output/resume.pdf --format pdf
+      - name: HTML -> PDF
+        uses: fifsky/html-to-pdf-action@master
+        with:
+          htmlFile: ./output/index.html
+          outputFile: ./output/resume.pdf
+          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
 
       - name: JSON -> Markdown
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
