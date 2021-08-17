@@ -73,7 +73,7 @@ jobs:
           npm install -g resume-cli
           npm install jsonresume-theme-even
           npm install jsonresume-theme-onepage
-          npm install jsonresume-theme-papser
+          npm install jsonresume-theme-paper
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
