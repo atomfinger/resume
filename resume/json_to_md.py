@@ -157,6 +157,7 @@ def convert_works(title: str, volunteers: List[Work]) -> List[str]:
         content.append(NEW_LINE)
     return content
 
+
 def convert_skill(skill: Skill) -> str:
     return f' - **{skill.name}:** {", ".join(skill.keywords)}'
 

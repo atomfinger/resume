@@ -64,7 +64,7 @@
     "education": [
         {
             "institution": "Aberystwyth University",
-            "website": "https://www.aber.ac.uk/en/",
+            "url": "https://www.aber.ac.uk/en/",
             "area": "Computer Science",
             "studyType": "Bachelor",
             "startDate": "2010-08-01",
