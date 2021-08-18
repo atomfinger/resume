@@ -1,9 +1,7 @@
-name: Branch build
+name: Pipeline build
 
 on:
   push:
-    branches-ignore:
-      - main
 
 jobs:
   python_tests:
