@@ -6,7 +6,6 @@ on:
       - main
 
 jobs:
-
   python_tests:
     name: Execute resume tests
     runs-on: ubuntu-latest
@@ -134,17 +133,14 @@ jobs:
           name: resume
           path: output
 
-  deploy:
+  create_release:
+    name: Bump version & create release
     needs: convert_resume
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: resume
-
       - name: Bump version and push tag
         id: version_bump
         uses: anothrNick/github-tag-action@1.17.2
@@ -164,92 +160,62 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload PDF
+  upload_assets:
+    name: Upload assets
+    needs: create_release
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      matrix:
+        include:
+          - asset: resume.pdf
+            asset_content_type: application/pdf
+          - asset: resume.html
+            asset_content_type: text/html
+          - asset: resume.docx
+            asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - asset: resume.json
+            asset_content_type: application/json
+          - asset: resume.txt
+            asset_content_type: application/text
+          - asset: resume_morse_code.txt
+            asset_content_type: application/text
+          - asset: resume.md
+            asset_content_type: text/markdown
+          - asset: resume.xml
+            asset_content_type: application/xml
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: resume
+
+      - name: Upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.pdf
-          asset_name: resume.pdf
-          asset_content_type: application/pdf
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ./output/${{ matrix.asset }}
+          asset_name: ${{ matrix.asset }}
+          asset_content_type: ${{ matrix.asset_content_type }}
 
-      - name: Upload HTML
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy_github_pages:
+    name: Deploy to GitHub Pages
+    needs: upload_assets
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.html
-          asset_name: resume.html
-          asset_content_type: text/html
-
-      # - name: Upload DOCX
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./output/resume.docx
-      #     asset_name: resume.docx
-      #     asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
-
-      - name: Upload JSON
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.json
-          asset_name: resume.json
-          asset_content_type: application/json
-
-      - name: Upload TXT
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.txt
-          asset_name: resume.txt
-          asset_content_type: application/text
-
-      - name: Upload Morse Code
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.txt
-          asset_name: resume.txt
-          asset_content_type: application/text
-
-      - name: Upload Markdown
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.md
-          asset_name: resume.md
-          asset_content_type: application/text
-
-      - name: Upload XML
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./output/resume.xml
-          asset_name: resume.xml
-          asset_content_type: application/xml
+          name: resume
 
       - name: Copy HTML file to public
         run: |
           mkdir public
           cp ./output/resume.html ./public/index.html
-          cp ./output/resume.json ./public/resume.json
-          cp ./output/resume.txt ./public/resume.txt
+          cp ./output/. ./public/.
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
