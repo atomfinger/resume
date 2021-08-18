@@ -204,7 +204,7 @@ jobs:
     name: Deploy to GitHub Pages
     needs: upload_assets
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
