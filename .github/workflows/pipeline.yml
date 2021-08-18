@@ -130,7 +130,7 @@ jobs:
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: resume
+          name: artifacts
           path: output
 
   create_release:
@@ -184,11 +184,17 @@ jobs:
             asset_content_type: text/markdown
           - asset: resume.xml
             asset_content_type: application/xml
+          - asset: resume.jpg
+            asset_content_type: image/jpeg
+          - asset: resume.csv
+            asset_content_type: text/csv
+          - asset: resume.yml
+            asset_content_type: text/yaml
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          name: resume
+          name: artifacts
 
       - name: Upload
         uses: actions/upload-release-asset@v1
@@ -196,7 +202,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./output/${{ matrix.asset }}
+          asset_path: ./artifacts/${{ matrix.asset }}
           asset_name: ${{ matrix.asset }}
           asset_content_type: ${{ matrix.asset_content_type }}
 
@@ -209,13 +215,13 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          name: resume
+          name: artifacts
 
       - name: Copy HTML file to public
         run: |
           mkdir public
-          cp ./output/resume.html ./public/index.html
-          cp ./output/. ./public/.
+          cp ./artifacts/resume.html ./public/index.html
+          cp ./artifacts/. ./public/.
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
