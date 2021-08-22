@@ -214,7 +214,7 @@ jobs:
         run: |
           mkdir public
           mv resume.html public/index.html
-          cp -a . public/.
+          rsync -am --exclude='*/' ./* public/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
