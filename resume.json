@@ -1,0 +1,176 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "John Mikael Gundersen",
+    "label": "Programmer",
+    "image": "",
+    "email": "john@jmgundersen.com",
+    "url": "https://jmgundersen.com",
+    "summary": "Developer with a passion for automated testing, clean code and excellent developer practices.",
+    "location": {
+      "city": "Oslo",
+      "countryCode": "NO"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "atomfinger",
+        "url": "https://github.com/atomfinger/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Protector",
+      "location": "Oslo, Norway",
+      "position": "Tech Lead",
+      "url": "https://protectorforsikring.no/",
+      "startDate": "2020-12-01",
+      "summary": "Currently helping the company by improving development processes",
+      "highlights": [
+        "Authored developer guidelines for a cleaner and more maintainable codebase"
+      ]
+    },
+    {
+      "name": "TietoEvry",
+      "location": "Oslo, Norway",
+      "position": "Senior Consultant",
+      "url": "https://www.tietoevry.com/",
+      "startDate": "2018-05-01",
+      "endDate": "2020-11-30",
+      "summary": "Maintained and created core solutions for major nordic banks.",
+      "highlights": [
+        "Made and maintained core web systems for multiple banks",
+        "Created new systems for integration testing and improved CI/CD pipelines",
+        "Authored developer guidelines for a cleaner and more maintainable codebase",
+        "Was a team lead managing the team responsible for our PCI compliant systems",
+        "Was a project architect that guided new banks, while being responsible for the technical aspect of the project",
+        "Worked closely with partners in India"
+      ]
+    },
+    {
+      "name": "Aspit",
+      "location": "Seljord, Norway",
+      "position": "Senior system developer",
+      "url": "https://www.aspit.no/",
+      "startDate": "2013-09-01",
+      "endDate": "2018-05-01",
+      "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
+      "highlights": [
+        "Was responsible for the development of the core product",
+        "Worked closely with the business by planning and implementing new features",
+        "Worked closely with an outsourcing team in Vietnam"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Aberystwyth University",
+      "url": "https://www.aber.ac.uk/en/",
+      "area": "Computer Science",
+      "studyType": "Bachelor of science",
+      "startDate": "2010-08-01",
+      "endDate": "2014-05-01",
+      "courses": [
+        "CS38010 - Space Robotics",
+        "CS36410 - Intelligent Robotics",
+        "CS38110 - Open Source Development Issues",
+        "CS31310 - Agile Methodologies"
+      ]
+    },
+    {
+      "institution": "Folkehøgskolen Sørlandet",
+      "url": "https://www.fhssorlandet.no/",
+      "area": "Data/Media",
+      "startDate": "2009-08-01",
+      "endDate": "2010-05-01"
+    },
+    {
+      "institution": "Bø VGS",
+      "url": "https://www.vtfk.no/skoler/bo-vgs/",
+      "area": "Studiespesialiserende",
+      "startDate": "2006-08-01",
+      "endDate": "2008-05-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Developer",
+      "keywords": [
+        "Java/Kotlin",
+        "C# .NET",
+        "Python",
+        "SQL of various kinds",
+        "Microservices",
+        "Kafka",
+        "Architecture",
+        "Contract first"
+      ]
+    },
+    {
+      "name": "DevOps",
+      "keywords": [
+        "TeamCity",
+        "Jenkins",
+        "GitHub Actions",
+        "Groovy",
+        "Docker",
+        "K8s",
+        "Swarm",
+        "Solution design"
+      ]
+    },
+    {
+      "name": "Testing",
+      "keywords": [
+        "Testcontainers",
+        "System tests",
+        "Mockserver",
+        "Contract testing",
+        "Narrow & Wide integration tests",
+        "Spock/Junit/Mockito/Nunit/etc"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Norwegian",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Stuff I like in general",
+      "keywords": [
+        "Dungeon & Dragons",
+        "Headphones (Good audio)",
+        "My dog",
+        "Discworld",
+        "Whiskey"
+      ]
+    },
+    {
+      "name": "Shows I like",
+      "keywords": [
+        "Battlestar Galactica",
+        "Firefly",
+        "Red Dwarf",
+        "Doctor Who"
+      ]
+    },
+    {
+      "name": "Developer books I recommend",
+      "keywords": [
+        "Clean Series",
+        "Pragmatic Programmer",
+        "The Phoenix Project/The Unicorn Project",
+        "The Art of Unit Testing",
+        "The Software Craftsman"
+      ]
+    }
+  ]
+}

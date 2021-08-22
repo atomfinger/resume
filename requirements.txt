@@ -1,0 +1,13 @@
+python-dateutil==2.8.2
+pip~=21.2.4
+py~=1.10.0
+setuptools~=57.4.0
+resume~=0.12
+parameterized~=0.8.1
+mdformat~=0.7.8
+ruamel.yaml>=0.17.10
+xmltodict~=0.12.0
+lxml~=4.6.3
+pandas~=1.3.2
+pdf2image~=1.16.0
+Pillow~=8.3.1
