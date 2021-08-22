@@ -1,3 +1,5 @@
+![Build status](https://github.com/atomfinger/resume/actions/workflows/pipeline.yml/badge.svg)
+
 # John's resume
 
 Howdy! Welcome to John's resume... or, well, at least the repository that generates the resume. Look, let's level for a
