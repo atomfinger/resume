@@ -82,9 +82,9 @@ jobs:
 
   # CONVERSION BEGIN
 
-  # HTML, PDF, JPG, TIFF
-  html_conversions:
-    name: Generate resume files
+  # PDF, JPG, TIFF
+  pdf_conversions:
+    name: Conversions based on PDF
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
@@ -93,16 +93,19 @@ jobs:
         uses: actions/setup-node@v2.1.4
         with:
           node-version: 12
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
       - name: Setup
         run: |
           npm install -g resume-cli
-          npm install jsonresume-theme-even
           npm install jsonresume-theme-paper
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
           mkdir output
           mkdir tmp
-      - name: JSON -> HTML
-        run: |
-          resume export output/resume.html --format html
           mv resume.json resume-full.json
           python ./resume/__main__.py --input 'resume-full.json' --output 'resume.json' --format 'simplify'
           resume export tmp/resume-paper.html --format html --theme paper
@@ -127,12 +130,39 @@ jobs:
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: artefacts-pdf
+          path: output
+
+  # HTML
+  html_conversions:
+    name: Conversions based on HTML
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 12
+      - name: Setup
+        run: |
+          npm install -g resume-cli
+          npm install jsonresume-theme-even
+          npm install jsonresume-theme-paper
+          mkdir output
+          mkdir tmp
+      - name: JSON -> HTML
+        run: |
+          resume export output/resume.html --format html
+      - name: Generate artifacts
+        uses: actions/upload-artifact@v2
+        with:
           name: artefacts-html
           path: output
 
   # JSON, XML, YAML, CSV
   script_conversions:
-    name: Stright conversions
+    name: JSON based conversions
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
@@ -197,7 +227,7 @@ jobs:
 
   create_release:
     name: Bump version & create release
-    needs: [ html_conversions, script_conversions, markdown_conversions ]
+    needs: [ html_conversions, script_conversions, markdown_conversions, pdf_conversions]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     outputs:
@@ -268,6 +298,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artefacts-markdown
+      - name: Download pdf artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-pdf
       - name: Upload
         uses: actions/upload-release-asset@v1
         env:
