@@ -51,6 +51,8 @@ jobs:
         uses: actions/setup-node@v2.1.4
         with:
           node-version: 12
+      - name: Install dependencies
+        run: npm install -g resume-cli
       - name: Validate resume schema
         run: resume validate
 
