@@ -4,137 +4,232 @@ on:
   push:
 
 jobs:
+  # TESTS BEGIN
   python_tests:
-    name: Execute resume tests
+    name: Run Python unit tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.1.4
-        with:
-          node-version: 12
-
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-
       - name: Install dependencies
         run: |
-          npm install -g resume-cli
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt
           python setup.py install
-
-      - name: Validate resume schema
-        run: resume validate
-
       - name: Run unit tests
         run: pytest
 
-      - name: Converting JSON to Markdown
-        run: |
-          python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
-
-      - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
-
-      - name: Verify URLs
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          file-path: ./resume.md
-
-
-  convert_resume:
-    name: Generate resume files
+  verify_spelling:
+    name: Check spelling
     runs-on: ubuntu-latest
-    needs: python_tests
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.1.4
-        with:
-          node-version: 12
-
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+      - name: Converting JSON to Markdown
+        run: |
+          python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
+      - name: Check spelling
+        uses: sbates130272/spellcheck-github-actions@v0.6.0
 
+  validate_schema:
+    name: Validate JSON resume schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm install -g resume-cli
+      - name: Validate resume schema
+        run: resume validate
+
+  verify_urls:
+    name: Verify URLs in resume
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+      - name: Converting JSON to Markdown
+        run: |
+          python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
+      - name: Verify URLs
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          file-path: ./resume.md
+  # TESTS END
+
+  # CONVERSION BEGIN
+
+  # PDF, JPG, TIFF
+  pdf_conversions:
+    name: Conversions based on PDF
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 12
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
       - name: Setup
         run: |
           npm install -g resume-cli
-          npm install jsonresume-theme-even
           npm install jsonresume-theme-paper
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
           mkdir output
           mkdir tmp
-          cp resume.json ./output/.
-
-      - name: JSON -> HTML
-        run: |
-          resume export output/resume.html --format html
           mv resume.json resume-full.json
           python ./resume/__main__.py --input 'resume-full.json' --output 'resume.json' --format 'simplify'
           resume export tmp/resume-paper.html --format html --theme paper
           mv resume.json resume-basic.json
           mv resume-full.json resume.json
-
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
           htmlFile: ./tmp/resume-paper.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
-
-      - name: JSON -> Markdown
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
-
-      - name: JSON -> XML
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
-
-      - name: JSON -> YAML
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
-
-      - name: JSON -> CSV
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
-
-      - name: Markdown -> TXT
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: --output=output/resume.txt
-            ./output/resume.md
-
-      - name: TXT -> Morse Code (TXT)
-        run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
-
       - name: PDF -> JPG
         run: |
           sudo apt install poppler-utils
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
-
       - name: PDF -> TIFF
         uses: jy95/ghostscript-action@v1
         with:
           file: 'output/resume.pdf'
           output: 'output/resume.tiff'
           arbitrary-parameters: '-dNOPAUSE -r300 -sDEVICE=tiffscaled24 -sCompression=lzw -dBATCH'
-
-      - name: Generate artifacts
+      - name: Generate artefacts
         uses: actions/upload-artifact@v2
         with:
-          name: artifacts
+          name: artefacts-pdf
           path: output
+
+  # HTML
+  html_conversions:
+    name: Conversions based on HTML
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 12
+      - name: Setup
+        run: |
+          npm install -g resume-cli
+          npm install jsonresume-theme-even
+          npm install jsonresume-theme-paper
+          mkdir output
+          mkdir tmp
+      - name: JSON -> HTML
+        run: |
+          resume export output/resume.html --format html
+      - name: Generate artefacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artefacts-html
+          path: output
+
+  # JSON, XML, YAML, CSV
+  script_conversions:
+    name: Conversions based on JSON
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+          mkdir output
+          cp resume.json ./output/.
+      - name: JSON -> XML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
+      - name: JSON -> YAML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
+      - name: JSON -> CSV
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
+      - name: Generate artefacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artefacts-basic
+          path: output
+
+  # Markdown, TXT, Morse Code
+  markdown_conversions:
+    name: Conversions based on Markdown
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+          mkdir output
+          cp resume.json ./output/.
+      - name: JSON -> Markdown
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
+      - name: Markdown -> TXT
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.txt
+            ./output/resume.md
+      - name: TXT -> Morse Code (TXT)
+        run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
+      - name: Generate artefacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artefacts-markdown
+          path: output
+
+  # CONVERSION END
+
+  # DEPLOYMENT BEGIN
 
   create_release:
     name: Bump version & create release
-    needs: convert_resume
+    needs: [ html_conversions, script_conversions, markdown_conversions, pdf_conversions ]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     outputs:
@@ -193,11 +288,22 @@ jobs:
           - asset: resume.tiff
             asset_content_type: image/tiff
     steps:
-      - name: Download artifacts
+      - name: Download HTML artifacts
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
-
+          name: artefacts-html
+      - name: Download JSON artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-basic
+      - name: Download markdown artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-markdown
+      - name: Download PDF artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-pdf
       - name: Upload
         uses: actions/upload-release-asset@v1
         env:
@@ -214,20 +320,32 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Download artifacts
+      - name: Download HTML artifacts
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
-
+          name: artefacts-html
+      - name: Download basic artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-basic
+      - name: Download markdown artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-markdown
+      - name: Download PDF artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-pdf
       - name: Copy HTML file to public
         run: |
           mkdir public
           mv resume.html public/index.html
           rsync -am --exclude='*/' ./* public/
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: github-page
+
+  # DEPLOYMENT END
