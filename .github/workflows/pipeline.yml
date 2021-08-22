@@ -75,7 +75,7 @@ jobs:
           python setup.py install
           mkdir output
           mkdir tmp
-          cd resume.json ./output/.
+          cp resume.json ./output/.
 
       - name: JSON -> HTML
         run: |
