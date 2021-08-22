@@ -81,8 +81,8 @@ jobs:
 
       - name: HTML -> PDF
         run: |
-          python ./resume/__main__.py --input 'resume.json' --output 'tmp/resume.json' --format 'simplify'
-          cd tmp
+          cd ./tmp/
+          python ../resume/__main__.py --input '../resume.json' --output 'resume.json' --format 'simplify'
           npm install jsonresume-theme-paper
           resume export ../output/resume.pdf --format pdf --theme paper
           cd ..
