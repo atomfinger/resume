@@ -194,7 +194,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/${{ matrix.asset }}
+          asset_path: ${{ matrix.asset }}
           asset_name: ${{ matrix.asset }}
           asset_content_type: ${{ matrix.asset_content_type }}
 
@@ -212,8 +212,8 @@ jobs:
       - name: Copy HTML file to public
         run: |
           mkdir public
-          cp ./artifacts/resume.html ./public/index.html
-          cp ./artifacts/. ./public/.
+          mv resume.html index.html
+          cp . ./public/.
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
