@@ -82,12 +82,12 @@ jobs:
 
       - name: HTML -> PDF
         run: |
-          python ./resume/__main__.py --input 'resume.json' --output 'tmp/resume.json' --format 'simplify'
-          cd ./tmp/
-          npm install jsonresume-theme-paper
-          resume export resume.pdf --format pdf --theme paper
-          cp resume.pdf ../output/.
-          cd ..
+          python ./resume/__main__.py --input 'resume.json' --output 'resume-simple.json' --format 'simplify'
+          mv resume.json resume-full.json
+          cp resume-basic.json resume.json
+          resume export output/resume.pdf --format pdf --theme paper
+          rm resume.json
+          cp resume-full.json resume.json
 
       - name: JSON -> Markdown
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
