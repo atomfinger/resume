@@ -7,6 +7,10 @@
     "email": "john@jmgundersen.com",
     "url": "https://jmgundersen.com",
     "summary": "Developer with a passion for automated testing, clean code and excellent developer practices.",
+    "location": {
+      "city": "Oslo",
+      "countryCode": "NO"
+    },
     "profiles": [
       {
         "network": "GitHub",
@@ -20,7 +24,7 @@
       "company": "Protector",
       "name": "Protector",
       "position": "Tech Lead",
-      "website": "https://protectorforsikring.no/",
+      "url": "https://protectorforsikring.no/",
       "startDate": "2020-12-01",
       "summary": "Currently helping the company by improving development processes",
       "highlights": [
@@ -31,7 +35,7 @@
       "company": "TietoEvry",
       "name": "TietoEvry",
       "position": "Senior Consultant",
-      "website": "https://www.tietoevry.com/",
+      "url": "https://www.tietoevry.com/",
       "startDate": "2018-05-01",
       "endDate": "2020-11-30",
       "summary": "Maintained and created core solutions for major nordic banks.",
@@ -48,7 +52,7 @@
       "company": "Aspit",
       "name": "Aspit",
       "position": "Senior system developer",
-      "website": "https://www.aspit.no/",
+      "url": "https://www.aspit.no/",
       "startDate": "2013-09-01",
       "endDate": "2018-05-01",
       "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",

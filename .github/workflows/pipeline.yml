@@ -69,8 +69,7 @@ jobs:
         run: |
           npm install -g resume-cli
           npm install jsonresume-theme-even
-          npm install jsonresume-theme-onepage
-          npm install jsonresume-theme-short
+          npm install jsonresume-theme-paper
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
@@ -80,15 +79,13 @@ jobs:
       - name: JSON -> HTML
         run: |
           resume export output/resume.html --format html
-          resume export ./tmp/resumeonepage.html --format html --theme onepage
-          resume export ./tmp/resumeshort.html --format html --theme short
 
       - name: HTML -> PDF
-        uses: fifsky/html-to-pdf-action@master
-        with:
-          htmlFile: ./tmp/resumeonepage.html
-          outputFile: ./output/resume.pdf
-          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
+        run: |
+          python ./resume/__main__.py --input 'resume.json' --output 'tmp/resume.json' --format 'simplify'
+          cd tmp
+          resume export ../output/resume.pdf --format pdf --theme paper
+          cd ..
 
       - name: JSON -> Markdown
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
@@ -115,15 +112,6 @@ jobs:
         run: |
           sudo apt install poppler-utils
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
-
-      - name: HTML -> DOCX
-        timeout-minutes: 5
-        run: |
-          sudo add-apt-repository ppa:libreoffice/ppa
-          sudo apt-get update
-          sudo apt-get install libreoffice
-          libreoffice --headless --convert-to "docx:Office Open XML Text" ./tmp/resumeshort.html
-          mv resumeshort.docx ./output/resume.docx
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
@@ -170,8 +158,6 @@ jobs:
             asset_content_type: application/pdf
           - asset: resume.html
             asset_content_type: text/html
-          - asset: resume.docx
-            asset_content_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
           - asset: resume.json
             asset_content_type: application/json
           - asset: resume.txt

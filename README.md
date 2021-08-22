@@ -36,7 +36,6 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 | JSON  | Resume stored with the schema outlined by [JSON Resume](https://jsonresume.org/) | [Schema](https://jsonresume.org/schema/)  |
 | HTML  | Resume to be viewed in a browser  | N/A |
 | PDF  | Resume to be viewed in a PDF reader | N/A |
-| DOCX  | For those who believes in legacy and proprietary formats  | N/A |
 | Markdown  | For you with style and class | N/A |
 | XML  | Why would you want this?  | I tried, but it turned into a hassle.  |
 | YAML  | I mean... okay.. but again why?  | [Schema](https://jsonresume.org/schema/) |
