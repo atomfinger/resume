@@ -109,10 +109,10 @@ jobs:
       - name: TXT -> Morse Code (TXT)
         run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
 
-      - name: PDF -> JPG
-        run: |
-          sudo apt install poppler-utils
-          python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
+      #- name: PDF -> JPG
+      #  run: |
+      #    sudo apt install poppler-utils
+      #    python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
