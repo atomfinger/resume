@@ -213,8 +213,8 @@ jobs:
       - name: Copy HTML file to public
         run: |
           mkdir public
-          mv resume.html index.html
-          cp . ./public/.
+          mv resume.html public/index.html
+          cp -a . public/.
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
