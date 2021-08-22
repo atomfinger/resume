@@ -1,11 +1,11 @@
-import datetime
 from typing import List
 from unittest import TestCase
 
 from parameterized import parameterized
 
-from resume.json_to_md import get_header_information, parse_date, convert_volunteer, convert_education, convert_skill, \
-    convert_award, convert_publication, convert_languages, convert_interests
+from resume.json_to_md import get_header_information, convert_volunteer, convert_education, \
+    convert_skill, \
+    convert_award, convert_publication, convert_languages, convert_interests, format_date
 from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication, Language, \
     Interest
 
@@ -29,14 +29,14 @@ class Test(TestCase):
 
     def test_parse_date_missing_date_and_default_error_should_be_thrown(self):
         with self.assertRaises(Exception) as context:
-            parse_date(None, None)
+            format_date(None, None)
         self.assertTrue('Missing date' in str(context.exception))
 
     def test_parse_date_missing_date_and_provided_default_should_be_returned(self):
-        self.assertEqual(parse_date(None, 'Current'), 'Current')
+        self.assertEqual(format_date(None, 'Current'), 'Current')
 
     def test_parse_date_actual_date_provided_should_be_returned_in_proper_string_form(self):
-        self.assertEqual(parse_date(datetime.datetime(1988, 6, 21), 'Current'), '06.1988')
+        self.assertEqual(format_date('1988-06-21', 'Current'), '06.1988')
 
     def test_convert_volunteer_verify_title_line(self):
         self.assertEqual(convert_volunteer(create_volunteer())[0],
@@ -77,19 +77,20 @@ class Test(TestCase):
         self.assertTrue(result[index], expected_result)
 
     def test_convert_skills(self):
-        skill = Skill('Programming languages', "Master", ['HTML', 'CSS', 'BRAINFUCK', 'Rockstar'])
+        skill = Skill(['HTML', 'CSS', 'BRAINFUCK', 'Rockstar'], "Master", 'Programming languages')
         self.assertEqual(convert_skill(skill), f' - **Programming languages:** HTML, CSS, BRAINFUCK, Rockstar')
 
     def test_convert_award(self):
-        award = Award('Coolest boy', datetime.datetime(1982, 8, 2), 'My mom', 'Got the coolest boy award')
+        award = Award('My mom', '1982-08-02', 'Got the coolest boy award', 'Coolest boy')
         self.assertEqual(convert_award(award), '**Coolest boy (My mom - 02.08.1982):** Got the coolest boy award')
 
     def test_convert_publication(self):
-        publication = Publication('1984', 'Secker & Warburg', datetime.datetime(1949, 6, 8),
-                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
+        publication = Publication('1984', 'Secker & Warburg', '1949-06-08',
                                   'The story takes place in an imagined future, the year 1984, when much of the world '
                                   'has fallen victim to perpetual war, omnipresent government surveillance, historical '
-                                  'negationism, and propaganda.')
+                                  'negationism, and propaganda.',
+                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four'
+                                  )
         result = convert_publication(publication)
         self.assertEqual(result, '**[1984 (08.06.1949)](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)** - '
                                  'Secker & Warburg  The story takes place in an imagined future, the year 1984, '
@@ -97,11 +98,12 @@ class Test(TestCase):
                                  'surveillance, historical negationism, and propaganda.')
 
     def test_convert_publication_when_no_publisher(self):
-        publication = Publication('1984', None, datetime.datetime(1949, 6, 8),
-                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
+        publication = Publication('1984', None, '1949-06-08',
                                   'The story takes place in an imagined future, the year 1984, when much of the world '
                                   'has fallen victim to perpetual war, omnipresent government surveillance, historical '
-                                  'negationism, and propaganda.')
+                                  'negationism, and propaganda.',
+                                  'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four'
+                                  )
         result = convert_publication(publication)
         self.assertEqual(result, '**[1984 (08.06.1949)](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)**  The '
                                  'story takes place in an imagined future, the year 1984, '
@@ -109,12 +111,12 @@ class Test(TestCase):
                                  'surveillance, historical negationism, and propaganda.')
 
     def test_convert_languages(self):
-        languages = [Language('English', 'Master'), Language('Elvish'), Language('Klingon', 'Beginner')]
+        languages = [Language('Master', 'English'), Language(None, 'Elvish'), Language('Beginner', 'Klingon')]
         result = convert_languages(languages)
         self.assertEqual(result[2], 'English, Elvish, Klingon')
 
     def test_convert_interests(self):
-        interests = [Interest('Being dope', ['Dabbing', 'Pawning noobs', 'Loving my mum'])]
+        interests = [Interest(['Dabbing', 'Pawning noobs', 'Loving my mum'], 'Being dope')]
         result = convert_interests(interests)
         self.assertEqual(result[2], ' - Being dope: Dabbing, Pawning noobs, Loving my mum')
 
@@ -125,8 +127,8 @@ def create_education() -> Education:
         url='awesomeuniversity.com',
         area='Cool Course',
         study_type='Bachelors',
-        start_date=datetime.datetime(420, 3, 21),
-        end_date=datetime.datetime(1337, 4, 21),
+        start_date='1420-03-21',
+        end_date='1337-4-21',
         score='N/A',
         courses=[
             'Being chill: The fundamentals',
@@ -140,8 +142,8 @@ def create_volunteer() -> Volunteer:
     return Volunteer(
         organization='The avengers',
         position='Iron man',
-        website='https://en.wikipedia.org/wiki/The_Avengers_(2012_film)',
-        start_date=datetime.datetime(1988, 6, 21),
+        url='https://en.wikipedia.org/wiki/The_Avengers_(2012_film)',
+        start_date='1988-06-21',
         end_date=None,
         summary='Worked with a group that battles horrors that might threaten earth',
         highlights=[

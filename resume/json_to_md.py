@@ -4,8 +4,8 @@ from typing import List, Optional, Union
 
 import mdformat
 
-from resume.resume_types import Basics, Resume, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
-    Project, Reference, Work
+from resume.resume_types import Basics, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
+    Project, Reference, Work, Resume
 
 NEW_LINE = '  '
 DASH_LINE = '----------'
@@ -71,17 +71,25 @@ def convert_to_markdown(resume: Resume, destination: str):
         f.write(markdown)
 
 
-def parse_date(date: Optional[datetime], default: str = None) -> str:
+def date_to_string(date: datetime) -> str:
+    return date.strftime('%m.%Y')
+
+
+def string_to_date(date: str) -> datetime:
+    return datetime.strptime(date, '%Y-%m-%d')
+
+
+def format_date(date: Optional[str], default: str = None) -> str:
     if not date and not default:
         raise TypeError("Missing date")
     if not date:
         return default
-    return date.strftime('%m.%Y')
+    return date_to_string(string_to_date(date))
 
 
 def convert_education(education: Education) -> List[str]:
-    start_date = parse_date(education.start_date)
-    end_date = parse_date(education.end_date, "Current")
+    start_date = format_date(education.start_date)
+    end_date = format_date(education.end_date, "Current")
     content = [
         f'**{education.study_type}, {education.area}**, '
         f'[{education.institution}]({education.url}) ({start_date} - {end_date}) '
@@ -107,10 +115,10 @@ def convert_educations(educations: List[Education]) -> List[str]:
 
 
 def convert_volunteer(volunteer: Volunteer) -> List[str]:
-    start_date = parse_date(volunteer.start_date)
-    end_date = parse_date(volunteer.end_date, "Current")
+    start_date = format_date(volunteer.start_date)
+    end_date = format_date(volunteer.end_date, "Current")
     content = [
-        f'**{volunteer.position}**, [{volunteer.organization}]({volunteer.website}) ({start_date} - {end_date})',
+        f'**{volunteer.position}**, [{volunteer.organization}]({volunteer.url}) ({start_date} - {end_date})',
         NEW_LINE,
         volunteer.summary,
         NEW_LINE
@@ -134,10 +142,10 @@ def convert_volunteers(title: str, volunteers: List[Volunteer]) -> List[str]:
 
 
 def convert_work(volunteer: Work) -> List[str]:
-    start_date = parse_date(volunteer.start_date)
-    end_date = parse_date(volunteer.end_date, "Current")
+    start_date = format_date(volunteer.start_date)
+    end_date = format_date(volunteer.end_date, "Current")
     content = [
-        f'**{volunteer.position}**, [{volunteer.company}]({volunteer.website}) ({start_date} - {end_date})',
+        f'**{volunteer.position}**, [{volunteer.name}]({volunteer.name}) ({start_date} - {end_date})',
         NEW_LINE,
         volunteer.summary,
         NEW_LINE
@@ -176,7 +184,7 @@ def convert_skills(skills: List[Skill]) -> List[str]:
 
 
 def convert_award(award: Award) -> str:
-    return f'**{award.title} ({award.awarder} - {award.date.strftime("%d.%m.%Y")}):** {award.summary}'
+    return f'**{award.title} ({award.awarder} - {string_to_date(award.date).strftime("%d.%m.%Y")}):** {award.summary}'
 
 
 def convert_awards(awards: List[Award]) -> List[str]:
@@ -194,7 +202,8 @@ def convert_publication(publication: Publication) -> str:
     publisher_text = ''
     if publication.publisher:
         publisher_text = f' - {publication.publisher}'
-    return f'**[{publication.name} ({publication.release_date.strftime("%d.%m.%Y")})]({publication.website})**' \
+    return f'**[{publication.name} ' \
+           f'({string_to_date(publication.release_date).strftime("%d.%m.%Y")})]({publication.url})**' \
            f'{publisher_text}  {publication.summary}'
 
 
@@ -233,8 +242,8 @@ def convert_interests(interests: List[Interest]) -> List[str]:
 
 
 def convert_project(project: Project) -> List[str]:
-    start_date = parse_date(project.start_date)
-    end_date = parse_date(project.end_date, "Current")
+    start_date = format_date(project.start_date)
+    end_date = format_date(project.end_date, "Current")
     roles = ''
     if project.roles:
         roles = f' - {", ".join(project.roles)}'
