@@ -70,6 +70,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
+      - name: Converting JSON to Markdown
+        run: |
+          python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
       - name: Verify URLs
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
