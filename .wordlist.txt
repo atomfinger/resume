@@ -46,3 +46,10 @@ Mockserver
 Nunit
 Testcontainers
 codebase
+Folkehøgskolen
+Sørlandet
+bo
+fhssorlandet
+skoler
+vgs
+vtfk
