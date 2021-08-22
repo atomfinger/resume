@@ -141,27 +141,27 @@ def convert_volunteers(title: str, volunteers: List[Volunteer]) -> List[str]:
     return content
 
 
-def convert_work(volunteer: Work) -> List[str]:
-    start_date = format_date(volunteer.start_date)
-    end_date = format_date(volunteer.end_date, "Current")
+def convert_work(work: Work) -> List[str]:
+    start_date = format_date(work.start_date)
+    end_date = format_date(work.end_date, "Current")
     content = [
-        f'**{volunteer.position}**, [{volunteer.name}]({volunteer.name}) ({start_date} - {end_date})',
+        f'**{work.position}**, [{work.name}]({work.url}) ({start_date} - {end_date})',
         NEW_LINE,
-        volunteer.summary,
+        work.summary,
         NEW_LINE
     ]
-    [content.append(f' * {highlight}') for highlight in volunteer.highlights]
+    [content.append(f' * {highlight}') for highlight in work.highlights]
     return content
 
 
-def convert_works(title: str, volunteers: List[Work]) -> List[str]:
-    if not volunteers or len(volunteers) == 0:
+def convert_works(title: str, works: List[Work]) -> List[str]:
+    if not works or len(works) == 0:
         return []
     content = [
         title,
         DASH_LINE
     ]
-    for volunteer in volunteers:
+    for volunteer in works:
         for line in convert_work(volunteer):
             content.append(line)
         content.append(NEW_LINE)

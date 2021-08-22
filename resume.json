@@ -21,8 +21,8 @@
   },
   "work": [
     {
-      "company": "Protector",
       "name": "Protector",
+      "location": "Oslo, Norway",
       "position": "Tech Lead",
       "url": "https://protectorforsikring.no/",
       "startDate": "2020-12-01",
@@ -32,8 +32,8 @@
       ]
     },
     {
-      "company": "TietoEvry",
       "name": "TietoEvry",
+      "location": "Oslo, Norway",
       "position": "Senior Consultant",
       "url": "https://www.tietoevry.com/",
       "startDate": "2018-05-01",
@@ -49,8 +49,8 @@
       ]
     },
     {
-      "company": "Aspit",
       "name": "Aspit",
+      "location": "Seljord, Norway",
       "position": "Senior system developer",
       "url": "https://www.aspit.no/",
       "startDate": "2013-09-01",
