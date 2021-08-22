@@ -1,0 +1,171 @@
+!Resume
+schema: https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json
+awards:
+basics: !Basics
+  email: john@jmgundersen.com
+  image: ''
+  label: Programmer
+  location: !Location
+    address:
+    city: Oslo
+    country_code: NO
+    postal_code:
+    region:
+  name: John Mikael Gundersen
+  phone:
+  profiles:
+  - !Profile
+    network: GitHub
+    url: https://github.com/atomfinger/
+    username: atomfinger
+  summary: Developer with a passion for automated testing, clean code and excellent
+    developer practices.
+  url: https://jmgundersen.com
+certificates:
+education:
+- !Education
+  area: Computer Science
+  courses:
+  - CS38010 - Space Robotics
+  - CS36410 - Intelligent Robotics
+  - CS38110 - Open Source Development Issues
+  - CS31310 - Agile Methodologies
+  end_date: '2014-05-01'
+  institution: Aberystwyth University
+  score:
+  start_date: '2010-08-01'
+  study_type: Bachelor of science
+  url: https://www.aber.ac.uk/en/
+- !Education
+  area: Data/Media
+  courses:
+  end_date: '2010-05-01'
+  institution: Folkehøgskolen Sørlandet
+  score:
+  start_date: '2009-08-01'
+  study_type:
+  url: https://www.fhssorlandet.no/
+- !Education
+  area: Studiespesialiserende
+  courses:
+  end_date: '2008-05-01'
+  institution: Bø VGS
+  score:
+  start_date: '2006-08-01'
+  study_type:
+  url: https://www.vtfk.no/skoler/bo-vgs/
+interests:
+- !Interest
+  keywords:
+  - Dungeon & Dragons
+  - Headphones (Good audio)
+  - My dog
+  - Discworld
+  - Whiskey
+  name: Stuff I like in general
+- !Interest
+  keywords:
+  - Battlestar Galactica
+  - Firefly
+  - Red Dwarf
+  - Doctor Who
+  name: Shows I like
+- !Interest
+  keywords:
+  - Clean Series
+  - Pragmatic Programmer
+  - The Phoenix Project/The Unicorn Project
+  - The Art of Unit Testing
+  - The Software Craftsman
+  name: Developer books I recommend
+languages:
+- !Language
+  fluency: Native speaker
+  language: English
+- !Language
+  fluency: Native speaker
+  language: Norwegian
+meta:
+projects:
+publications:
+references:
+skills:
+- !Skill
+  keywords:
+  - Java/Kotlin
+  - C# .NET
+  - Python
+  - SQL of various kinds
+  - Microservices
+  - Kafka
+  - Architecture
+  - Contract first
+  level:
+  name: Developer
+- !Skill
+  keywords:
+  - TeamCity
+  - Jenkins
+  - GitHub Actions
+  - Groovy
+  - Docker
+  - K8s
+  - Swarm
+  - Solution design
+  level:
+  name: DevOps
+- !Skill
+  keywords:
+  - Testcontainers
+  - System tests
+  - Mockserver
+  - Contract testing
+  - Narrow & Wide integration tests
+  - Spock/Junit/Mockito/Nunit/etc
+  level:
+  name: Testing
+volunteer:
+work:
+- !Work
+  description:
+  end_date:
+  highlights:
+  - Authored developer guidelines for a cleaner and more maintainable codebase
+  location: Oslo, Norway
+  name: Protector
+  position: Tech Lead
+  start_date: '2020-12-01'
+  summary: Currently helping the company by improving development processes
+  url: https://protectorforsikring.no/
+- !Work
+  description:
+  end_date: '2020-11-30'
+  highlights:
+  - Made and maintained core web systems for multiple banks
+  - Created new systems for integration testing and improved CI/CD pipelines
+  - Authored developer guidelines for a cleaner and more maintainable codebase
+  - Was a team lead managing the team responsible for our PCI compliant systems
+  - Was a project architect that guided new banks, while being responsible for the
+    technical aspect of the project
+  - Worked closely with partners in India
+  location: Oslo, Norway
+  name: TietoEvry
+  position: Senior Consultant
+  start_date: '2018-05-01'
+  summary: Maintained and created core solutions for major nordic banks.
+  url: https://www.tietoevry.com/
+- !Work
+  description:
+  end_date: '2018-05-01'
+  highlights:
+  - Was responsible for the development of the core product
+  - Worked closely with the business by planning and implementing new features
+  - Worked closely with an outsourcing team in Vietnam
+  location: Seljord, Norway
+  name: Aspit
+  position: Senior system developer
+  start_date: '2013-09-01'
+  summary: Made electronic health record systems for the privatized healthcare sector
+    in Norway. Started as a system developer for the first 3 years, eventually got
+    promoted to the position of a team lead.
+  url: https://www.aspit.no/

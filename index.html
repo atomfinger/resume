@@ -1,134 +1,491 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>resume</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-  <style type="text/css">
-  /* 
-      CSS based upon Christophe-Marie Duquesne resume CSS found here:
-      https://github.com/mszep/pandoc_resume
-   */
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>John Mikael Gundersen</title>
+      <meta name="description" content="Developer with a passion for automated testing, clean code and excellent developer practices.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap">
+    <style>:root {
+  color-scheme: light dark;
 
-  body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      max-width: 800px;
-      margin: auto;
-      background: #FFFFFF;
-      padding: 10px 10px 10px 10px;
+  --color-background: #ffffff;
+  --color-primary: #212529;
+  --color-secondary: #95a5a6;
+  --color-muted: #f4f6f6;
+  --color-accent: #f1c40f;
+  --color-link: #2ecc71;
+
+  --scale-ratio: 1.25;
+  --scale0: 1rem;
+  --scale1: calc(var(--scale0) * var(--scale-ratio));
+  --scale2: calc(var(--scale1) * var(--scale-ratio));
+  --scale3: calc(var(--scale2) * var(--scale-ratio));
+  --scale4: calc(var(--scale3) * var(--scale-ratio));
+  --scale5: calc(var(--scale4) * var(--scale-ratio));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #181a1b;
+    --color-primary: #d1cdc7;
+    --color-secondary: #aaa398;
+    --color-muted: #1e2021;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-primary);
+  display: grid;
+  font: 1em/1.5 Lato, sans-serif;
+  gap: 2em;
+  grid-template-columns:
+    [full-start]
+    1fr
+    [main-start side-start]
+    minmax(min-content, 12em)
+    [side-end content-start]
+    minmax(min-content, 36em)
+    [main-end content-end]
+    1fr
+    [full-end];
+  grid-template-rows: auto [content] 0;
+  margin-bottom: 4em;
+}
+
+body::before {
+  content: '';
+  grid-column: full;
+  grid-row: content;
+}
+
+ol,
+ul {
+  padding-left: 1em;
+}
+
+li + li {
+  margin-top: 0.4em;
+}
+
+li::marker,
+.network {
+  color: var(--color-secondary);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:focus,
+a:hover {
+  color: var(--color-accent);
+}
+
+h1,
+h2,
+h3,
+h5 {
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--scale5);
+}
+
+h2 {
+  color: var(--color-secondary);
+  font-size: var(--scale4);
+}
+
+h3 {
+  color: var(--color-accent);
+  font-size: var(--scale3);
+  grid-column: side;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: var(--scale2);
+}
+
+h5 {
+  font-size: var(--scale1);
+}
+
+h6 {
+  font-size: var(--scale0);
+}
+
+blockquote {
+  border-left: 0.2em solid var(--color-muted);
+  padding-left: 1em;
+}
+
+cite {
+  color: var(--color-secondary);
+  font-style: inherit;
+}
+
+cite::before {
+  content: '— ';
+}
+
+svg {
+  margin-right: 0.2em;
+  vertical-align: -0.2em;
+}
+
+.masthead {
+  background: var(--color-muted);
+  display: inherit;
+  gap: inherit;
+  grid-column: full;
+  grid-template-columns: inherit;
+  padding: 4em 0;
+  text-align: center;
+}
+
+.masthead > *,
+section {
+  grid-column: main;
+}
+
+.masthead > img {
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 12em;
+}
+
+article > * + *,
+blockquote > * + * {
+  margin-top: 0.6em;
+}
+
+.stack {
+  display: grid;
+  gap: 1.5em;
+}
+
+.icon-list {
+  list-style: none;
+  padding: 0;
+}
+
+.grid-list {
+  display: grid;
+  gap: 1em;
+}
+
+.spaced-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spaced-list::before {
+  border-bottom: 1px solid var(--color-muted);
+  content: '';
+  flex-grow: 1;
+  margin: 0 1em;
+  order: 1;
+}
+
+.spaced-list > :nth-child(2) {
+  order: 2;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.tag-list > li {
+  background: var(--color-muted);
+  margin: 0 0.2em 0.2em 0;
+  padding: 0.2em 0.6em;
+}
+
+@media print, (min-width: 48em) {
+  h3 {
+    text-align: right;
+    margin-bottom: inherit;
   }
 
-  h1 {
-      font-size: 30px;
-      color: #757575;
-      text-align:center;
-      margin-bottom:15px;
+  .masthead {
+    text-align: inherit;
   }
 
-  h2 {
-      color: #397249;
+  .masthead > *,
+  section {
+    grid-column: content;
   }
 
-  h2:before {
-      content: "";
-      display: inline-block;
-      margin-right:1%;
-      width: 16%;
-      height: 10px;
-      background-color: #9CB770;
+  .masthead img {
+    grid-column: side;
+    grid-row: span 2;
+    max-width: 100%;
   }
 
-  dt {
-      float: left;
-      clear: left;
-      width: 17%;
-      font-weight: bold;
+  section {
+    display: contents;
   }
 
-  dd {
-      margin-left: 17%;
-      margin-bottom:7px;
+  .grid-list {
+    grid-template-columns: 1fr 1fr;
   }
+}
+</style>
+  </head>
+  <body>
+      <header class="masthead">
+          <img src="" alt="">
+        <div>
+            <h1>John Mikael Gundersen</h1>
+            <h2>Programmer</h2>
+        </div>
+          <article>
+            <p>Developer with a passion for automated testing, clean code and excellent developer practices.</p>
+          </article>
+        <ul class="icon-list">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Oslo, NO
+              </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:john@jmgundersen.com">john@jmgundersen.com</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <a href="https://jmgundersen.com">jmgundersen.com</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <a href="https://github.com/atomfinger/">atomfinger</a>
+                <span class="network">(GitHub)</span>
+            </li>
+        </ul>
+      </header>
 
-  p {
-      margin-top:0;
-      margin-bottom:7px;
-  }
-
-  blockquote {
-      text-align: center
-  }
-
-  a {
-      text-decoration: none;
-      color: #397249;
-  }
-
-  a:hover, a:active {
-      background-color: #397249;
-      color: #FFFFFF;
-      text-decoration: none;
-      text-shadow: 1px 1px 1px #333;
-  }
-
-  hr {
-      color: #A6A6A6;
-  }
-
-  table {
-      width: 100%;
-  }
-  </style>
-</head>
-<body>
-<h1 id="john-mikael-gundersen">John Mikael Gundersen</h1>
-<h4 id="developer-with-a-passion-for-automated-testing-clean-code-and-pipelines">Developer with a passion for automated testing, clean code and pipelines</h4>
-<h6 id="jmgundersen.net---johnjmgundersen.com---github.comatomfinger"><a href="https://www.jmgundersen.net/">jmgundersen.net</a> - john@jmgundersen.com - <a href="https://github.com/atomfinger/">github.com/atomfinger</a></h6>
-<h2 id="experience">Experience</h2>
-<p><strong>Senior Consultant</strong>, TietoEvry (05.2018 - current)</p>
-<p>Made banking systems for some of the biggest banks in the nordic region.</p>
-<ul>
-<li>Made and maintained core web systems for multiple banks</li>
-<li>Improved the development process by
-<ul>
-<li>Creating new systems for integration testing and improved CI/CD pipelines</li>
-<li>Authoring developer guidelines for cleaner more maintainable code</li>
-</ul></li>
-<li>I was a team lead managing the team responsible for our PCI compliant systems</li>
-<li>I was a project architect where I guided new banks into the solution, and was responsible for the technical aspects of that solution</li>
-<li>Worked closely with partners in India</li>
-</ul>
-<p><strong>Senior system developer</strong>, Aspit AS (09.2013 - 05.2018)</p>
-<p>Made journaling systems for the privatized healthcare sector in Norway. Started out as a system developer for the first 3 years, eventually got promoted to senior team lead.</p>
-<ul>
-<li>Was responsible for the development of the core product</li>
-<li>Worked closely with the business by planning and implementing new features</li>
-<li>Worked closely with an outsourcing team in Vietnam</li>
-</ul>
-<h2 id="education">Education</h2>
-<p><strong>Bachelor of science, Computer Science</strong>, Aberystwyth University (2010 - 2014)</p>
-<p><strong>Data Media</strong>, Birkeland Folkehøgskole (2009 - 2010)</p>
-<p><strong>Studiespesialiserende</strong>, Bø Vgs (2006 - 2008)</p>
-<h2 id="skills">Skills</h2>
-<p><strong>Primary languages:</strong> Java, C#, Kotlin</p>
-<p><strong>Secondary languages:</strong> Python, Groovy, C/C++, PHP, Ruby, JS/TS</p>
-<p><strong>Primary technologies:</strong> k8s, ICP, Docker, Jenkins, Spring, JUnit, Spock, .net/.net core, DevExpress</p>
-<h2 id="other">Other</h2>
-<ul>
-<li>Speaks and writes Norwegian and English fluently</li>
-<li>Writes about programming on his <a href="https://www.jmgundersen.net/blog">blog</a></li>
-</ul>
-</body>
+      <section id="work">
+        <h3>Work</h3>
+        <div class="stack">
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4>Tech Lead</h4>
+                  <span>
+                    <time datetime="2020-12-01">Dec 2020</time> –
+                    Present
+                  </span>
+                </div>
+                <strong><a href="https://protectorforsikring.no/">Protector</a></strong>
+              </header>
+                <p>Currently helping the company by improving development processes</p>
+                <ul>
+                    <li>Authored developer guidelines for a cleaner and more maintainable codebase</li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4>Senior Consultant</h4>
+                  <span>
+                    <time datetime="2018-05-01">May 2018</time> –
+                    <time datetime="2020-11-30">Nov 2020</time>
+                  </span>
+                </div>
+                <strong><a href="https://www.tietoevry.com/">TietoEvry</a></strong>
+              </header>
+                <p>Maintained and created core solutions for major nordic banks.</p>
+                <ul>
+                    <li>Made and maintained core web systems for multiple banks</li>
+                    <li>Created new systems for integration testing and improved CI/CD pipelines</li>
+                    <li>Authored developer guidelines for a cleaner and more maintainable codebase</li>
+                    <li>Was a team lead managing the team responsible for our PCI compliant systems</li>
+                    <li>Was a project architect that guided new banks, while being responsible for the technical aspect of the project</li>
+                    <li>Worked closely with partners in India</li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4>Senior system developer</h4>
+                  <span>
+                    <time datetime="2013-09-01">Sep 2013</time> –
+                    <time datetime="2018-05-01">May 2018</time>
+                  </span>
+                </div>
+                <strong><a href="https://www.aspit.no/">Aspit</a></strong>
+              </header>
+                <p>Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.</p>
+                <ul>
+                    <li>Was responsible for the development of the core product</li>
+                    <li>Worked closely with the business by planning and implementing new features</li>
+                    <li>Worked closely with an outsourcing team in Vietnam</li>
+                </ul>
+            </article>
+        </div>
+      </section>
+      <section id="education">
+        <h3>Education</h3>
+        <div class="stack">
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4><a href="https://www.aber.ac.uk/en/">Aberystwyth University</a></h4>
+                  <span>
+                    <time datetime="2010-08-01">Aug 2010</time> –
+                    <time datetime="2014-05-01">May 2014</time>
+                  </span>
+                </div>
+                  <strong>Computer Science</strong>
+              </header>
+                <p>Bachelor of science</p>
+                <h5>Courses</h5>
+                <ul>
+                    <li>CS38010 - Space Robotics</li>
+                    <li>CS36410 - Intelligent Robotics</li>
+                    <li>CS38110 - Open Source Development Issues</li>
+                    <li>CS31310 - Agile Methodologies</li>
+                </ul>
+            </article>
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4><a href="https://www.fhssorlandet.no/">Folkehøgskolen Sørlandet</a></h4>
+                  <span>
+                    <time datetime="2009-08-01">Aug 2009</time> –
+                    <time datetime="2010-05-01">May 2010</time>
+                  </span>
+                </div>
+                  <strong>Data/Media</strong>
+              </header>
+            </article>
+            <article>
+              <header>
+                <div class="spaced-list">
+                  <h4><a href="https://www.vtfk.no/skoler/bo-vgs/">Bø VGS</a></h4>
+                  <span>
+                    <time datetime="2006-08-01">Aug 2006</time> –
+                    <time datetime="2008-05-01">May 2008</time>
+                  </span>
+                </div>
+                  <strong>Studiespesialiserende</strong>
+              </header>
+            </article>
+        </div>
+      </section>
+      <section id="skills">
+        <h3>Skills</h3>
+        <div class="grid-list">
+            <div>
+                <h4>Developer</h4>
+                <ul class="tag-list">
+                    <li>Java/Kotlin</li>
+                    <li>C# .NET</li>
+                    <li>Python</li>
+                    <li>SQL of various kinds</li>
+                    <li>Microservices</li>
+                    <li>Kafka</li>
+                    <li>Architecture</li>
+                    <li>Contract first</li>
+                </ul>
+            </div>
+            <div>
+                <h4>DevOps</h4>
+                <ul class="tag-list">
+                    <li>TeamCity</li>
+                    <li>Jenkins</li>
+                    <li>GitHub Actions</li>
+                    <li>Groovy</li>
+                    <li>Docker</li>
+                    <li>K8s</li>
+                    <li>Swarm</li>
+                    <li>Solution design</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Testing</h4>
+                <ul class="tag-list">
+                    <li>Testcontainers</li>
+                    <li>System tests</li>
+                    <li>Mockserver</li>
+                    <li>Contract testing</li>
+                    <li>Narrow &amp; Wide integration tests</li>
+                    <li>Spock/Junit/Mockito/Nunit/etc</li>
+                </ul>
+            </div>
+        </div>
+      </section>
+      <section id="languages">
+        <h3>Languages</h3>
+        <div class="grid-list">
+            <div>
+                <h4>English</h4>
+              Native speaker
+            </div>
+            <div>
+                <h4>Norwegian</h4>
+              Native speaker
+            </div>
+        </div>
+      </section>
+      <section id="interests">
+        <h3>Interests</h3>
+        <div class="grid-list">
+            <div>
+                <h4>Stuff I like in general</h4>
+                <ul class="tag-list">
+                    <li>Dungeon &amp; Dragons</li>
+                    <li>Headphones (Good audio)</li>
+                    <li>My dog</li>
+                    <li>Discworld</li>
+                    <li>Whiskey</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Shows I like</h4>
+                <ul class="tag-list">
+                    <li>Battlestar Galactica</li>
+                    <li>Firefly</li>
+                    <li>Red Dwarf</li>
+                    <li>Doctor Who</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Developer books I recommend</h4>
+                <ul class="tag-list">
+                    <li>Clean Series</li>
+                    <li>Pragmatic Programmer</li>
+                    <li>The Phoenix Project/The Unicorn Project</li>
+                    <li>The Art of Unit Testing</li>
+                    <li>The Software Craftsman</li>
+                </ul>
+            </div>
+        </div>
+      </section>
+  </body>
 </html>
