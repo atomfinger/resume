@@ -4,6 +4,7 @@ on:
   push:
 
 jobs:
+  # TESTS BEGIN
   python_tests:
     name: Run Python unit tests
     runs-on: ubuntu-latest
@@ -77,37 +78,28 @@ jobs:
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           file-path: ./resume.md
+  # TESTS END
 
-  convert_resume:
+  # CONVERSION BEGIN
+
+  # HTML, PDF, JPG, TIFF
+  html_conversions:
     name: Generate resume files
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Setup Node.js
         uses: actions/setup-node@v2.1.4
         with:
           node-version: 12
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
       - name: Setup
         run: |
           npm install -g resume-cli
           npm install jsonresume-theme-even
           npm install jsonresume-theme-paper
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          python setup.py install
           mkdir output
           mkdir tmp
-          cp resume.json ./output/.
-
       - name: JSON -> HTML
         run: |
           resume export output/resume.html --format html
@@ -116,56 +108,96 @@ jobs:
           resume export tmp/resume-paper.html --format html --theme paper
           mv resume.json resume-basic.json
           mv resume-full.json resume.json
-
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
           htmlFile: ./tmp/resume-paper.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
-
-      - name: JSON -> Markdown
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
-
-      - name: JSON -> XML
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
-
-      - name: JSON -> YAML
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
-
-      - name: JSON -> CSV
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
-
-      - name: Markdown -> TXT
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: --output=output/resume.txt
-            ./output/resume.md
-
-      - name: TXT -> Morse Code (TXT)
-        run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
-
       - name: PDF -> JPG
         run: |
           sudo apt install poppler-utils
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
-
       - name: PDF -> TIFF
         uses: jy95/ghostscript-action@v1
         with:
           file: 'output/resume.pdf'
           output: 'output/resume.tiff'
           arbitrary-parameters: '-dNOPAUSE -r300 -sDEVICE=tiffscaled24 -sCompression=lzw -dBATCH'
-
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: artifacts
+          name: artefacts-html
           path: output
+
+  # JSON, XML, YAML, CSV
+  script_conversions:
+    name: Stright conversions
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+          mkdir output
+          cp resume.json ./output/.
+      - name: JSON -> XML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.xml' --format 'xml'
+      - name: JSON -> YAML
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
+      - name: JSON -> CSV
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
+      - name: Generate artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artefacts-basic
+          path: output
+
+  # Markdown, TXT, Morse Code
+  markdown_conversions:
+    name: Conversions based on Markdown
+    runs-on: ubuntu-latest
+    needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+          mkdir output
+          cp resume.json ./output/.
+      - name: JSON -> Markdown
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.md' --format 'markdown'
+      - name: Markdown -> TXT
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/resume.txt
+            ./output/resume.md
+      - name: TXT -> Morse Code (TXT)
+        run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
+      - name: Generate artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artefacts-markdown
+          path: output
+
+  # CONVERSION END
 
   create_release:
     name: Bump version & create release
-    needs: convert_resume
+    needs: [ html_conversions, script_conversions, markdown_conversions ]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     outputs:
@@ -224,11 +256,18 @@ jobs:
           - asset: resume.tiff
             asset_content_type: image/tiff
     steps:
-      - name: Download artifacts
+      - name: Download HTML artifacts
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
-
+          name: artefacts-html
+      - name: Download basic artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-basic
+      - name: Download markdown artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-markdown
       - name: Upload
         uses: actions/upload-release-asset@v1
         env:
@@ -245,11 +284,18 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Download artifacts
+      - name: Download HTML artifacts
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
-
+          name: artefacts-html
+      - name: Download basic artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-basic
+      - name: Download markdown artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artefacts-markdown
       - name: Copy HTML file to public
         run: |
           mkdir public
