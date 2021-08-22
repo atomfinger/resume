@@ -119,6 +119,13 @@ jobs:
           sudo apt install poppler-utils
           python ./resume/__main__.py --input 'output/resume.pdf' --output 'output/resume.jpg' --format 'jpg'
 
+      - name: PDF -> TIFF
+        uses: jy95/ghostscript-action@v1
+        with:
+          file: 'output/resume.pdf'
+          output: 'output/resume.tiff'
+          arbitrary-parameters: '-dNOPAUSE -r300 -sDEVICE=tiffscaled24 -sCompression=lzw -dBATCH'
+
       - name: Generate artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -183,6 +190,8 @@ jobs:
             asset_content_type: text/csv
           - asset: resume.yml
             asset_content_type: text/yaml
+          - asset: resume.tiff
+            asset_content_type: image/tiff
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
