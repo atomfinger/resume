@@ -30,11 +30,10 @@ jobs:
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.ics' --format 'ics'
 
       - name: Upload calendar event
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        uses: svenstaro/upload-release-action@v2
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./output/resume.ics
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          file: ./output/resume.ics
+          overwrite: true
           asset_name: resume.ics
-          asset_content_type: text/calendar
