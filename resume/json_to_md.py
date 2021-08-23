@@ -242,13 +242,16 @@ def convert_interests(interests: List[Interest]) -> List[str]:
 
 
 def convert_project(project: Project) -> List[str]:
-    start_date = format_date(project.start_date)
-    end_date = format_date(project.end_date, "Current")
+    date_string = ''
+    if project.start_date:
+        start_date = format_date(project.start_date)
+        end_date = format_date(project.end_date, "Current")
+        date_string = f' ({start_date} - {end_date})'
     roles = ''
     if project.roles:
         roles = f' - {", ".join(project.roles)}'
     content = [
-        f'**[{project.name} ({start_date} - {end_date})]({project.url})**{roles}',
+        f'**[{project.name}{date_string}]({project.url})**{roles}',
         NEW_LINE,
         project.description,
         NEW_LINE
