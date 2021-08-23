@@ -112,3 +112,19 @@ Interests
 -   Developer books I recommend: Clean Series, Pragmatic Programmer, The
     Phoenix Project/The Unicorn Project, The Art of Unit Testing, The
     Software Craftsman
+
+Projects
+--------
+
+**[toUUID (10.2020 - Current)](https://github.com/atomfinger/toUUID)**
+
+A small library that creates human-readable and deterministic UUIDs for
+testing purposes.
+
+**[This resume (08.2020 -
+Current)](https://github.com/atomfinger/resume)**
+
+This resume is more than just a resume. It is fully automated using
+Github Actions and scripted with Python. It has automated tests. It
+converts between a bunch of different formats and it auto-deploys to a
+production-like environment.

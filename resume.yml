@@ -87,6 +87,37 @@ languages:
   language: Norwegian
 meta:
 projects:
+- !Project
+  description: A small library that creates human-readable and deterministic UUIDs
+    for testing purposes.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - Java
+  - Kotlin
+  - Testing
+  name: toUUID
+  roles:
+  start_date: '2020-10-09'
+  type:
+  url: https://github.com/atomfinger/toUUID
+- !Project
+  description: This resume is more than just a resume. It is fully automated using
+    Github Actions and scripted with Python. It has automated tests. It converts between
+    a bunch of different formats and it auto-deploys to a production-like environment.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - GitHub Actions
+  - Python
+  - Automation
+  name: This resume
+  roles:
+  start_date: '2020-08-31'
+  type:
+  url: https://github.com/atomfinger/resume
 publications:
 references:
 skills:
