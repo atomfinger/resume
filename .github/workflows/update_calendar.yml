@@ -28,8 +28,9 @@ jobs:
           mkdir output
       - name: Create calendar event
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.ics' --format 'ics'
+
       - name: Upload calendar event
-        uses: actions/upload-release-asset@v1.0.2
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
