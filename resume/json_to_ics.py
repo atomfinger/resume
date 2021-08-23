@@ -51,7 +51,7 @@ def get_attendee() -> vCalAddress:
 
 def get_event_start() -> datetime:
     event_date = datetime.date.today() + datetime.timedelta(days=1)
-    return datetime.datetime.combine(event_date, datetime.time(13, 37)).replace(tzinfo=pytz.utc)
+    return datetime.datetime.combine(event_date, datetime.time(11, 37)).replace(tzinfo=pytz.utc)
 
 
 def get_event_end() -> datetime:
