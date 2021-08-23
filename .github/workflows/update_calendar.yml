@@ -36,7 +36,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.get_release.outputs.name }}
+          tag: ${{ steps.get_release.outputs.tag_name }}
+          release_name: ${{ steps.get_release.outputs.name }}
           file: ./output/resume.ics
           overwrite: true
           asset_name: resume.ics
