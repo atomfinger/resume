@@ -1,4 +1,7 @@
+<!-- markdown-link-check-disable -->
 ![Build status](https://github.com/atomfinger/resume/actions/workflows/pipeline.yml/badge.svg)
+![Calendar status](https://github.com/atomfinger/resume/actions/workflows/update_calendar.yml/badge.svg)
+<!-- markdown-link-check-enable -->
 
 # John's resume
 

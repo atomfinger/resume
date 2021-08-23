@@ -1,0 +1,38 @@
+name: Calendar event update
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  update_calendar:
+    name: Run Python unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
+          mkdir output
+      - name: Create calendar event
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.ics' --format 'ics'
+      - name: Upload calendar event
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./output/resume.ics
+          asset_name: resume.ics
+          asset_content_type: text/calendar
