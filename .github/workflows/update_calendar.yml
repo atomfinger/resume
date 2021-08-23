@@ -3,6 +3,7 @@ name: Calendar event update
 on:
   schedule:
     - cron: '30 1 * * *'
+  workflow_dispatch:
 
 jobs:
   update_calendar:

@@ -2,6 +2,7 @@ name: Pipeline build
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   # TESTS BEGIN
