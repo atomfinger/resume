@@ -293,6 +293,8 @@ jobs:
             asset_content_type: image/tiff
           - asset: resume.ics
             asset_content_type: text/calendar
+          - asset: resume.pptx
+            asset_content_type: application/vnd.openxmlformats-officedocument.presentationml.presentation
     steps:
       - name: Download HTML artifacts
         uses: actions/download-artifact@v2
