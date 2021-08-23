@@ -49,6 +49,8 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 | JPG  | Maybe you're on a device that can only view images. I'm not judging. | [Schema](https://jpeg.org/jpeg/workplan.html) |
 | Morse code (TXT) | The most legacy format | N/A |
 | TIFF | Companies still use FAX machines, right? | N/A |
+| ICS | Getting into people's calendar can be difficult. Hopefully this makes it easier | N/A |
+| PPTX | What does companies love more than a good PowerPoint? Not much | N/A |
 
 ## Where to download/View this resume
 
