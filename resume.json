@@ -172,5 +172,27 @@
         "The Software Craftsman"
       ]
     }
+  ],
+  "projects": [
+    {
+      "name": "toUUID",
+      "url": "https://github.com/atomfinger/toUUID",
+      "description": "A small library that creates human-readable and deterministic UUIDs for testing purposes.",
+      "keywords": [
+        "Java",
+        "Kotlin",
+        "Testing"
+      ]
+    },
+    {
+      "name": "This resume",
+      "url": "https://github.com/atomfinger/resume",
+      "description": "This resume is more than just a resume. It is fully automated using Github Actions and scripted with Python. It has automated tests. It converts between a bunch of different formats and it auto-deploys to a production-like environment.",
+      "keywords": [
+        "GitHub Actions",
+        "Python",
+        "Automation"
+      ]
+    }
   ]
 }
