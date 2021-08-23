@@ -160,7 +160,7 @@ jobs:
           name: artefacts-html
           path: output
 
-  # JSON, XML, YAML, CSV
+  # JSON, XML, YAML, CSV, ICS
   script_conversions:
     name: Conversions based on JSON
     runs-on: ubuntu-latest
@@ -184,6 +184,8 @@ jobs:
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
       - name: JSON -> CSV
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
+      - name: JSON -> ICS
+        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.ics' --format 'ics'
       - name: Generate artefacts
         uses: actions/upload-artifact@v2
         with:
@@ -287,6 +289,8 @@ jobs:
             asset_content_type: text/yaml
           - asset: resume.tiff
             asset_content_type: image/tiff
+          - asset: resume.ics
+            asset_content_type: text/calendar
     steps:
       - name: Download HTML artifacts
         uses: actions/download-artifact@v2
