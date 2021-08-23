@@ -41,7 +41,7 @@ jobs:
         run: |
           python ./resume/__main__.py --input 'resume.json' --output 'resume.md' --format 'markdown'
       - name: Check spelling
-        uses: sbates130272/spellcheck-github-actions@v0.6.0
+        uses: sbates130272/spellcheck-github-actions@v0.7.0
 
   validate_schema:
     name: Validate JSON resume schema
