@@ -2,6 +2,7 @@ import argparse
 import json
 from argparse import Namespace
 
+from resume.html_to_epub import convert_to_epub
 from resume.json_to_ics import convert_to_ics
 from resume.json_to_csv import convert_to_csv
 from resume.json_to_md import convert_to_markdown
@@ -19,7 +20,7 @@ def parse_arguments() -> Namespace:
     parser.add_argument('--input', metavar='path', type=str, help='Input JSON file', required=True)
     parser.add_argument('--output', metavar='path', type=str, help='Output file', required=True)
     parser.add_argument('--format', type=str,
-                        choices=['markdown', 'yaml', 'xml', 'csv', 'jpg', 'morse', 'simplify', 'ics', 'pptx'],
+                        choices=['markdown', 'yaml', 'xml', 'csv', 'jpg', 'morse', 'simplify', 'ics', 'pptx', 'epub'],
                         required=True)
     return parser.parse_args()
 
@@ -39,6 +40,8 @@ def main():
     if file_format == 'simplify':
         simplify(source, destination)
         return
+    if file_format == 'epub':
+        convert_to_epub(source, destination)
 
     with open(source, 'r') as f:
         resume = resume_from_dict(json.loads(f.read()))

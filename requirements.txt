@@ -13,3 +13,6 @@ Pillow~=8.3.2
 icalendar~=4.0.7
 pytz~=2021.1
 python-pptx~=0.6.19
+uuid~=1.30
+resume~=0.12
+pypub~=1.5

@@ -134,7 +134,7 @@ jobs:
           name: artefacts-pdf
           path: output
 
-  # HTML
+  # HTML, EPUB
   html_conversions:
     name: Conversions based on HTML
     runs-on: ubuntu-latest
@@ -145,16 +145,23 @@ jobs:
         uses: actions/setup-node@v2.4.0
         with:
           node-version: 12
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
       - name: Setup
         run: |
           npm install -g resume-cli
           npm install jsonresume-theme-even
-          npm install jsonresume-theme-paper
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python setup.py install
           mkdir output
-          mkdir tmp
       - name: JSON -> HTML
         run: |
           resume export output/resume.html --format html
+      - name: HTML -> EPUB
+        run: python ./resume/__main__.py --input 'output/resume.htm' --output 'output/' --format 'epub'
       - name: Generate artefacts
         uses: actions/upload-artifact@v2
         with:
