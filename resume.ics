@@ -5,8 +5,8 @@ BEGIN:VEVENT
 SUMMARY:Read John Mikael Gundersen' resume
 DTSTART:20210911T113700Z
 DTEND:20210911T123700Z
-DTSTAMP:20210911T191244Z
-UID:4e535b36-b78a-4a4b-9c9b-caf8a94dc2ae
+DTSTAMP:20210911T191233Z
+UID:d2ca3f9c-4808-4ba3-b5bd-98780d77f3a3
 ATTENDEE;CN="A person";ROLE=REQ-PARTICIPANT:MAILTO:you@somecompany.com
 DESCRIPTION:You should read John Mikael Gundersen's resume.\n\nThe online 
  version can be found here:\nhttps://atomfinger.github.io/resume/\n\nOther 
