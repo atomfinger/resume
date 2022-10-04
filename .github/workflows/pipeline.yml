@@ -10,7 +10,7 @@ jobs:
     name: Run Python unit tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -28,7 +28,7 @@ jobs:
     name: Check spelling
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -48,7 +48,7 @@ jobs:
     name: Validate JSON resume schema
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Setup Node.js
         uses: actions/setup-node@v2.4.1
         with:
@@ -62,7 +62,7 @@ jobs:
     name: Verify URLs in resume
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Setup Node.js
         uses: actions/setup-node@v2.4.1
         with:
@@ -140,7 +140,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Setup Node.js
         uses: actions/setup-node@v2.4.1
         with:
@@ -167,7 +167,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -201,7 +201,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ python_tests, verify_spelling, validate_schema, verify_urls ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -240,7 +240,7 @@ jobs:
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
