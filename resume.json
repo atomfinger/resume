@@ -29,7 +29,7 @@
       "summary": "Currently helping the company by improving development processes",
       "highlights": [
         "Built the initialiser which serves as the golden standard within the organisation while also being the fundation of any new application",
-        "Created the system that allows for efficient risk analysis for our reinsurance which is expected to save the business millions in years to come",
+        "Created the system that allows for efficient risk analysis for our reinsurance which can potentially save the business millions in years to come",
         "Headed a project which aimed at geolocating risks in the UK where we ended up geolocating +90% of the UK portfolio",
         "Headed the adoption of various technologies and practices: OpenAPI, Unit, system and integration testing, Static analysis tools such as SonarCloud, Created the post-mortem process",
         "Authored developer guidelines. Created the first pipeline implementation for GitHub workflow",
