@@ -53,3 +53,10 @@ fhssorlandet
 skoler
 vgs
 vtfk
+OpenAPI
+SonarCloud
+fundation
+gRPC
+geolocating
+initialiser
+mortem
