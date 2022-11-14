@@ -52,8 +52,6 @@ a p p l i c a t i o n s
 
 a n d
 
-c a r e
-
 ## l a r g e
 
 s c a l e
