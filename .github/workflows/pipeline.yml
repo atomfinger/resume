@@ -101,7 +101,7 @@ jobs:
       - name: Setup
         run: |
           npm install -g resume-cli
-          npm install jsonresume-theme-paper
+          npm install jsonresume-theme-actual
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
@@ -109,13 +109,13 @@ jobs:
           mkdir tmp
           mv resume.json resume-full.json
           python ./resume/__main__.py --input 'resume-full.json' --output 'resume.json' --format 'simplify'
-          resume export tmp/resume-paper.html --format html --theme paper
+          resume export tmp/resume-actual.html --format html --theme actual
           mv resume.json resume-basic.json
           mv resume-full.json resume.json
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
-          htmlFile: ./tmp/resume-paper.html
+          htmlFile: ./tmp/resume-actual.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
       - name: PDF -> JPG
