@@ -4,7 +4,7 @@ awards:
 basics: !Basics
   email: john@jmgundersen.com
   image: ''
-  label: Programmer
+  label: Tech lead | Developer
   location: !Location
     address:
     city: Oslo
@@ -18,8 +18,9 @@ basics: !Basics
     network: GitHub
     url: https://github.com/atomfinger/
     username: atomfinger
-  summary: Developer with a passion for automated testing, clean code and excellent
-    developer practices.
+  summary: Tech lead with a foucs on quality and best practices. Has worked within
+    a variety of domains, such as highly sensitive healthcare applications and care
+    large-scale banking systems.
   url: https://jmgundersen.com
 certificates:
 education:
@@ -36,24 +37,6 @@ education:
   start_date: '2010-08-01'
   study_type: Bachelor of science
   url: https://www.aber.ac.uk/en/
-- !Education
-  area: Data/Media
-  courses:
-  end_date: '2010-05-01'
-  institution: Folkehøgskolen Sørlandet
-  score:
-  start_date: '2009-08-01'
-  study_type:
-  url: https://www.fhssorlandet.no/
-- !Education
-  area: Studiespesialiserende
-  courses:
-  end_date: '2008-05-01'
-  institution: Bø VGS
-  score:
-  start_date: '2006-08-01'
-  study_type:
-  url: https://www.vtfk.no/skoler/bo-vgs/
 interests:
 - !Interest
   keywords:
@@ -77,6 +60,7 @@ interests:
   - The Phoenix Project/The Unicorn Project
   - The Art of Unit Testing
   - The Software Craftsman
+  - Working effectively with legacy code
   name: Developer books I recommend
 languages:
 - !Language
@@ -126,11 +110,13 @@ skills:
   - Java/Kotlin
   - C# .NET
   - Python
+  - Elixir
   - SQL of various kinds
   - Microservices
   - Kafka
   - Architecture
   - Contract first
+  - gRPC
   level:
   name: Developer
 - !Skill
@@ -161,7 +147,18 @@ work:
   description:
   end_date:
   highlights:
-  - Authored developer guidelines for a cleaner and more maintainable codebase
+  - Built the initialiser which serves as the golden standard within the organisation
+    while also being the fundation of any new application
+  - Created the system that allows for efficient risk analysis for our reinsurance
+    which can potentially save the business millions in years to come
+  - Headed a project which aimed at geolocating risks in the UK where we ended up
+    geolocating +90% of the UK portfolio
+  - 'Headed the adoption of various technologies and practices: OpenAPI, Unit, system
+    and integration testing, Static analysis tools such as SonarCloud, Created the
+    post-mortem process'
+  - Authored developer guidelines. Created the first pipeline implementation for GitHub
+    workflow
+  - Been part of most major technology decisions taken since I started
   location: Oslo, Norway
   name: Protector
   position: Tech Lead

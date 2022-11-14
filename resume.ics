@@ -3,10 +3,10 @@ VERSION:2.0
 PRODID:-//John's cheeky calendar thing/jmgundersen.com//
 BEGIN:VEVENT
 SUMMARY:Read John Mikael Gundersen' resume
-DTSTART:20210929T113700Z
-DTEND:20210929T123700Z
-DTSTAMP:20210929T124613Z
-UID:a0290d1a-5efa-4819-84e3-a728c96f8b59
+DTSTART:20221115T113700Z
+DTEND:20221115T123700Z
+DTSTAMP:20221115T103118Z
+UID:2e0168d7-cd95-49bc-860c-d3185ef5efe9
 ATTENDEE;CN="A person";ROLE=REQ-PARTICIPANT:MAILTO:you@somecompany.com
 DESCRIPTION:You should read John Mikael Gundersen's resume.\n\nThe online 
  version can be found here:\nhttps://atomfinger.github.io/resume/\n\nOther 
@@ -14,8 +14,8 @@ DESCRIPTION:You should read John Mikael Gundersen's resume.\n\nThe online
  /latest/\n\nThen you should consider contacting him at john@jmgundersen.co
  m or through his website (https://jmgundersen.com)
 LOCATIONS:Somewhere comfortable
-ORGANIZER;CN="John Mikael Gundersen";ROLE=Programmer:MAILTO:john@jmgunders
- en.com
+ORGANIZER;CN="John Mikael Gundersen";ROLE="Tech lead | Developer":MAILTO:j
+ ohn@jmgundersen.com
 PRIORITY:5
 END:VEVENT
 END:VCALENDAR

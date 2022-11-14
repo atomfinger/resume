@@ -1,34 +1,66 @@
 # John Mikael Gundersen
 
-#### Programmer
+#### Tech lead | Developer
 
 ###### john@jmgundersen.com - [https://jmgundersen.com](https://jmgundersen.com) - [atomfinger@GitHub](https://github.com/atomfinger/)
 
-D e v e l o p e r
+T e c h
+
+l e a d
 
 w i t h
 
 a
 
-p a s s i o n
+f o u c s
 
-f o r
+o n
 
-a u t o m a t e d
-
-t e s t i n g ,
-
-c l e a n
-
-c o d e
+q u a l i t y
 
 a n d
 
-e x c e l l e n t
-
-d e v e l o p e r
+b e s t
 
 p r a c t i c e s .
+
+H a s
+
+w o r k e d
+
+w i t h i n
+
+a
+
+v a r i e t y
+
+o f
+
+d o m a i n s ,
+
+s u c h
+
+a s
+
+h i g h l y
+
+s e n s i t i v e
+
+h e a l t h c a r e
+
+a p p l i c a t i o n s
+
+a n d
+
+c a r e
+
+## l a r g e
+
+s c a l e
+
+b a n k i n g
+
+s y s t e m s .
 
 ## Experience
 
@@ -36,7 +68,15 @@ p r a c t i c e s .
 
 Currently helping the company by improving development processes
 
-- Authored developer guidelines for a cleaner and more maintainable codebase
+- Built the initialiser which serves as the golden standard within the organisation while also being the fundation of
+  any new application
+- Created the system that allows for efficient risk analysis for our reinsurance which can potentially save the business
+  millions in years to come
+- Headed a project which aimed at geolocating risks in the UK where we ended up geolocating +90% of the UK portfolio
+- Headed the adoption of various technologies and practices: OpenAPI, Unit, system and integration testing, Static
+  analysis tools such as SonarCloud, Created the post-mortem process
+- Authored developer guidelines. Created the first pipeline implementation for GitHub workflow
+- Been part of most major technology decisions taken since I started
 
 **Senior Consultant**, [TietoEvry](https://www.tietoevry.com/) (05.2018 - 11.2020)
 
@@ -67,13 +107,10 @@ the first 3 years, eventually got promoted to the position of a team lead.
 - CS38110 - Open Source Development Issues
 - CS31310 - Agile Methodologies
 
-**None, Data/Media**, [Folkehøgskolen Sørlandet](https://www.fhssorlandet.no/) (08.2009 - 05.2010)
-
-**None, Studiespesialiserende**, [Bø VGS](https://www.vtfk.no/skoler/bo-vgs/) (08.2006 - 05.2008)
-
 ## Skills
 
-- **Developer:** Java/Kotlin, C# .NET, Python, SQL of various kinds, Microservices, Kafka, Architecture, Contract first
+- **Developer:** Java/Kotlin, C# .NET, Python, Elixir, SQL of various kinds, Microservices, Kafka, Architecture,
+  Contract first, gRPC
 - **DevOps:** TeamCity, Jenkins, GitHub Actions, Groovy, Docker, K8s, Swarm, Solution design
 - **Testing:** Testcontainers, System tests, Mockserver, Contract testing, Narrow & Wide integration tests,
   Spock/Junit/Mockito/Nunit/etc
@@ -87,7 +124,7 @@ English, Norwegian
 - Stuff I like in general: Dungeon & Dragons, Headphones (Good audio), My dog, Discworld, Whiskey
 - Shows I like: Battlestar Galactica, Firefly, Red Dwarf, Doctor Who
 - Developer books I recommend: Clean Series, Pragmatic Programmer, The Phoenix Project/The Unicorn Project, The Art of
-  Unit Testing, The Software Craftsman
+  Unit Testing, The Software Craftsman, Working effectively with legacy code
 
 ## Projects
 

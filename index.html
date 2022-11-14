@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8">
       <title>John Mikael Gundersen</title>
-      <meta name="description" content="Developer with a passion for automated testing, clean code and excellent developer practices.">
+      <meta name="description" content="Tech lead with a foucs on quality and best practices. Has worked within a variety of domains, such as highly sensitive healthcare applications and care large-scale banking systems.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap">
     <style>:root {
   color-scheme: light dark;
 
-  --color-background: #ffffff;
-  --color-primary: #212529;
-  --color-secondary: #95a5a6;
-  --color-muted: #f4f6f6;
-  --color-accent: #f1c40f;
-  --color-link: #2ecc71;
+  --color-background: #ffffff; /* White */
+  --color-muted: #f3f4f5; /* Light Gray 200 */
+  --color-primary: #191e23; /* Dark Gray 900 */
+  --color-secondary: #6c7781; /* Dark Gray 300 */
+  --color-accent: #ffb900; /* Accent Yellow */
+  --color-link: #46b450; /* Accent Green */
 
   --scale-ratio: 1.25;
   --scale0: 1rem;
@@ -27,10 +27,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #181a1b;
-    --color-primary: #d1cdc7;
-    --color-secondary: #aaa398;
-    --color-muted: #1e2021;
+    --color-background: #191e23; /* Dark Gray 900 */
+    --color-muted: #23282d; /* Dark Gray 800 */
+    --color-primary: #fbfbfc; /* Light Gray 100 */
+    --color-secondary: #ccd0d4; /* Light Gray 700 */
   }
 }
 
@@ -75,7 +75,7 @@ ul {
   padding-left: 1em;
 }
 
-li + li {
+:not(.icon-list, .tag-list) > li + li {
   margin-top: 0.4em;
 }
 
@@ -181,12 +181,20 @@ blockquote > * + * {
   margin-top: 0.6em;
 }
 
+.meta {
+  color: var(--color-secondary);
+}
+
 .stack {
   display: grid;
   gap: 1.5em;
 }
 
 .icon-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1em;
+  justify-content: center;
   list-style: none;
   padding: 0;
 }
@@ -196,35 +204,23 @@ blockquote > * + * {
   gap: 1em;
 }
 
-.spaced-list {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.spaced-list::before {
-  border-bottom: 1px solid var(--color-muted);
-  content: '';
-  flex-grow: 1;
-  margin: 0 1em;
-  order: 1;
-}
-
-.spaced-list > :nth-child(2) {
-  order: 2;
-}
-
 .tag-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.4em;
   list-style: none;
   padding: 0;
 }
 
 .tag-list > li {
   background: var(--color-muted);
-  margin: 0 0.2em 0.2em 0;
+  border-radius: 0.2em;
   padding: 0.2em 0.6em;
+}
+
+.bullet-item:not(:first-child)::before {
+  content: '· ';
+  margin: 0 0.2em;
 }
 
 @media print, (min-width: 48em) {
@@ -252,8 +248,15 @@ blockquote > * + * {
     display: contents;
   }
 
+  .icon-list {
+    flex-direction: column;
+  }
+
   .grid-list {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc((100% - 1em) / 2), 1fr)
+    );
   }
 }
 </style>
@@ -263,10 +266,10 @@ blockquote > * + * {
           <img src="" alt="">
         <div>
             <h1>John Mikael Gundersen</h1>
-            <h2>Programmer</h2>
+            <h2>Tech lead | Developer</h2>
         </div>
           <article>
-            <p>Developer with a passion for automated testing, clean code and excellent developer practices.</p>
+            <p>Tech lead with a foucs on quality and best practices. Has worked within a variety of domains, such as highly sensitive healthcare applications and care large-scale banking systems.</p>
           </article>
         <ul class="icon-list">
               <li>
@@ -294,57 +297,71 @@ blockquote > * + * {
         <div class="stack">
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4>Tech Lead</h4>
-                  <span>
+                <h4>Tech Lead</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://protectorforsikring.no/">Protector</a></strong>
+                  </div>
+                  <div>
                     <time datetime="2020-12-01">Dec 2020</time> –
                     Present
-                  </span>
+                  </div>
+                    <div>Oslo, Norway</div>
                 </div>
-                <strong><a href="https://protectorforsikring.no/">Protector</a></strong>
               </header>
                 <p>Currently helping the company by improving development processes</p>
                 <ul>
-                    <li>Authored developer guidelines for a cleaner and more maintainable codebase</li>
+                    <li><p>Built the initialiser which serves as the golden standard within the organisation while also being the fundation of any new application</p></li>
+                    <li><p>Created the system that allows for efficient risk analysis for our reinsurance which can potentially save the business millions in years to come</p></li>
+                    <li><p>Headed a project which aimed at geolocating risks in the UK where we ended up geolocating +90% of the UK portfolio</p></li>
+                    <li><p>Headed the adoption of various technologies and practices: OpenAPI, Unit, system and integration testing, Static analysis tools such as SonarCloud, Created the post-mortem process</p></li>
+                    <li><p>Authored developer guidelines. Created the first pipeline implementation for GitHub workflow</p></li>
+                    <li><p>Been part of most major technology decisions taken since I started</p></li>
                 </ul>
             </article>
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4>Senior Consultant</h4>
-                  <span>
+                <h4>Senior Consultant</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://www.tietoevry.com/">TietoEvry</a></strong>
+                  </div>
+                  <div>
                     <time datetime="2018-05-01">May 2018</time> –
                     <time datetime="2020-11-30">Nov 2020</time>
-                  </span>
+                  </div>
+                    <div>Oslo, Norway</div>
                 </div>
-                <strong><a href="https://www.tietoevry.com/">TietoEvry</a></strong>
               </header>
                 <p>Maintained and created core solutions for major nordic banks.</p>
                 <ul>
-                    <li>Made and maintained core web systems for multiple banks</li>
-                    <li>Created new systems for integration testing and improved CI/CD pipelines</li>
-                    <li>Authored developer guidelines for a cleaner and more maintainable codebase</li>
-                    <li>Was a team lead managing the team responsible for our PCI compliant systems</li>
-                    <li>Was a project architect that guided new banks, while being responsible for the technical aspect of the project</li>
-                    <li>Worked closely with partners in India</li>
+                    <li><p>Made and maintained core web systems for multiple banks</p></li>
+                    <li><p>Created new systems for integration testing and improved CI/CD pipelines</p></li>
+                    <li><p>Authored developer guidelines for a cleaner and more maintainable codebase</p></li>
+                    <li><p>Was a team lead managing the team responsible for our PCI compliant systems</p></li>
+                    <li><p>Was a project architect that guided new banks, while being responsible for the technical aspect of the project</p></li>
+                    <li><p>Worked closely with partners in India</p></li>
                 </ul>
             </article>
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4>Senior system developer</h4>
-                  <span>
+                <h4>Senior system developer</h4>
+                <div class="meta">
+                  <div>
+                    <strong><a href="https://www.aspit.no/">Aspit</a></strong>
+                  </div>
+                  <div>
                     <time datetime="2013-09-01">Sep 2013</time> –
                     <time datetime="2018-05-01">May 2018</time>
-                  </span>
+                  </div>
+                    <div>Seljord, Norway</div>
                 </div>
-                <strong><a href="https://www.aspit.no/">Aspit</a></strong>
               </header>
                 <p>Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.</p>
                 <ul>
-                    <li>Was responsible for the development of the core product</li>
-                    <li>Worked closely with the business by planning and implementing new features</li>
-                    <li>Worked closely with an outsourcing team in Vietnam</li>
+                    <li><p>Was responsible for the development of the core product</p></li>
+                    <li><p>Worked closely with the business by planning and implementing new features</p></li>
+                    <li><p>Worked closely with an outsourcing team in Vietnam</p></li>
                 </ul>
             </article>
         </div>
@@ -354,47 +371,23 @@ blockquote > * + * {
         <div class="stack">
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4><a href="https://www.aber.ac.uk/en/">Aberystwyth University</a></h4>
-                  <span>
+                <h4><a href="https://www.aber.ac.uk/en/">Aberystwyth University</a></h4>
+                <div class="meta">
+                    <strong>Computer Science</strong>
+                  <div>
                     <time datetime="2010-08-01">Aug 2010</time> –
                     <time datetime="2014-05-01">May 2014</time>
-                  </span>
+                  </div>
                 </div>
-                  <strong>Computer Science</strong>
               </header>
                 <p>Bachelor of science</p>
                 <h5>Courses</h5>
                 <ul>
-                    <li>CS38010 - Space Robotics</li>
-                    <li>CS36410 - Intelligent Robotics</li>
-                    <li>CS38110 - Open Source Development Issues</li>
-                    <li>CS31310 - Agile Methodologies</li>
+                    <li><p>CS38010 - Space Robotics</p></li>
+                    <li><p>CS36410 - Intelligent Robotics</p></li>
+                    <li><p>CS38110 - Open Source Development Issues</p></li>
+                    <li><p>CS31310 - Agile Methodologies</p></li>
                 </ul>
-            </article>
-            <article>
-              <header>
-                <div class="spaced-list">
-                  <h4><a href="https://www.fhssorlandet.no/">Folkehøgskolen Sørlandet</a></h4>
-                  <span>
-                    <time datetime="2009-08-01">Aug 2009</time> –
-                    <time datetime="2010-05-01">May 2010</time>
-                  </span>
-                </div>
-                  <strong>Data/Media</strong>
-              </header>
-            </article>
-            <article>
-              <header>
-                <div class="spaced-list">
-                  <h4><a href="https://www.vtfk.no/skoler/bo-vgs/">Bø VGS</a></h4>
-                  <span>
-                    <time datetime="2006-08-01">Aug 2006</time> –
-                    <time datetime="2008-05-01">May 2008</time>
-                  </span>
-                </div>
-                  <strong>Studiespesialiserende</strong>
-              </header>
             </article>
         </div>
       </section>
@@ -403,29 +396,29 @@ blockquote > * + * {
         <div class="stack">
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4><a href="https://github.com/atomfinger/toUUID">toUUID</a></h4>
-                  <span>
+                <h4><a href="https://github.com/atomfinger/toUUID">toUUID</a></h4>
+                <div class="meta">
+                  <div>
+                  </div>
+                  <div>
                     <time datetime="2020-10-09">Oct 2020</time> –
                     Present
-                  </span>
+                  </div>
                 </div>
-                <span>
-                </span>
               </header>
                 <p>A small library that creates human-readable and deterministic UUIDs for testing purposes.</p>
             </article>
             <article>
               <header>
-                <div class="spaced-list">
-                  <h4><a href="https://github.com/atomfinger/resume">This resume</a></h4>
-                  <span>
+                <h4><a href="https://github.com/atomfinger/resume">This resume</a></h4>
+                <div class="meta">
+                  <div>
+                  </div>
+                  <div>
                     <time datetime="2020-08-31">Aug 2020</time> –
                     Present
-                  </span>
+                  </div>
                 </div>
-                <span>
-                </span>
               </header>
                 <p>This resume is more than just a resume. It is fully automated using Github Actions and scripted with Python. It has automated tests. It converts between a bunch of different formats and it auto-deploys to a production-like environment.</p>
             </article>
@@ -440,11 +433,13 @@ blockquote > * + * {
                     <li>Java/Kotlin</li>
                     <li>C# .NET</li>
                     <li>Python</li>
+                    <li>Elixir</li>
                     <li>SQL of various kinds</li>
                     <li>Microservices</li>
                     <li>Kafka</li>
                     <li>Architecture</li>
                     <li>Contract first</li>
+                    <li>gRPC</li>
                 </ul>
             </div>
             <div>
@@ -516,6 +511,7 @@ blockquote > * + * {
                     <li>The Phoenix Project/The Unicorn Project</li>
                     <li>The Art of Unit Testing</li>
                     <li>The Software Craftsman</li>
+                    <li>Working effectively with legacy code</li>
                 </ul>
             </div>
         </div>
