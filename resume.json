@@ -180,16 +180,5 @@
         "Testing"
       ]
     },
-    {
-      "name": "This resume",
-      "url": "https://github.com/atomfinger/resume",
-      "startDate": "2020-08-31",
-      "description": "This resume is more than just a resume. It is fully automated using Github Actions and scripted with Python. It has automated tests. It converts between a bunch of different formats and it auto-deploys to a production-like environment.",
-      "keywords": [
-        "GitHub Actions",
-        "Python",
-        "Automation"
-      ]
-    }
   ]
 }
