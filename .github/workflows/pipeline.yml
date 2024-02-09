@@ -129,7 +129,7 @@ jobs:
           output: 'output/resume.tiff'
           arbitrary-parameters: '-dNOPAUSE -r300 -sDEVICE=tiffscaled24 -sCompression=lzw -dBATCH'
       - name: Generate artefacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artefacts-pdf
           path: output
@@ -156,7 +156,7 @@ jobs:
         run: |
           resume export output/resume.html --format html
       - name: Generate artefacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artefacts-html
           path: output
@@ -190,7 +190,7 @@ jobs:
       - name: JSON -> PPTX
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.pptx' --format 'pptx'
       - name: Generate artefacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artefacts-basic
           path: output
@@ -223,7 +223,7 @@ jobs:
       - name: TXT -> Morse Code (TXT)
         run: python ./resume/__main__.py --input 'output/resume.txt' --output 'output/resume_morse_code.txt' --format 'morse'
       - name: Generate artefacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artefacts-markdown
           path: output
