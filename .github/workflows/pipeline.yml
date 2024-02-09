@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
       - name: Setup Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 12
       - name: Install dependencies
@@ -91,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
       - name: Setup Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 12
       - name: Set up Python 3.9
@@ -142,7 +142,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
       - name: Setup Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 12
       - name: Setup
