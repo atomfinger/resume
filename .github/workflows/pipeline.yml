@@ -298,19 +298,19 @@ jobs:
             asset_content_type: application/vnd.openxmlformats-officedocument.presentationml.presentation
     steps:
       - name: Download HTML artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-html
       - name: Download JSON artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-basic
       - name: Download markdown artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-markdown
       - name: Download PDF artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-pdf
       - name: Upload
@@ -330,19 +330,19 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Download HTML artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-html
       - name: Download basic artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-basic
       - name: Download markdown artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-markdown
       - name: Download PDF artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artefacts-pdf
       - name: Copy HTML file to public
