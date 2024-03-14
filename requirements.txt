@@ -1,7 +1,7 @@
 python-dateutil==2.8.2
 pip~=23.0.1
 py~=1.11.0
-setuptools~=69.0.3
+setuptools~=69.2.0
 parameterized~=0.9.0
 mdformat~=0.7.17
 ruamel.yaml>=0.17.10
