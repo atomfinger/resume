@@ -14,7 +14,7 @@ MORSE_CODE_DICT = {'A': '.-', 'B': '-...',
                    '4': '....-', '5': '.....', '6': '-....',
                    '7': '--...', '8': '---..', '9': '----.',
                    '0': '-----', ', ': '--..--', '.': '.-.-.-',
-                   '?': '..--..', '/': '-..-.', '-': '-....-',
+                   '?': '..--..', '/': '-..-.', '-': '-....-', '_': '..--.-',
                    '(': '-.--.', ')': '-.--.-'}
 
 
@@ -30,8 +30,9 @@ def convert_to_morse_code(origin: str, destination: str):
 def encrypt(message: str) -> str:
     cipher = ''
     for letter in message.upper():
-        if letter != ' ':
-            cipher += MORSE_CODE_DICT[letter] + ' '
-        else:
+        if letter == ' ':
             cipher += ' '
+        elif letter in MORSE_CODE_DICT:
+            # Characters without a Morse code are skipped rather than failing the whole build.
+            cipher += MORSE_CODE_DICT[letter] + ' '
     return cipher

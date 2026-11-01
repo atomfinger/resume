@@ -34,6 +34,20 @@ of [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it), but I have
 supporting many formats is very important. Yes indeed. I might not need it today, but one day there will be a recruiter
 that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you wait!
 
+### Extra fields
+
+The JSON file is a valid JSON Resume, but [lindbakk.com](https://lindbakk.com) reads a few extra fields from it (other tools
+and the converters here ignore them), so the website never needs a separate copy of the data:
+
+- `work[].projects`: the projects done at a job, in the schema's `projects` shape. The website lists them under "Projects".
+  `entity` names the client, or describes it where it has to stay anonymous (the consulting projects).
+- `projects[].type`: `"talk"` marks a talk, which is listed under "Public speaking" and not under "Projects" (`entity` is the
+  conference, `url` the recording and `slides` the slides). Every other project is one of mine.
+- `projects[].slug`, `tagline`, `image` and `repository`: used for the project cards (`url` is the website, or the
+  repository when there is no website).
+
+After changing `resume.json`, copy it into the website repository with `make sync-resume` over there.
+
 ## Supported formats
 
 | Format  | Description  | Schema |
@@ -55,8 +69,11 @@ that will only accept [YAML](https://en.wikipedia.org/wiki/YAML) files; just you
 ## Where to download/View this resume
 
 If you are one of those who prefer other, lesser, file formats feel free to view the latest
-version [online](https://atomfinger.github.io/resume/), or you can download all the other
-formats [here](https://github.com/atomfinger/resume/releases/latest/).
+version [online](https://atomfinger.github.io/resume/). Every other format is published next to it on
+GitHub Pages, for example [`resume.pdf`](https://atomfinger.github.io/resume/resume.pdf),
+[`resume.json`](https://atomfinger.github.io/resume/resume.json) and
+[`resume_morse_code.txt`](https://atomfinger.github.io/resume/resume_morse_code.txt). The same files are also attached
+to the [latest release](https://github.com/atomfinger/resume/releases/latest/).
 
 If no format exists that support your needs, do let me know :)
 

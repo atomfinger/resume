@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 import mdformat
 
 from resume.resume_types import Basics, Volunteer, Education, Skill, Award, Publication, Language, Interest, \
-    Project, Reference, Work, Resume
+    Project, Reference, Work, Resume, Certificate
 
 NEW_LINE = '  '
 DASH_LINE = '----------'
@@ -32,7 +32,7 @@ def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
         content.append(get_header_information(resume.basics))
         content.append(get_contact_and_social_line(resume.basics))
         content.append(NEW_LINE)
-        content.append(resume.basics.summary)
+        content.append([resume.basics.summary])
         content.append(NEW_LINE)
     if resume.work:
         content.append(convert_works("Experience", resume.work))
@@ -40,11 +40,18 @@ def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
     if resume.education:
         content.append(convert_educations(resume.education))
         content.append(NEW_LINE)
+    if resume.certificates:
+        content.append(convert_certificates(resume.certificates))
+        content.append(NEW_LINE)
     if resume.volunteer:
         content.append(convert_volunteers("Volunteer", resume.volunteer))
         content.append(NEW_LINE)
     if resume.skills:
         content.append(convert_skills(resume.skills))
+        content.append(NEW_LINE)
+    talks = get_talks(resume.projects)
+    if talks:
+        content.append(convert_talks(talks))
         content.append(NEW_LINE)
     if resume.publications:
         content.append(convert_publications(resume.publications))
@@ -55,8 +62,9 @@ def get_markdown_content(resume: Resume) -> list[Union[list[str], str]]:
     if resume.interests:
         content.append(convert_interests(resume.interests))
         content.append(NEW_LINE)
-    if resume.projects:
-        content.append(convert_projects(resume.projects))
+    projects = get_other_projects(resume.projects)
+    if projects:
+        content.append(convert_projects(projects))
         content.append(NEW_LINE)
     return content
 
@@ -76,7 +84,23 @@ def date_to_string(date: datetime) -> str:
 
 
 def string_to_date(date: str) -> datetime:
-    return datetime.strptime(date, '%Y-%m-%d')
+    # JSON Resume also allows dates with only a year and month (2026-09) or just a year.
+    for date_format in ('%Y-%m-%d', '%Y-%m', '%Y'):
+        try:
+            return datetime.strptime(date, date_format)
+        except ValueError:
+            continue
+    raise ValueError(f"Unsupported date: {date}")
+
+
+def format_release_date(date: str) -> str:
+    # Only claim a day when there is one.
+    parsed = string_to_date(date)
+    if len(date) == 10:
+        return parsed.strftime('%d.%m.%Y')
+    if len(date) == 7:
+        return parsed.strftime('%m.%Y')
+    return parsed.strftime('%Y')
 
 
 def format_date(date: Optional[str], default: str = None) -> str:
@@ -111,6 +135,23 @@ def convert_educations(educations: List[Education]) -> List[str]:
         for line in convert_education(education):
             content.append(line)
         content.append(NEW_LINE)
+    return content
+
+
+def convert_certificate(certificate: Certificate) -> str:
+    issuer = f', {certificate.issuer}' if certificate.issuer else ''
+    date = f' ({date_to_string(certificate.date)})' if certificate.date else ''
+    return f' - **{certificate.name}**{issuer}{date}'
+
+
+def convert_certificates(certificates: List[Certificate]) -> List[str]:
+    if len(certificates) == 0:
+        return []
+    content = [
+        "Certificates",
+        DASH_LINE
+    ]
+    [content.append(convert_certificate(certificate)) for certificate in certificates]
     return content
 
 
@@ -203,7 +244,7 @@ def convert_publication(publication: Publication) -> str:
     if publication.publisher:
         publisher_text = f' - {publication.publisher}'
     return f'**[{publication.name} ' \
-           f'({string_to_date(publication.release_date).strftime("%d.%m.%Y")})]({publication.url})**' \
+           f'({format_release_date(publication.release_date)})]({publication.url})**' \
            f'{publisher_text}  {publication.summary}'
 
 
@@ -238,6 +279,36 @@ def convert_interests(interests: List[Interest]) -> List[str]:
     ]
     for interest in interests:
         content.append(f' - {interest.name}: {", ".join(interest.keywords)}')
+    return content
+
+
+TALK = 'talk'
+
+
+def get_talks(projects: Optional[List[Project]]) -> List[Project]:
+    # Talks are projects with `type: "talk"`, and are presented on their own.
+    return [project for project in projects or [] if project.type == TALK]
+
+
+def get_other_projects(projects: Optional[List[Project]]) -> List[Project]:
+    return [project for project in projects or [] if project.type != TALK]
+
+
+def convert_talk(talk: Project) -> str:
+    entity = f' - {talk.entity}' if talk.entity else ''
+    date = f' ({format_release_date(talk.start_date)})' if talk.start_date else ''
+    description = f'  {talk.description}' if talk.description else ''
+    return f'**[{talk.name}{date}]({talk.url})**{entity}{description}'
+
+
+def convert_talks(talks: List[Project]) -> List[str]:
+    if len(talks) == 0:
+        return []
+    content = [
+        "Public speaking",
+        DASH_LINE
+    ]
+    [content.append(convert_talk(talk)) and content.append(NEW_LINE) for talk in talks]
     return content
 
 

@@ -52,7 +52,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4.0.2
         with:
-          node-version: 12
+          node-version: 22
       - name: Install dependencies
         run: npm install -g resume-cli
       - name: Validate resume schema
@@ -93,7 +93,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4.0.2
         with:
-          node-version: 12
+          node-version: 22
       - name: Set up Python 3.9
         uses: actions/setup-python@v5
         with:
@@ -101,7 +101,7 @@ jobs:
       - name: Setup
         run: |
           npm install -g resume-cli
-          npm install jsonresume-theme-paper
+          npm install jsonresume-theme-even
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python setup.py install
@@ -109,13 +109,15 @@ jobs:
           mkdir tmp
           mv resume.json resume-full.json
           python ./resume/__main__.py --input 'resume-full.json' --output 'resume.json' --format 'simplify'
-          resume export tmp/resume-paper.html --format html --theme paper
+          resume export tmp/resume-basic.html --format html
+          # Keep each block of skills on one page, instead of split across a page break.
+          sed -i 's#</head>#<style>.grid-list > div { break-inside: avoid; }</style></head>#' tmp/resume-basic.html
           mv resume.json resume-basic.json
           mv resume-full.json resume.json
       - name: HTML -> PDF
         uses: fifsky/html-to-pdf-action@master
         with:
-          htmlFile: ./tmp/resume-paper.html
+          htmlFile: ./tmp/resume-basic.html
           outputFile: ./output/resume.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
       - name: PDF -> JPG
@@ -144,12 +146,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4.0.2
         with:
-          node-version: 12
+          node-version: 22
       - name: Setup
         run: |
           npm install -g resume-cli
           npm install jsonresume-theme-even
-          npm install jsonresume-theme-paper
           mkdir output
           mkdir tmp
       - name: JSON -> HTML

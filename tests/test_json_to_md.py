@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 from unittest import TestCase
 
@@ -5,9 +6,10 @@ from parameterized import parameterized
 
 from resume.json_to_md import get_header_information, convert_volunteer, convert_education, \
     convert_skill, \
-    convert_award, convert_publication, convert_languages, convert_interests, format_date
+    convert_award, convert_publication, convert_languages, convert_interests, format_date, convert_certificate, format_release_date, convert_talk, get_talks, get_other_projects, \
+    get_markdown_content
 from resume.resume_types import Basics, Location, Profile, Volunteer, Education, Skill, Award, Publication, Language, \
-    Interest
+    Interest, Certificate, Resume, Project
 
 
 class Test(TestCase):
@@ -31,6 +33,25 @@ class Test(TestCase):
         with self.assertRaises(Exception) as context:
             format_date(None, None)
         self.assertTrue('Missing date' in str(context.exception))
+
+    def test_convert_certificate_includes_issuer_and_date(self):
+        certificate = Certificate(name='Certified Kubernetes Administrator', issuer='CNCF',
+                                  date=datetime(1989, 6, 12))
+        self.assertEqual(convert_certificate(certificate),
+                         ' - **Certified Kubernetes Administrator**, CNCF (06.1989)')
+
+    def test_convert_certificate_without_issuer_and_date_is_just_the_name(self):
+        self.assertEqual(convert_certificate(Certificate(name='Foundational C#')), ' - **Foundational C#**')
+
+    def test_release_date_only_shows_the_precision_it_has(self):
+        self.assertEqual(format_release_date('2026-09-03'), '03.09.2026')
+        self.assertEqual(format_release_date('2026-09'), '09.2026')
+        self.assertEqual(format_release_date('2026'), '2026')
+
+    def test_publication_with_only_month_and_year(self):
+        publication = Publication('A talk', 'A conference', '2026-09', 'A summary', 'https://example.com/talk')
+        self.assertEqual(convert_publication(publication),
+                         '**[A talk (09.2026)](https://example.com/talk)** - A conference  A summary')
 
     def test_parse_date_missing_date_and_provided_default_should_be_returned(self):
         self.assertEqual(format_date(None, 'Current'), 'Current')
@@ -175,3 +196,42 @@ def create_profiles() -> List[Profile]:
     return [
         Profile('Facebook', 'tomwaits', 'https://www.facebook.com/tomwaits')
     ]
+
+
+class TestMarkdownContent(TestCase):
+    def test_summary_is_kept_as_one_line_of_text(self):
+        resume = Resume(basics=Basics(name='Tom Waits', label='Musician', summary='A summary of a career', profiles=[]))
+        lines = [line for category in get_markdown_content(resume) for line in category]
+        self.assertIn('A summary of a career', lines)
+
+
+class TestTalks(TestCase):
+    def test_talks_are_the_projects_of_type_talk(self):
+        talk = Project(name='A talk', type='talk')
+        project = Project(name='A library')
+        self.assertEqual(get_talks([talk, project]), [talk])
+        self.assertEqual(get_other_projects([talk, project]), [project])
+
+    def test_no_projects_means_no_talks(self):
+        self.assertEqual(get_talks(None), [])
+        self.assertEqual(get_other_projects(None), [])
+
+    def test_convert_talk(self):
+        talk = Project(name='Gleam and BEAM', type='talk', entity='JavaZone', start_date='2026-09',
+                       description='A talk about Gleam.', url='https://example.com/video')
+        self.assertEqual(convert_talk(talk),
+                         '**[Gleam and BEAM (09.2026)](https://example.com/video)** - JavaZone  A talk about Gleam.')
+
+    def test_markdown_lists_talks_apart_from_projects(self):
+        resume = Resume(projects=[
+            Project(name='A library', url='https://example.com/lib', description='A library.'),
+            Project(name='A talk', type='talk', entity='A conference', start_date='2026-02',
+                    url='https://example.com/talk', description='About things.')])
+        lines = [line for category in get_markdown_content(resume) for line in category]
+        self.assertIn('Public speaking', lines)
+        self.assertIn('Projects', lines)
+        speaking = lines.index('Public speaking')
+        projects = lines.index('Projects')
+        self.assertTrue(any('A talk' in line for line in lines[speaking:projects]) or
+                        any('A talk' in line for line in lines[speaking:]))
+        self.assertFalse(any('A library' in line for line in lines[speaking:projects]))
