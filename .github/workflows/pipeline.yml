@@ -162,7 +162,7 @@ jobs:
           name: artefacts-html
           path: output
 
-  # JSON, XML, YAML, CSV, ICS, PPTX
+  # JSON, XML, YAML, CSV, PPTX
   script_conversions:
     name: Conversions based on JSON
     runs-on: ubuntu-latest
@@ -186,8 +186,6 @@ jobs:
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.yml' --format 'yaml'
       - name: JSON -> CSV
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.csv' --format 'csv'
-      - name: JSON -> ICS
-        run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.ics' --format 'ics'
       - name: JSON -> PPTX
         run: python ./resume/__main__.py --input 'resume.json' --output 'output/resume.pptx' --format 'pptx'
       - name: Generate artefacts
@@ -293,8 +291,6 @@ jobs:
             asset_content_type: text/yaml
           - asset: resume.tiff
             asset_content_type: image/tiff
-          - asset: resume.ics
-            asset_content_type: text/calendar
           - asset: resume.pptx
             asset_content_type: application/vnd.openxmlformats-officedocument.presentationml.presentation
     steps:

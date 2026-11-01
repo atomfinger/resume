@@ -81,11 +81,16 @@ def add_education_slides(slide, resume: Resume):
         p.level = 1
 
 
+def contact_line(basics) -> str:
+    # The email is optional: without it, the website is the way to get in touch.
+    return ' or '.join(part for part in (basics.email, basics.url) if part)
+
+
 def add_contact_slide(slide, resume:Resume):
     title = slide.shapes.title
     subtitle = slide.placeholders[1]
     title.text = f'Contact him today'
-    subtitle.text = f'{resume.basics.email} or {resume.basics.url}'
+    subtitle.text = contact_line(resume.basics)
 
 
 def add_personality_slide(slide):
