@@ -2,20 +2,20 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//John's cheeky calendar thing/jmgundersen.com//
 BEGIN:VEVENT
-SUMMARY:Read John Mikael Gundersen' resume
-DTSTART:20221115T113700Z
-DTEND:20221115T123700Z
-DTSTAMP:20221115T110953Z
-UID:d116bc72-70b8-42d9-b79b-4d9e0147b511
+SUMMARY:Read John Mikael Lindbakk' resume
+DTSTART:20261102T113700Z
+DTEND:20261102T123700Z
+DTSTAMP:20261102T192017Z
+UID:81ee0f23-79fb-414e-8e8c-6c7414fdbfa1
 ATTENDEE;CN="A person";ROLE=REQ-PARTICIPANT:MAILTO:you@somecompany.com
-DESCRIPTION:You should read John Mikael Gundersen's resume.\n\nThe online 
- version can be found here:\nhttps://atomfinger.github.io/resume/\n\nOther 
- formats are available here:\nhttps://github.com/atomfinger/resume/releases
- /latest/\n\nThen you should consider contacting him at john@jmgundersen.co
- m or through his website (https://jmgundersen.com)
+DESCRIPTION:You should read John Mikael Lindbakk's resume.\n\nThe online v
+ ersion can be found here:\nhttps://atomfinger.github.io/resume/\n\nOther f
+ ormats are available here:\nhttps://github.com/atomfinger/resume/releases/
+ latest/\n\nThen you should consider contacting him at john@lindbakk.com or
+  through his website (https://lindbakk.com)
 LOCATIONS:Somewhere comfortable
-ORGANIZER;CN="John Mikael Gundersen";ROLE="Tech lead | Developer":MAILTO:j
- ohn@jmgundersen.com
+ORGANIZER;CN="John Mikael Lindbakk";ROLE="Senior backend developer | Tech 
+ lead":MAILTO:john@jmgundersen.com
 PRIORITY:5
 END:VEVENT
 END:VCALENDAR

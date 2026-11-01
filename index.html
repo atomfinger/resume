@@ -1,520 +1,582 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-      <title>John Mikael Gundersen</title>
-      <meta name="description" content="Tech lead with a foucs on quality and best practices. Has worked within a variety of domains, such as highly sensitive healthcare applications and large-scale banking systems.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap">
-    <style>:root {
-  color-scheme: light dark;
+<!doctype html>
+    <html lang="en" style="">
+      <head>
+        <meta charset="utf-8" />
+        
+    <title>John Mikael Lindbakk</title>
+    <meta name="description" content="Senior backend developer and tech lead who builds robust, maintainable software. Cares about architecture that can evolve, teams that can sustain a pace, and code the next person can actually read. More than 13 years across healthcare, banking and insurance, and since 2023 as a consultant. Does open source and public speaking." />
+  
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" />
+        <style>
+            :root{color-scheme:light dark;--color-background-light:#fff;--color-dimmed-light:#f3f4f6;--color-primary-light:#111827;--color-secondary-light:#6b7280;--color-accent-light:#527575;--color-background-dark:#121113;--color-dimmed-dark:#222;--color-primary-dark:#c1c1c1;--color-secondary-dark:#888;--color-accent-dark:#5f8787;--color-background:var(--color-background-light);--color-dimmed:var(--color-dimmed-light);--color-primary:var(--color-primary-light);--color-secondary:var(--color-secondary-light);--color-accent:var(--color-accent-light);--scale-ratio:1.25;--scale0:1rem;--scale1:calc(var(--scale0) * var(--scale-ratio));--scale2:calc(var(--scale1) * var(--scale-ratio));--scale3:calc(var(--scale2) * var(--scale-ratio));--scale4:calc(var(--scale3) * var(--scale-ratio));--scale5:calc(var(--scale4) * var(--scale-ratio))}@media (prefers-color-scheme:dark){:root{--color-background:var(--color-background-dark);--color-dimmed:var(--color-dimmed-dark);--color-primary:var(--color-primary-dark);--color-secondary:var(--color-secondary-dark);--color-accent:var(--color-accent-dark)}}*{box-sizing:border-box;margin:0;padding:0}html{font-size:14px}body{background:var(--color-background);color:var(--color-primary);grid-template-rows:auto[content]0;grid-template-columns:[full-start]1fr[main-start side-start]minmax(min-content,12em)[side-end content-start]minmax(min-content,36em)[main-end content-end]1fr[full-end];gap:2em;margin-bottom:4em;font:1em/1.5 Lato,sans-serif;display:grid}body:before{content:"";grid-area:content/full}ol,ul{padding-left:1em}:not(.icon-list,.tag-list)>li+li{margin-top:.4em}li::marker,.network{color:var(--color-secondary)}a{color:var(--color-accent);text-decoration:none}a:focus,a:hover{text-decoration:underline}h1,h2,h3,h5{font-weight:400}h1,h2,h3{line-height:1.2}h1{font-size:var(--scale5)}h2{color:var(--color-secondary);font-size:var(--scale4)}h3{color:var(--color-secondary);font-size:var(--scale3);grid-column:side;margin-bottom:1rem}h4{font-size:var(--scale2)}h5{font-size:var(--scale1)}h6{font-size:var(--scale0)}blockquote{border-left:.2em solid var(--color-dimmed);padding-left:1em}cite{color:var(--color-secondary);font-style:inherit}cite:before{content:"— "}svg{vertical-align:text-bottom;margin-right:.2em}.masthead{background:var(--color-dimmed);display:inherit;gap:inherit;grid-column:full;grid-template-columns:inherit;text-align:center;padding:4em 0}.masthead>*,section{grid-column:main}.masthead>img{border:4px solid;border-radius:50%;max-width:12em;margin:0 auto}article>*+*,blockquote>*+*,.timeline>div>*+*{margin-top:.6em}.meta{color:var(--color-secondary)}.stack{gap:1.5em;display:grid}.icon-list{flex-wrap:wrap;justify-content:center;gap:.4em 1em;padding:0;list-style:none;display:flex}.grid-list{gap:1em;display:grid}.tag-list{flex-wrap:wrap;gap:.4em;padding:0;list-style:none;display:flex}.tag-list>li{background:var(--color-dimmed);border-radius:.2em;padding:.2em .6em}.timeline>div{position:relative}.timeline>div:not(:last-child){padding-bottom:1rem}.timeline>div:not(:last-child):before{content:"";background:var(--color-secondary);width:2px;height:100%;position:absolute;top:1rem;left:-15px}.timeline>div:not(:only-child):after{content:"";background:var(--color-secondary);border:2px solid var(--color-background);border-radius:50%;width:8px;height:8px;position:absolute;top:.6rem;left:-20px}@media print,(width>=48em){h3{text-align:right;margin-bottom:inherit}.masthead{text-align:inherit}.masthead>*,section{grid-column:content}.masthead img{grid-area:span 2/side;max-width:100%}section{display:contents}.icon-list{flex-direction:column}.grid-list{grid-template-columns:repeat(auto-fit,minmax(calc(50% - .5em),1fr))}}time+time-duration:before{content:"· "}@media print{time-duration{display:none}}
+          </style>
+        <script type="module">
+            const pluralize = (num, str) => `${num} ${num === 1 ? str : str.concat('s')}`
 
-  --color-background: #ffffff; /* White */
-  --color-muted: #f3f4f5; /* Light Gray 200 */
-  --color-primary: #191e23; /* Dark Gray 900 */
-  --color-secondary: #6c7781; /* Dark Gray 300 */
-  --color-accent: #ffb900; /* Accent Yellow */
-  --color-link: #46b450; /* Accent Green */
+class TimeDuration extends HTMLElement {
+  connectedCallback() {
+    const dates = this.getAttribute('dates')
+    if (!dates) return this.remove()
 
-  --scale-ratio: 1.25;
-  --scale0: 1rem;
-  --scale1: calc(var(--scale0) * var(--scale-ratio));
-  --scale2: calc(var(--scale1) * var(--scale-ratio));
-  --scale3: calc(var(--scale2) * var(--scale-ratio));
-  --scale4: calc(var(--scale3) * var(--scale-ratio));
-  --scale5: calc(var(--scale4) * var(--scale-ratio));
-}
+    const duration = dates.split('|').reduce((acc, _date, i, dates) => {
+      if (i % 2) return acc
+      const [startDate, endDate] = dates.slice(i)
+      return acc + (startDate ? +new Date(endDate || Date.now()) - +new Date(startDate) : 0)
+    }, 0)
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #191e23; /* Dark Gray 900 */
-    --color-muted: #23282d; /* Dark Gray 800 */
-    --color-primary: #fbfbfc; /* Light Gray 100 */
-    --color-secondary: #ccd0d4; /* Light Gray 700 */
+    const diffDate = new Date(duration)
+    const years = diffDate.getFullYear() - 1970
+    const months = diffDate.getMonth()
+    const days = diffDate.getDate() - 1
+
+    const segments = [
+      years && pluralize(years, 'yr'),
+      months && pluralize(months, 'mo'),
+      days && !years && !months && pluralize(days, 'day'),
+    ].filter(Boolean)
+    if (!segments.length) return
+
+    this.textContent = segments.join(' ')
   }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+customElements.define('time-duration', TimeDuration)
 
-html {
-  font-size: 14px;
-}
-
-body {
-  background: var(--color-background);
-  color: var(--color-primary);
-  display: grid;
-  font: 1em/1.5 Lato, sans-serif;
-  gap: 2em;
-  grid-template-columns:
-    [full-start]
-    1fr
-    [main-start side-start]
-    minmax(min-content, 12em)
-    [side-end content-start]
-    minmax(min-content, 36em)
-    [main-end content-end]
-    1fr
-    [full-end];
-  grid-template-rows: auto [content] 0;
-  margin-bottom: 4em;
-}
-
-body::before {
-  content: '';
-  grid-column: full;
-  grid-row: content;
-}
-
-ol,
-ul {
-  padding-left: 1em;
-}
-
-:not(.icon-list, .tag-list) > li + li {
-  margin-top: 0.4em;
-}
-
-li::marker,
-.network {
-  color: var(--color-secondary);
-}
-
-a {
-  color: var(--color-link);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-a:focus,
-a:hover {
-  color: var(--color-accent);
-}
-
-h1,
-h2,
-h3,
-h5 {
-  font-weight: normal;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: var(--scale5);
-}
-
-h2 {
-  color: var(--color-secondary);
-  font-size: var(--scale4);
-}
-
-h3 {
-  color: var(--color-accent);
-  font-size: var(--scale3);
-  grid-column: side;
-  margin-bottom: 1rem;
-}
-
-h4 {
-  font-size: var(--scale2);
-}
-
-h5 {
-  font-size: var(--scale1);
-}
-
-h6 {
-  font-size: var(--scale0);
-}
-
-blockquote {
-  border-left: 0.2em solid var(--color-muted);
-  padding-left: 1em;
-}
-
-cite {
-  color: var(--color-secondary);
-  font-style: inherit;
-}
-
-cite::before {
-  content: '— ';
-}
-
-svg {
-  margin-right: 0.2em;
-  vertical-align: -0.2em;
-}
-
-.masthead {
-  background: var(--color-muted);
-  display: inherit;
-  gap: inherit;
-  grid-column: full;
-  grid-template-columns: inherit;
-  padding: 4em 0;
-  text-align: center;
-}
-
-.masthead > *,
-section {
-  grid-column: main;
-}
-
-.masthead > img {
-  border-radius: 50%;
-  margin: 0 auto;
-  max-width: 12em;
-}
-
-article > * + *,
-blockquote > * + * {
-  margin-top: 0.6em;
-}
-
-.meta {
-  color: var(--color-secondary);
-}
-
-.stack {
-  display: grid;
-  gap: 1.5em;
-}
-
-.icon-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em 1em;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-}
-
-.grid-list {
-  display: grid;
-  gap: 1em;
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em;
-  list-style: none;
-  padding: 0;
-}
-
-.tag-list > li {
-  background: var(--color-muted);
-  border-radius: 0.2em;
-  padding: 0.2em 0.6em;
-}
-
-.bullet-item:not(:first-child)::before {
-  content: '· ';
-  margin: 0 0.2em;
-}
-
-@media print, (min-width: 48em) {
-  h3 {
-    text-align: right;
-    margin-bottom: inherit;
-  }
-
-  .masthead {
-    text-align: inherit;
-  }
-
-  .masthead > *,
-  section {
-    grid-column: content;
-  }
-
-  .masthead img {
-    grid-column: side;
-    grid-row: span 2;
-    max-width: 100%;
-  }
-
-  section {
-    display: contents;
-  }
-
-  .icon-list {
-    flex-direction: column;
-  }
-
-  .grid-list {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(calc((100% - 1em) / 2), 1fr)
-    );
-  }
-}
-</style>
-  </head>
-  <body>
-      <header class="masthead">
-          <img src="" alt="">
-        <div>
-            <h1>John Mikael Gundersen</h1>
-            <h2>Tech lead | Developer</h2>
-        </div>
-          <article>
-            <p>Tech lead with a foucs on quality and best practices. Has worked within a variety of domains, such as highly sensitive healthcare applications and large-scale banking systems.</p>
-          </article>
-        <ul class="icon-list">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Oslo, NO
-              </li>
+          </script>
+      </head>
+      <body>
+        
+    <header class="masthead">
+      
+      <div><h1>John Mikael Lindbakk</h1> <h2>Senior backend developer | Tech lead</h2></div>
+      <article><p>Senior backend developer and tech lead who builds robust, maintainable software. Cares about architecture that can evolve, teams that can sustain a pace, and code the next person can actually read. More than 13 years across healthcare, banking and insurance, and since 2023 as a consultant. Does open source and public speaking.</p></article>
+      <ul class="icon-list">
+        
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Oslo, Norway
+            </li>
+          
+        
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <a href="mailto:john@jmgundersen.com">john@jmgundersen.com</a>
+              <a href="mailto:john@lindbakk.com">john@lindbakk.com</a>
             </li>
+          
+        
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> <a href="https://lindbakk.com">lindbakk.com</a></li>
+        
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              <a href="https://jmgundersen.com">jmgundersen.com</a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> <a href="https://github.com/atomfinger/">atomfinger</a>
+              <span class="network">(GitHub)</span>
             </li>
+          
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <a href="https://github.com/atomfinger/">atomfinger</a>
-                <span class="network">(GitHub)</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg> <a href="https://www.linkedin.com/in/john-mikael-gundersen/">john-mikael-gundersen</a>
+              <span class="network">(LinkedIn)</span>
             </li>
-        </ul>
-      </header>
-
+          
+      </ul>
+    </header>
+   
       <section id="work">
         <h3>Work</h3>
         <div class="stack">
-            <article>
-              <header>
-                <h4>Tech Lead</h4>
-                <div class="meta">
-                  <div>
-                    <strong><a href="https://protectorforsikring.no/">Protector</a></strong>
+          
+              <article>
+                <header>
+                  <h4>Senior Consultant</h4>
+                  <div class="meta">
+                    
+                            <div>
+                              <strong><a href="https://www.bspoke.no/">bspoke</a></strong>
+                            </div>
+                            <div><time datetime="2023-05-01">May 2023</time> – Present <time-duration dates="2023-05-01|"></time-duration></div>
+                            <div>Oslo, Norway</div>
+                          
                   </div>
-                  <div>
-                    <time datetime="2020-12-01">Dec 2020</time> –
-                    Present
-                  </div>
-                    <div>Oslo, Norway</div>
+                </header>
+                <div class="timeline">
+                  
+                      <div>
+                        
+                        <p>Consulting as a senior backend developer, architect and tech lead in client teams, across logistics, finance, public health and telecom.</p>
+                        
+                            <ul>
+                              <li><p>Architect on a greenfield logistics platform: a modular monolith built with Domain-Driven Design, event sourcing and event-driven integration, delivered by up to three teams</p></li><li><p>Team lead and tech lead for the core credit-card systems at a large Nordic IT services company, where I set the test strategy, introduced contract testing and took part in the PCI audit</p></li><li><p>Architect for a public health institute's move to a new Azure and Kubernetes platform</p></li><li><p>Brought in at the end of a critical telecom infrastructure project, after its two original developers had left, to do a security audit, fix the remaining bugs and bring it to the finish line</p></li><li><p>Developer on a restaurant ordering platform, building integrations with point-of-sale systems</p></li><li><p>Mentored developers, gave internal talks and held technical interviews</p></li>
+                            </ul>
+                          
+                      </div>
+                    
                 </div>
-              </header>
-                <p>Currently helping the company by improving development processes</p>
-                <ul>
-                    <li><p>Built the initialiser which serves as the golden standard within the organisation while also being the fundation of any new application</p></li>
-                    <li><p>Created the system that allows for efficient risk analysis for our reinsurance which can potentially save the business millions in years to come</p></li>
-                    <li><p>Headed a project which aimed at geolocating risks in the UK where we ended up geolocating +90% of the UK portfolio</p></li>
-                    <li><p>Headed the adoption of various technologies and practices: OpenAPI, Unit, system and integration testing, Static analysis tools such as SonarCloud, Created the post-mortem process</p></li>
-                    <li><p>Authored developer guidelines. Created the first pipeline implementation for GitHub workflow</p></li>
-                    <li><p>Been part of most major technology decisions taken since I started</p></li>
-                </ul>
-            </article>
-            <article>
-              <header>
-                <h4>Senior Consultant</h4>
-                <div class="meta">
-                  <div>
-                    <strong><a href="https://www.tietoevry.com/">TietoEvry</a></strong>
+              </article>
+            
+              <article>
+                <header>
+                  <h4>Tech Lead</h4>
+                  <div class="meta">
+                    
+                            <div>
+                              <strong><a href="https://protectorforsikring.no/">Protector Forsikring</a></strong>
+                            </div>
+                            <div><time datetime="2020-12-01">Dec 2020</time> – <time datetime="2023-05-31">May 2023</time> <time-duration dates="2020-12-01|2023-05-31"></time-duration></div>
+                            <div>Oslo, Norway</div>
+                          
                   </div>
-                  <div>
-                    <time datetime="2018-05-01">May 2018</time> –
-                    <time datetime="2020-11-30">Nov 2020</time>
-                  </div>
-                    <div>Oslo, Norway</div>
+                </header>
+                <div class="timeline">
+                  
+                      <div>
+                        
+                        <p>Improved how the developers worked: architecture, test strategy, CI/CD and coaching.</p>
+                        
+                            <ul>
+                              <li><p>Tech lead across several teams, responsible for architecture, coaching and how the developers worked day to day</p></li><li><p>Owned the test strategy and the CI/CD pipelines, including the move from TeamCity to GitHub Actions</p></li><li><p>Introduced practices that stuck: post-incident reviews, Architecture Decision Records, self-updating dependencies and DORA metrics</p></li><li><p>Built an initialiser that generates production-ready services, which became the foundation of every new application</p></li><li><p>Replaced authorisation logic scattered across codebases with central policies and audit logging</p></li><li><p>Led a project that geolocated more than 90% of the insured buildings in the UK, and built the reinsurance application used for risk analysis</p></li><li><p>Took part in most major technology decisions during my time there</p></li>
+                            </ul>
+                          
+                      </div>
+                    
                 </div>
-              </header>
-                <p>Maintained and created core solutions for major nordic banks.</p>
-                <ul>
-                    <li><p>Made and maintained core web systems for multiple banks</p></li>
-                    <li><p>Created new systems for integration testing and improved CI/CD pipelines</p></li>
-                    <li><p>Authored developer guidelines for a cleaner and more maintainable codebase</p></li>
-                    <li><p>Was a team lead managing the team responsible for our PCI compliant systems</p></li>
-                    <li><p>Was a project architect that guided new banks, while being responsible for the technical aspect of the project</p></li>
-                    <li><p>Worked closely with partners in India</p></li>
-                </ul>
-            </article>
-            <article>
-              <header>
-                <h4>Senior system developer</h4>
-                <div class="meta">
-                  <div>
-                    <strong><a href="https://www.aspit.no/">Aspit</a></strong>
+              </article>
+            
+              <article>
+                <header>
+                  <h4>Senior Consultant</h4>
+                  <div class="meta">
+                    
+                            <div>
+                              <strong><a href="https://www.tietoevry.com/">TietoEvry</a></strong>
+                            </div>
+                            <div><time datetime="2018-05-01">May 2018</time> – <time datetime="2020-11-30">Nov 2020</time> <time-duration dates="2018-05-01|2020-11-30"></time-duration></div>
+                            <div>Oslo, Norway</div>
+                          
                   </div>
-                  <div>
-                    <time datetime="2013-09-01">Sep 2013</time> –
-                    <time datetime="2018-05-01">May 2018</time>
-                  </div>
-                    <div>Seljord, Norway</div>
+                </header>
+                <div class="timeline">
+                  
+                      <div>
+                        
+                        <p>Maintained and created core solutions for major Nordic banks.</p>
+                        
+                            <ul>
+                              <li><p>Built and maintained core backend systems for multiple banks: reporting, integrations and a generic changelog</p></li><li><p>Created automated integration testing that cut a week-long manual test of a bank's core systems to 15 minutes, and improved CI/CD pipelines</p></li><li><p>Authored developer guidelines for a cleaner and more maintainable codebase</p></li><li><p>Team lead for the team responsible for our PCI compliant systems</p></li><li><p>Project architect for new banks joining the platform, responsible for the technical side from sale to delivery</p></li><li><p>Worked closely with partners in India</p></li>
+                            </ul>
+                          
+                      </div>
+                    
                 </div>
-              </header>
-                <p>Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.</p>
-                <ul>
-                    <li><p>Was responsible for the development of the core product</p></li>
-                    <li><p>Worked closely with the business by planning and implementing new features</p></li>
-                    <li><p>Worked closely with an outsourcing team in Vietnam</p></li>
-                </ul>
-            </article>
+              </article>
+            
+              <article>
+                <header>
+                  <h4>System Developer → Senior System Developer</h4>
+                  <div class="meta">
+                    
+                            <div>
+                              <strong><a href="https://www.aspit.no/">Aspit</a></strong>
+                            </div>
+                            <div><time datetime="2013-09-01">Sep 2013</time> – <time datetime="2018-04-30">Apr 2018</time> <time-duration dates="2013-09-01|2018-04-30"></time-duration></div>
+                            <div>Seljord, Norway</div>
+                          
+                  </div>
+                </header>
+                <div class="timeline">
+                  
+                      <div>
+                        
+                        <p>Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer and was eventually promoted to team lead.</p>
+                        
+                            <ul>
+                              <li><p>Responsible for the development of the core product, an electronic health record system</p></li><li><p>Team lead: estimated, planned and followed up projects, and gathered requirements from customers</p></li><li><p>Built integrations with payment terminals, accounting systems and video chat, and a system for migrating customers between vendors</p></li><li><p>Worked closely with the business by planning and implementing new features</p></li><li><p>Worked closely with an outsourcing team in Vietnam, and lived there for a few months to do it</p></li>
+                            </ul>
+                          
+                      </div>
+                    
+                </div>
+              </article>
+            
         </div>
       </section>
+      
       <section id="education">
         <h3>Education</h3>
         <div class="stack">
-            <article>
-              <header>
-                <h4><a href="https://www.aber.ac.uk/en/">Aberystwyth University</a></h4>
-                <div class="meta">
-                    <strong>Computer Science</strong>
-                  <div>
-                    <time datetime="2010-08-01">Aug 2010</time> –
-                    <time datetime="2014-05-01">May 2014</time>
+          
+              <article>
+                <header>
+                  <h4><a href="https://www.aber.ac.uk/en/">Aberystwyth University</a></h4>
+                  <div class="meta">
+                    <div>Bachelor of science in <strong>Computer Science</strong></div>
+                    <div><time datetime="2010-08-01">Aug 2010</time> – <time datetime="2013-06-01">Jun 2013</time> <time-duration dates="2010-08-01|2013-06-01"></time-duration></div>
                   </div>
-                </div>
-              </header>
-                <p>Bachelor of science</p>
-                <h5>Courses</h5>
-                <ul>
-                    <li><p>CS38010 - Space Robotics</p></li>
-                    <li><p>CS36410 - Intelligent Robotics</p></li>
-                    <li><p>CS38110 - Open Source Development Issues</p></li>
-                    <li><p>CS31310 - Agile Methodologies</p></li>
-                </ul>
-            </article>
+                </header>
+                
+                    <h5>Courses</h5>
+                    <ul>
+                      <li><p>CS38010 - Space Robotics</p></li><li><p>CS36410 - Intelligent Robotics</p></li><li><p>CS38110 - Open Source Development Issues</p></li><li><p>CS31310 - Agile Methodologies</p></li>
+                    </ul>
+                  
+              </article>
+            
         </div>
       </section>
+    
+        
       <section id="projects">
         <h3>Projects</h3>
         <div class="stack">
-            <article>
-              <header>
-                <h4><a href="https://github.com/atomfinger/toUUID">toUUID</a></h4>
-                <div class="meta">
-                  <div>
+          
+              <article>
+                <header>
+                  <h4><a href="https://gaseto.hexdocs.pm/">Gaseto</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    <div><time datetime="2025-08-01">Aug 2025</time> – Present <time-duration dates="2025-08-01|"></time-duration></div>
+                    
                   </div>
-                  <div>
-                    <time datetime="2020-10-09">Oct 2020</time> –
-                    Present
+                </header>
+                <p>A Gleam implementation of PASETO (Platform-Agnostic SEcurity TOkens), a safer alternative to JWT. Supports v3 and v4 local and public tokens, is verified against the official test vectors, and comes with gaseto_http for using it over HTTP.</p>
+                
+                
+                    <ul class="tag-list">
+                      <li>gleam</li><li>library</li><li>security</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://nomeatproxy.com/">No Meat Proxy</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    
+                    
                   </div>
-                </div>
-              </header>
+                </header>
+                <p>A simple website showcasing how to (not) use AI when working with other people.</p>
+                
+                
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://surtoget.no/">Surtoget</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    
+                    
+                  </div>
+                </header>
+                <p>A public tool that exposes systemic delay patterns in the Norwegian rail network through open data — because the official statistics don't tell the full story.</p>
+                
+                
+                    <ul class="tag-list">
+                      <li>gleam</li><li>erlang/otp</li><li>open data</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://atomfinger.github.io/brunost/">Brunost</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    
+                    
+                  </div>
+                </header>
+                <p>A programming language built for Norwegian speakers — using Nynorsk keywords (forKvart, prøv, gjevTilbake) so code reads naturally in the language you think in. Built in Zig, it compiles to native binaries and WebAssembly.</p>
+                
+                
+                    <ul class="tag-list">
+                      <li>zig</li><li>wasm</li><li>language design</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://atomfinger.github.io/bygg/">Bygg</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    
+                    
+                  </div>
+                </header>
+                <p>Getting started with Gleam is easy. Getting something production ready is less so, regardless of the language. Bygg aims to help developers getting started by generating projects with sensible defaults already configured and ready to go.</p>
+                
+                
+                    <ul class="tag-list">
+                      <li>gleam</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://hexdocs.pm/http_server_mock/">HTTP Mock Server for Gleam</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    
+                    
+                  </div>
+                </header>
+                <p>A WireMock-style HTTP mock server for Gleam integration tests. Start a real HTTP server in your test, tell it what to respond to, make requests against it, and verify what was called — on both Erlang and JavaScript targets.</p>
+                
+                
+                    <ul class="tag-list">
+                      <li>gleam</li><li>library</li><li>testing</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://github.com/atomfinger/toUUID">toUUID</a></h4>
+                  <div class="meta">
+                    <div>
+                      
+                      
+                    </div>
+                    <div><time datetime="2020-10-09">Oct 2020</time> – Present <time-duration dates="2020-10-09|"></time-duration></div>
+                    
+                  </div>
+                </header>
                 <p>A small library that creates human-readable and deterministic UUIDs for testing purposes.</p>
-            </article>
-            <article>
-              <header>
-                <h4><a href="https://github.com/atomfinger/resume">This resume</a></h4>
-                <div class="meta">
-                  <div>
+                
+                
+                    <ul class="tag-list">
+                      <li>Java</li><li>Kotlin</li><li>Testing</li>
+                    </ul>
+                  
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://vimeo.com/1223666800">Gleam and BEAM: Looking beyond the JVM</a></h4>
+                  <div class="meta">
+                    <div>
+                      <strong>Speaker</strong>
+                      at <strong>JavaZone</strong>
+                    </div>
+                    <div><time datetime="2026-09">Sep 2026</time> – Present <time-duration dates="2026-09|"></time-duration></div>
+                    <div>talk</div>
                   </div>
-                  <div>
-                    <time datetime="2020-08-31">Aug 2020</time> –
-                    Present
+                </header>
+                <p>On exploring a different language on a different VM: how Gleam brings a statically-typed, functional, immutable language with no exceptions to the BEAM, where every process is tiny, isolated, communicates via messaging, and embraces &quot;let it crash&quot;.</p>
+                
+                
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://speakerdeck.com/atomfinger/my-advice-to-compsci-graduates">My advice to CompSci graduates</a></h4>
+                  <div class="meta">
+                    <div>
+                      <strong>Speaker</strong>
+                      at <strong>Aberystwyth University</strong>
+                    </div>
+                    <div><time datetime="2026-02">Feb 2026</time> – Present <time-duration dates="2026-02|"></time-duration></div>
+                    <div>talk</div>
                   </div>
-                </div>
-              </header>
-                <p>This resume is more than just a resume. It is fully automated using Github Actions and scripted with Python. It has automated tests. It converts between a bunch of different formats and it auto-deploys to a production-like environment.</p>
-            </article>
+                </header>
+                <p>Here I shared advice for graduates touching on AI, automated testing, legacy code, and the importance of understanding practical implementations of theory and concepts.</p>
+                
+                
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://www.youtube.com/watch?v=gq2-eR10vn8">Riding the Sour Train: Building surtoget.no with Gleam</a></h4>
+                  <div class="meta">
+                    <div>
+                      <strong>Speaker</strong>
+                      at <strong>Gleam Gathering</strong>
+                    </div>
+                    <div><time datetime="2026-02">Feb 2026</time> – Present <time-duration dates="2026-02|"></time-duration></div>
+                    <div>talk</div>
+                  </div>
+                </header>
+                <p>A two-part talk: first on how technical skills can help shed light on real-world societal problems — using surtoget.no as a case study — then on driving correctness through the type system.</p>
+                
+                
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://speakerdeck.com/atomfinger/thinking-architecturally">Thinking Architecturally</a></h4>
+                  <div class="meta">
+                    <div>
+                      <strong>Speaker</strong>
+                      at <strong>bspoke</strong>
+                    </div>
+                    <div><time datetime="2025-05">May 2025</time> – Present <time-duration dates="2025-05|"></time-duration></div>
+                    <div>talk</div>
+                  </div>
+                </header>
+                <p>A talk all about thinking about architecture in terms of dependencies, and how these dependencies connect, but also how the size and complexity of the codebase impacts architecture.</p>
+                
+                
+              </article>
+            
+              <article>
+                <header>
+                  <h4><a href="https://vimeo.com/showcase/11348501/video/1006510177">Modern testing — Test more and better with less friction</a></h4>
+                  <div class="meta">
+                    <div>
+                      <strong>Speaker</strong>
+                      at <strong>JavaZone</strong>
+                    </div>
+                    <div><time datetime="2024-09">Sep 2024</time> – Present <time-duration dates="2024-09|"></time-duration></div>
+                    <div>talk</div>
+                  </div>
+                </header>
+                <p>On writing testable systems and what testability actually means in practice. Demonstrated different approaches to automated testing, including contract and approval testing.</p>
+                
+                
+              </article>
+            
         </div>
       </section>
+      
+      <section id="certificates">
+        <h3>Certificates</h3>
+        <div class="stack">
+          
+              <article>
+                <header>
+                  <h4>Confluent Certified Developer for Apache Kafka</h4>
+                  <div class="meta">
+                    <div>Issued by <strong>Confluent</strong></div> <time datetime="2024-03-01">Mar 2024</time>
+                  </div>
+                </header>
+              </article>
+            
+              <article>
+                <header>
+                  <h4>OWASP course</h4>
+                  <div class="meta">
+                    <div>Issued by <strong>OWASP</strong></div> <time datetime="2021-05-01">May 2021</time>
+                  </div>
+                </header>
+              </article>
+            
+        </div>
+      </section>
+    
+         
       <section id="skills">
         <h3>Skills</h3>
         <div class="grid-list">
-            <div>
+          
+              <div>
                 <h4>Developer</h4>
-                <ul class="tag-list">
-                    <li>Java/Kotlin</li>
-                    <li>C# .NET</li>
-                    <li>Python</li>
-                    <li>Elixir</li>
-                    <li>SQL of various kinds</li>
-                    <li>Microservices</li>
-                    <li>Kafka</li>
-                    <li>Architecture</li>
-                    <li>Contract first</li>
-                    <li>gRPC</li>
-                </ul>
-            </div>
-            <div>
+                
+                    <ul class="tag-list">
+                      <li>Kotlin/Java</li><li>C# .NET</li><li>Gleam and Erlang/OTP</li><li>Python</li><li>SQL of various kinds and MongoDB</li><li>Microservices and modular monoliths</li><li>Kafka and Azure Service Bus</li><li>Architecture and Domain-Driven Design</li><li>Contract first</li><li>gRPC</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
                 <h4>DevOps</h4>
-                <ul class="tag-list">
-                    <li>TeamCity</li>
-                    <li>Jenkins</li>
-                    <li>GitHub Actions</li>
-                    <li>Groovy</li>
-                    <li>Docker</li>
-                    <li>K8s</li>
-                    <li>Swarm</li>
-                    <li>Solution design</li>
-                </ul>
-            </div>
-            <div>
+                
+                    <ul class="tag-list">
+                      <li>GitHub Actions</li><li>TeamCity</li><li>Jenkins</li><li>Docker</li><li>Kubernetes</li><li>Helm and GitOps</li><li>Azure DevOps</li><li>Datadog, Grafana and OpenTelemetry</li><li>Solution design</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
+                <h4>Security</h4>
+                
+                    <ul class="tag-list">
+                      <li>OWASP</li><li>OAuth 2.0</li><li>Open Policy Agent</li><li>PASETO</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
                 <h4>Testing</h4>
-                <ul class="tag-list">
-                    <li>Testcontainers</li>
-                    <li>System tests</li>
-                    <li>Mockserver</li>
-                    <li>Contract testing</li>
-                    <li>Narrow &amp; Wide integration tests</li>
-                    <li>Spock/Junit/Mockito/Nunit/etc</li>
-                </ul>
-            </div>
+                
+                    <ul class="tag-list">
+                      <li>Testcontainers</li><li>System tests</li><li>Mockserver</li><li>Contract testing</li><li>Narrow & Wide integration tests</li><li>Spock/Junit/Mockito/Nunit/etc</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
+                <h4>AI-assisted development</h4>
+                
+                    <ul class="tag-list">
+                      <li>Claude Code</li><li>Codex</li><li>Gemini CLI</li>
+                    </ul>
+                  
+              </div>
+            
         </div>
       </section>
+     
       <section id="languages">
         <h3>Languages</h3>
         <div class="grid-list">
-            <div>
-                <h4>English</h4>
-              Native speaker
-            </div>
-            <div>
-                <h4>Norwegian</h4>
-              Native speaker
-            </div>
+          <div><h4>English</h4> Fluent</div><div><h4>Norwegian</h4> Native speaker</div>
         </div>
       </section>
+    
+        
       <section id="interests">
         <h3>Interests</h3>
         <div class="grid-list">
-            <div>
+          
+              <div>
                 <h4>Stuff I like in general</h4>
-                <ul class="tag-list">
-                    <li>Dungeon &amp; Dragons</li>
-                    <li>Headphones (Good audio)</li>
-                    <li>My dog</li>
-                    <li>Discworld</li>
-                    <li>Whiskey</li>
-                </ul>
-            </div>
-            <div>
+                
+                    <ul class="tag-list">
+                      <li>Dungeon & Dragons</li><li>Headphones (Good audio)</li><li>My dog</li><li>Discworld</li><li>Whiskey</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
                 <h4>Shows I like</h4>
-                <ul class="tag-list">
-                    <li>Battlestar Galactica</li>
-                    <li>Firefly</li>
-                    <li>Red Dwarf</li>
-                    <li>Doctor Who</li>
-                </ul>
-            </div>
-            <div>
+                
+                    <ul class="tag-list">
+                      <li>Battlestar Galactica</li><li>Firefly</li><li>Red Dwarf</li><li>Doctor Who</li>
+                    </ul>
+                  
+              </div>
+            
+              <div>
                 <h4>Developer books I recommend</h4>
-                <ul class="tag-list">
-                    <li>Clean Series</li>
-                    <li>Pragmatic Programmer</li>
-                    <li>The Phoenix Project/The Unicorn Project</li>
-                    <li>The Art of Unit Testing</li>
-                    <li>The Software Craftsman</li>
-                    <li>Working effectively with legacy code</li>
-                </ul>
-            </div>
+                
+                    <ul class="tag-list">
+                      <li>Clean Series</li><li>Pragmatic Programmer</li><li>The Phoenix Project/The Unicorn Project</li><li>The Art of Unit Testing</li><li>The Software Craftsman</li><li>Working effectively with legacy code</li>
+                    </ul>
+                  
+              </div>
+            
         </div>
       </section>
-  </body>
-</html>
+     
+      </body>
+    </html>

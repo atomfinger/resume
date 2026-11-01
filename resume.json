@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
-    "name": "John Mikael Gundersen",
-    "label": "Tech lead | Developer",
+    "name": "John Mikael Lindbakk",
+    "label": "Senior backend developer | Tech lead",
     "image": "",
-    "email": "john@jmgundersen.com",
-    "url": "https://jmgundersen.com",
-    "summary": "Tech lead with a foucs on quality and best practices. Has worked within a variety of domains, such as highly sensitive healthcare applications and large-scale banking systems.",
+    "email": "john@lindbakk.com",
+    "url": "https://lindbakk.com",
+    "summary": "Senior backend developer and tech lead who builds robust, maintainable software. Cares about architecture that can evolve, teams that can sustain a pace, and code the next person can actually read. More than 13 years across healthcare, banking and insurance, and since 2023 as a consultant. Does open source and public speaking.",
     "location": {
       "city": "Oslo",
       "countryCode": "NO"
@@ -16,24 +16,173 @@
         "network": "GitHub",
         "username": "atomfinger",
         "url": "https://github.com/atomfinger/"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "john-mikael-gundersen",
+        "url": "https://www.linkedin.com/in/john-mikael-gundersen/"
       }
     ]
   },
   "work": [
     {
-      "name": "Protector",
+      "name": "bspoke",
+      "location": "Oslo, Norway",
+      "position": "Senior Consultant",
+      "url": "https://www.bspoke.no/",
+      "startDate": "2023-05-01",
+      "summary": "Consulting as a senior backend developer, architect and tech lead in client teams, across logistics, finance, public health and telecom.",
+      "highlights": [
+        "Architect on a greenfield logistics platform: a modular monolith built with Domain-Driven Design, event sourcing and event-driven integration, delivered by up to three teams",
+        "Team lead and tech lead for the core credit-card systems at a large Nordic IT services company, where I set the test strategy, introduced contract testing and took part in the PCI audit",
+        "Architect for a public health institute's move to a new Azure and Kubernetes platform",
+        "Brought in at the end of a critical telecom infrastructure project, after its two original developers had left, to do a security audit, fix the remaining bugs and bring it to the finish line",
+        "Developer on a restaurant ordering platform, building integrations with point-of-sale systems",
+        "Mentored developers, gave internal talks and held technical interviews"
+      ],
+      "projects": [
+        {
+          "name": "Greenfield logistics platform",
+          "entity": "A software company serving the largest hauliers in the Nordics",
+          "roles": [
+            "Architect",
+            "Developer"
+          ],
+          "startDate": "2024-10",
+          "description": "A transport and logistics system built from scratch: ordering transport, automatic route planning, trip administration and more. A modular monolith with about 290 API endpoints, built by up to three teams of 5–6 developers, under SLA requirements.",
+          "highlights": [
+            "Introduced Domain-Driven Design and a modular monolith so several teams can work in parallel in one codebase without the overhead of a distributed architecture.",
+            "Designed event-driven integration with Azure Service Bus and event sourcing, plus a distributed cache in Hazelcast, and defined the standards for API design (OpenAPI) and automated testing with approval tests and TestContainers.",
+            "Designed schema management and database migration in MongoDB, and the asynchronous integration with transactional outbox, idempotent consumers, retries and dead-letter queues.",
+            "Technical contact for the customers, from requirements to integration design. Mentored the team, gave an internal talk on Domain-Driven Design and introduced ADRs.",
+            "Largest single contributor: about a third of the code and pull requests, more than half of the database migrations and most of the technical documentation. Also builds frontend in React and TypeScript.",
+            "Owns the solution in production, with GitOps deployment to Kubernetes through Azure DevOps and Helm, monitoring in Datadog, and a record of handling production incidents from debugging to data repair."
+          ],
+          "keywords": [
+            "Kotlin",
+            "Spring Boot",
+            "MongoDB",
+            "Hazelcast",
+            "Azure Service Bus",
+            "Kubernetes",
+            "Helm",
+            "Datadog",
+            "React",
+            "TypeScript",
+            "Claude Code"
+          ]
+        },
+        {
+          "name": "Location management for 5G sites",
+          "entity": "A telecom infrastructure company",
+          "roles": [
+            "Senior Developer"
+          ],
+          "startDate": "2024-09",
+          "endDate": "2024-09",
+          "description": "A system managing the locations of 5G stations around the country. It counts as critical infrastructure, and the data must stay in Norway, so security requirements were high. I was brought in at the end of the project: the two developers who built it had left, and the company needed someone to bring it to the finish line.",
+          "highlights": [
+            "Took over a codebase I hadn't written, after its two original developers had left, and brought it to the finish line.",
+            "Did a security audit of the code, given the high security requirements of critical infrastructure.",
+            "Fixed the few remaining bugs.",
+            "Implemented a database migration."
+          ],
+          "keywords": [
+            "C#",
+            ".NET Core",
+            "MSSQL",
+            "GitHub"
+          ]
+        },
+        {
+          "name": "Shared components on a new platform",
+          "entity": "A Norwegian public health institute",
+          "roles": [
+            "Architect",
+            "System Developer"
+          ],
+          "startDate": "2024-05",
+          "endDate": "2024-09",
+          "description": "The institute was building a new platform on Azure and Kubernetes and owned shared components used across its solutions, including its national identity integration.",
+          "highlights": [
+            "As architect I assessed solution proposals and transition architectures for the move, identified critical dependencies to avoid tightly coupled designs, and was a sparring partner for their solution architects.",
+            "As developer I worked on the shared components and on preparing for the migration, and on the link between the institute's solutions and health data."
+          ],
+          "keywords": [
+            ".NET",
+            "C#",
+            "Azure",
+            "Azure DevOps",
+            "Kubernetes",
+            "REST"
+          ]
+        },
+        {
+          "name": "Restaurant ordering platform",
+          "entity": "A food-ordering software company",
+          "roles": [
+            "Developer"
+          ],
+          "startDate": "2024-04",
+          "endDate": "2024-06",
+          "description": "An ordering system for restaurants and other eateries that unifies web ordering, take-away, dine-in, catering, QR ordering and infection tracing, with integrations to several point-of-sale systems. I designed the architecture of the integrations and built them, plus the frontend needed to administer them.",
+          "keywords": [
+            ".NET Core",
+            "C#",
+            "EF Core",
+            "Blazor",
+            "Azure Pipelines"
+          ]
+        },
+        {
+          "name": "Core credit-card systems",
+          "entity": "A large Nordic IT services company",
+          "roles": [
+            "Team Lead",
+            "Tech Lead",
+            "Developer"
+          ],
+          "startDate": "2023-05",
+          "endDate": "2024-04",
+          "description": "The systems that run credit cards: transactions, interest calculation and account balances, under high transaction volumes with peaks towards Christmas. 10–12 developers, 30–40 microservices, many of the integrations SOAP services with XML.",
+          "highlights": [
+            "Team lead for the team owning the general ledger, bonus and customer data, and responsible for the company's PCI audit. Trained junior developers, communicated with stakeholders and planned quarterly goals, while still developing, pair programming and reviewing code.",
+            "As tech lead I set the test strategy: contract testing for microservices, plus TestContainers, MockServer and OpenAPI compatibility checks.",
+            "Started a regular workshop for developers across teams, led a small project introducing Domain-Driven Design and Clean Architecture, introduced a post-incident process and specified event-driven deletion routines.",
+            "Standardised on transactional outbox, idempotent consumers and retries. Wrote Helm charts and deployed to OpenShift, with Grafana and Kibana for monitoring. Held technical interviews for new hires."
+          ],
+          "keywords": [
+            "Kotlin",
+            "Java",
+            "Spring Boot",
+            "Oracle DB",
+            "OpenShift",
+            "Helm",
+            "Contract testing",
+            "Clean architecture",
+            "DDD",
+            "OWASP",
+            "Grafana"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Protector Forsikring",
       "location": "Oslo, Norway",
       "position": "Tech Lead",
       "url": "https://protectorforsikring.no/",
       "startDate": "2020-12-01",
-      "summary": "Currently helping the company by improving development processes",
+      "endDate": "2023-05-31",
+      "summary": "Improved how the developers worked: architecture, test strategy, CI/CD and coaching.",
       "highlights": [
-        "Built the initialiser which serves as the golden standard within the organisation while also being the fundation of any new application",
-        "Created the system that allows for efficient risk analysis for our reinsurance which can potentially save the business millions in years to come",
-        "Headed a project which aimed at geolocating risks in the UK where we ended up geolocating +90% of the UK portfolio",
-        "Headed the adoption of various technologies and practices: OpenAPI, Unit, system and integration testing, Static analysis tools such as SonarCloud, Created the post-mortem process",
-        "Authored developer guidelines. Created the first pipeline implementation for GitHub workflow",
-        "Been part of most major technology decisions taken since I started"
+        "Tech lead across several teams, responsible for architecture, coaching and how the developers worked day to day",
+        "Owned the test strategy and the CI/CD pipelines, including the move from TeamCity to GitHub Actions",
+        "Introduced practices that stuck: post-incident reviews, Architecture Decision Records, self-updating dependencies and DORA metrics",
+        "Built an initialiser that generates production-ready services, which became the foundation of every new application",
+        "Replaced authorisation logic scattered across codebases with central policies and audit logging",
+        "Led a project that geolocated more than 90% of the insured buildings in the UK, and built the reinsurance application used for risk analysis",
+        "Took part in most major technology decisions during my time there"
       ]
     },
     {
@@ -43,28 +192,30 @@
       "url": "https://www.tietoevry.com/",
       "startDate": "2018-05-01",
       "endDate": "2020-11-30",
-      "summary": "Maintained and created core solutions for major nordic banks.",
+      "summary": "Maintained and created core solutions for major Nordic banks.",
       "highlights": [
-        "Made and maintained core web systems for multiple banks",
-        "Created new systems for integration testing and improved CI/CD pipelines",
+        "Built and maintained core backend systems for multiple banks: reporting, integrations and a generic changelog",
+        "Created automated integration testing that cut a week-long manual test of a bank's core systems to 15 minutes, and improved CI/CD pipelines",
         "Authored developer guidelines for a cleaner and more maintainable codebase",
-        "Was a team lead managing the team responsible for our PCI compliant systems",
-        "Was a project architect that guided new banks, while being responsible for the technical aspect of the project",
+        "Team lead for the team responsible for our PCI compliant systems",
+        "Project architect for new banks joining the platform, responsible for the technical side from sale to delivery",
         "Worked closely with partners in India"
       ]
     },
     {
       "name": "Aspit",
       "location": "Seljord, Norway",
-      "position": "Senior system developer",
+      "position": "System Developer → Senior System Developer",
       "url": "https://www.aspit.no/",
       "startDate": "2013-09-01",
-      "endDate": "2018-05-01",
-      "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer for the first 3 years, eventually got promoted to the position of a team lead.",
+      "endDate": "2018-04-30",
+      "summary": "Made electronic health record systems for the privatized healthcare sector in Norway. Started as a system developer and was eventually promoted to team lead.",
       "highlights": [
-        "Was responsible for the development of the core product",
+        "Responsible for the development of the core product, an electronic health record system",
+        "Team lead: estimated, planned and followed up projects, and gathered requirements from customers",
+        "Built integrations with payment terminals, accounting systems and video chat, and a system for migrating customers between vendors",
         "Worked closely with the business by planning and implementing new features",
-        "Worked closely with an outsourcing team in Vietnam"
+        "Worked closely with an outsourcing team in Vietnam, and lived there for a few months to do it"
       ]
     }
   ],
@@ -75,7 +226,7 @@
       "area": "Computer Science",
       "studyType": "Bachelor of science",
       "startDate": "2010-08-01",
-      "endDate": "2014-05-01",
+      "endDate": "2013-06-01",
       "courses": [
         "CS38010 - Space Robotics",
         "CS36410 - Intelligent Robotics",
@@ -84,18 +235,30 @@
       ]
     }
   ],
+  "certificates": [
+    {
+      "name": "Confluent Certified Developer for Apache Kafka",
+      "issuer": "Confluent",
+      "date": "2024-03-01"
+    },
+    {
+      "name": "OWASP course",
+      "issuer": "OWASP",
+      "date": "2021-05-01"
+    }
+  ],
   "skills": [
     {
       "name": "Developer",
       "keywords": [
-        "Java/Kotlin",
+        "Kotlin/Java",
         "C# .NET",
+        "Gleam and Erlang/OTP",
         "Python",
-        "Elixir",
-        "SQL of various kinds",
-        "Microservices",
-        "Kafka",
-        "Architecture",
+        "SQL of various kinds and MongoDB",
+        "Microservices and modular monoliths",
+        "Kafka and Azure Service Bus",
+        "Architecture and Domain-Driven Design",
         "Contract first",
         "gRPC"
       ]
@@ -103,14 +266,24 @@
     {
       "name": "DevOps",
       "keywords": [
+        "GitHub Actions",
         "TeamCity",
         "Jenkins",
-        "GitHub Actions",
-        "Groovy",
         "Docker",
-        "K8s",
-        "Swarm",
+        "Kubernetes",
+        "Helm and GitOps",
+        "Azure DevOps",
+        "Datadog, Grafana and OpenTelemetry",
         "Solution design"
+      ]
+    },
+    {
+      "name": "Security",
+      "keywords": [
+        "OWASP",
+        "OAuth 2.0",
+        "Open Policy Agent",
+        "PASETO"
       ]
     },
     {
@@ -123,12 +296,20 @@
         "Narrow & Wide integration tests",
         "Spock/Junit/Mockito/Nunit/etc"
       ]
+    },
+    {
+      "name": "AI-assisted development",
+      "keywords": [
+        "Claude Code",
+        "Codex",
+        "Gemini CLI"
+      ]
     }
   ],
   "languages": [
     {
       "language": "English",
-      "fluency": "Native speaker"
+      "fluency": "Fluent"
     },
     {
       "language": "Norwegian",
@@ -169,6 +350,85 @@
   ],
   "projects": [
     {
+      "name": "Gaseto",
+      "slug": "gaseto",
+      "tagline": "PASETO security tokens for Gleam.",
+      "description": "A Gleam implementation of PASETO (Platform-Agnostic SEcurity TOkens), a safer alternative to JWT. Supports v3 and v4 local and public tokens, is verified against the official test vectors, and comes with gaseto_http for using it over HTTP.",
+      "keywords": [
+        "gleam",
+        "library",
+        "security"
+      ],
+      "image": "gaseto_project.webp",
+      "url": "https://gaseto.hexdocs.pm/",
+      "repository": "https://github.com/atomfinger/gaseto",
+      "startDate": "2025-08-01"
+    },
+    {
+      "name": "No Meat Proxy",
+      "slug": "nomeatproxy",
+      "tagline": "Protest site against anti-social behaviour in the LLM era.",
+      "description": "A simple website showcasing how to (not) use AI when working with other people.",
+      "keywords": [],
+      "image": "no_meat_proxy.webp",
+      "url": "https://nomeatproxy.com/",
+      "repository": "https://github.com/atomfinger/nomeatproxy"
+    },
+    {
+      "name": "Surtoget",
+      "slug": "surtoget",
+      "tagline": "Tracking chronic delays on Norwegian trains.",
+      "description": "A public tool that exposes systemic delay patterns in the Norwegian rail network through open data — because the official statistics don't tell the full story.",
+      "keywords": [
+        "gleam",
+        "erlang/otp",
+        "open data"
+      ],
+      "image": "surtoget_project.webp",
+      "url": "https://surtoget.no/",
+      "repository": "https://github.com/atomfinger/surtoget"
+    },
+    {
+      "name": "Brunost",
+      "slug": "brunost",
+      "tagline": "A programming language with Norwegian syntax.",
+      "description": "A programming language built for Norwegian speakers — using Nynorsk keywords (forKvart, prøv, gjevTilbake) so code reads naturally in the language you think in. Built in Zig, it compiles to native binaries and WebAssembly.",
+      "keywords": [
+        "zig",
+        "wasm",
+        "language design"
+      ],
+      "image": "brunost_project.webp",
+      "url": "https://atomfinger.github.io/brunost/",
+      "repository": "https://github.com/atomfinger/brunost"
+    },
+    {
+      "name": "Bygg",
+      "slug": "bygg",
+      "tagline": "A Gleam project scaffolding tool",
+      "description": "Getting started with Gleam is easy. Getting something production ready is less so, regardless of the language. Bygg aims to help developers getting started by generating projects with sensible defaults already configured and ready to go.",
+      "keywords": [
+        "gleam"
+      ],
+      "image": "bygg_logo.png",
+      "url": "https://atomfinger.github.io/bygg/",
+      "repository": "https://github.com/atomfinger/bygg"
+    },
+    {
+      "name": "HTTP Mock Server for Gleam",
+      "slug": "http_server_mock",
+      "tagline": "A mock server for Gleam supporting Erlang and JavaScript targets",
+      "description": "A WireMock-style HTTP mock server for Gleam integration tests. Start a real HTTP server in your test, tell it what to respond to, make requests against it, and verify what was called — on both Erlang and JavaScript targets.",
+      "keywords": [
+        "gleam",
+        "library",
+        "testing"
+      ],
+      "image": "http_server_mock.webp",
+      "url": "https://hexdocs.pm/http_server_mock/",
+      "repository": "https://github.com/atomfinger/http_server_mock"
+    },
+    {
       "name": "toUUID",
       "url": "https://github.com/atomfinger/toUUID",
       "startDate": "2020-10-09",
@@ -177,18 +437,68 @@
         "Java",
         "Kotlin",
         "Testing"
-      ]
+      ],
+      "repository": "https://github.com/atomfinger/toUUID"
     },
     {
-      "name": "This resume",
-      "url": "https://github.com/atomfinger/resume",
-      "startDate": "2020-08-31",
-      "description": "This resume is more than just a resume. It is fully automated using Github Actions and scripted with Python. It has automated tests. It converts between a bunch of different formats and it auto-deploys to a production-like environment.",
-      "keywords": [
-        "GitHub Actions",
-        "Python",
-        "Automation"
-      ]
+      "name": "Gleam and BEAM: Looking beyond the JVM",
+      "type": "talk",
+      "entity": "JavaZone",
+      "roles": [
+        "Speaker"
+      ],
+      "startDate": "2026-09",
+      "description": "On exploring a different language on a different VM: how Gleam brings a statically-typed, functional, immutable language with no exceptions to the BEAM, where every process is tiny, isolated, communicates via messaging, and embraces \"let it crash\".",
+      "url": "https://vimeo.com/1223666800",
+      "slides": "https://speakerdeck.com/atomfinger/beam-and-gleam-looking-beyond-the-jvm"
+    },
+    {
+      "name": "My advice to CompSci graduates",
+      "type": "talk",
+      "entity": "Aberystwyth University",
+      "roles": [
+        "Speaker"
+      ],
+      "startDate": "2026-02",
+      "description": "Here I shared advice for graduates touching on AI, automated testing, legacy code, and the importance of understanding practical implementations of theory and concepts.",
+      "url": "https://speakerdeck.com/atomfinger/my-advice-to-compsci-graduates",
+      "slides": "https://speakerdeck.com/atomfinger/my-advice-to-compsci-graduates"
+    },
+    {
+      "name": "Riding the Sour Train: Building surtoget.no with Gleam",
+      "type": "talk",
+      "entity": "Gleam Gathering",
+      "roles": [
+        "Speaker"
+      ],
+      "startDate": "2026-02",
+      "description": "A two-part talk: first on how technical skills can help shed light on real-world societal problems — using surtoget.no as a case study — then on driving correctness through the type system.",
+      "url": "https://www.youtube.com/watch?v=gq2-eR10vn8",
+      "slides": "https://speakerdeck.com/atomfinger/riding-the-sour-train-building-surtoget-dot-no-with-gleam"
+    },
+    {
+      "name": "Thinking Architecturally",
+      "type": "talk",
+      "entity": "bspoke",
+      "roles": [
+        "Speaker"
+      ],
+      "startDate": "2025-05",
+      "description": "A talk all about thinking about architecture in terms of dependencies, and how these dependencies connect, but also how the size and complexity of the codebase impacts architecture.",
+      "url": "https://speakerdeck.com/atomfinger/thinking-architecturally",
+      "slides": "https://speakerdeck.com/atomfinger/thinking-architecturally"
+    },
+    {
+      "name": "Modern testing — Test more and better with less friction",
+      "type": "talk",
+      "entity": "JavaZone",
+      "roles": [
+        "Speaker"
+      ],
+      "startDate": "2024-09",
+      "description": "On writing testable systems and what testability actually means in practice. Demonstrated different approaches to automated testing, including contract and approval testing.",
+      "url": "https://vimeo.com/showcase/11348501/video/1006510177",
+      "slides": "https://speakerdeck.com/atomfinger/test-more-and-better-with-less-friction"
     }
   ]
 }

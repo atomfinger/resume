@@ -1,28 +1,45 @@
 !Resume
-schema: https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json
+schema: 
+  https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json
 awards:
 basics: !Basics
-  email: john@jmgundersen.com
+  email: john@lindbakk.com
   image: ''
-  label: Tech lead | Developer
+  label: Senior backend developer | Tech lead
   location: !Location
     address:
     city: Oslo
     country_code: NO
     postal_code:
     region:
-  name: John Mikael Gundersen
+  name: John Mikael Lindbakk
   phone:
   profiles:
   - !Profile
     network: GitHub
     url: https://github.com/atomfinger/
     username: atomfinger
-  summary: Tech lead with a foucs on quality and best practices. Has worked within
-    a variety of domains, such as highly sensitive healthcare applications and large-scale
-    banking systems.
-  url: https://jmgundersen.com
+  - !Profile
+    network: LinkedIn
+    url: https://www.linkedin.com/in/john-mikael-gundersen/
+    username: john-mikael-gundersen
+  summary: Senior backend developer and tech lead who builds robust, 
+    maintainable software. Cares about architecture that can evolve, teams that 
+    can sustain a pace, and code the next person can actually read. More than 13
+    years across healthcare, banking and insurance, and since 2023 as a 
+    consultant. Does open source and public speaking.
+  url: https://lindbakk.com
 certificates:
+- !Certificate
+  date: 2024-03-01 00:00:00
+  issuer: Confluent
+  name: Confluent Certified Developer for Apache Kafka
+  url:
+- !Certificate
+  date: 2021-05-01 00:00:00
+  issuer: OWASP
+  name: OWASP course
+  url:
 education:
 - !Education
   area: Computer Science
@@ -31,7 +48,7 @@ education:
   - CS36410 - Intelligent Robotics
   - CS38110 - Open Source Development Issues
   - CS31310 - Agile Methodologies
-  end_date: '2014-05-01'
+  end_date: '2013-06-01'
   institution: Aberystwyth University
   score:
   start_date: '2010-08-01'
@@ -64,7 +81,7 @@ interests:
   name: Developer books I recommend
 languages:
 - !Language
-  fluency: Native speaker
+  fluency: Fluent
   language: English
 - !Language
   fluency: Native speaker
@@ -72,8 +89,102 @@ languages:
 meta:
 projects:
 - !Project
-  description: A small library that creates human-readable and deterministic UUIDs
-    for testing purposes.
+  description: A Gleam implementation of PASETO (Platform-Agnostic SEcurity 
+    TOkens), a safer alternative to JWT. Supports v3 and v4 local and public 
+    tokens, is verified against the official test vectors, and comes with 
+    gaseto_http for using it over HTTP.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - gleam
+  - library
+  - security
+  name: Gaseto
+  roles:
+  start_date: '2025-08-01'
+  type:
+  url: https://gaseto.hexdocs.pm/
+- !Project
+  description: A simple website showcasing how to (not) use AI when working with
+    other people.
+  end_date:
+  entity:
+  highlights:
+  keywords: []
+  name: No Meat Proxy
+  roles:
+  start_date:
+  type:
+  url: https://nomeatproxy.com/
+- !Project
+  description: A public tool that exposes systemic delay patterns in the 
+    Norwegian rail network through open data — because the official statistics 
+    don't tell the full story.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - gleam
+  - erlang/otp
+  - open data
+  name: Surtoget
+  roles:
+  start_date:
+  type:
+  url: https://surtoget.no/
+- !Project
+  description: A programming language built for Norwegian speakers — using 
+    Nynorsk keywords (forKvart, prøv, gjevTilbake) so code reads naturally in 
+    the language you think in. Built in Zig, it compiles to native binaries and 
+    WebAssembly.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - zig
+  - wasm
+  - language design
+  name: Brunost
+  roles:
+  start_date:
+  type:
+  url: https://atomfinger.github.io/brunost/
+- !Project
+  description: Getting started with Gleam is easy. Getting something production 
+    ready is less so, regardless of the language. Bygg aims to help developers 
+    getting started by generating projects with sensible defaults already 
+    configured and ready to go.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - gleam
+  name: Bygg
+  roles:
+  start_date:
+  type:
+  url: https://atomfinger.github.io/bygg/
+- !Project
+  description: A WireMock-style HTTP mock server for Gleam integration tests. 
+    Start a real HTTP server in your test, tell it what to respond to, make 
+    requests against it, and verify what was called — on both Erlang and 
+    JavaScript targets.
+  end_date:
+  entity:
+  highlights:
+  keywords:
+  - gleam
+  - library
+  - testing
+  name: HTTP Mock Server for Gleam
+  roles:
+  start_date:
+  type:
+  url: https://hexdocs.pm/http_server_mock/
+- !Project
+  description: A small library that creates human-readable and deterministic 
+    UUIDs for testing purposes.
   end_date:
   entity:
   highlights:
@@ -87,50 +198,114 @@ projects:
   type:
   url: https://github.com/atomfinger/toUUID
 - !Project
-  description: This resume is more than just a resume. It is fully automated using
-    Github Actions and scripted with Python. It has automated tests. It converts between
-    a bunch of different formats and it auto-deploys to a production-like environment.
+  description: 'On exploring a different language on a different VM: how Gleam brings
+    a statically-typed, functional, immutable language with no exceptions to the BEAM,
+    where every process is tiny, isolated, communicates via messaging, and embraces
+    "let it crash".'
   end_date:
-  entity:
+  entity: JavaZone
   highlights:
   keywords:
-  - GitHub Actions
-  - Python
-  - Automation
-  name: This resume
+  name: 'Gleam and BEAM: Looking beyond the JVM'
   roles:
-  start_date: '2020-08-31'
-  type:
-  url: https://github.com/atomfinger/resume
+  - Speaker
+  start_date: 2026-09
+  type: talk
+  url: https://vimeo.com/1223666800
+- !Project
+  description: Here I shared advice for graduates touching on AI, automated 
+    testing, legacy code, and the importance of understanding practical 
+    implementations of theory and concepts.
+  end_date:
+  entity: Aberystwyth University
+  highlights:
+  keywords:
+  name: My advice to CompSci graduates
+  roles:
+  - Speaker
+  start_date: 2026-02
+  type: talk
+  url: https://speakerdeck.com/atomfinger/my-advice-to-compsci-graduates
+- !Project
+  description: 'A two-part talk: first on how technical skills can help shed light
+    on real-world societal problems — using surtoget.no as a case study — then on
+    driving correctness through the type system.'
+  end_date:
+  entity: Gleam Gathering
+  highlights:
+  keywords:
+  name: 'Riding the Sour Train: Building surtoget.no with Gleam'
+  roles:
+  - Speaker
+  start_date: 2026-02
+  type: talk
+  url: https://www.youtube.com/watch?v=gq2-eR10vn8
+- !Project
+  description: A talk all about thinking about architecture in terms of 
+    dependencies, and how these dependencies connect, but also how the size and 
+    complexity of the codebase impacts architecture.
+  end_date:
+  entity: bspoke
+  highlights:
+  keywords:
+  name: Thinking Architecturally
+  roles:
+  - Speaker
+  start_date: 2025-05
+  type: talk
+  url: https://speakerdeck.com/atomfinger/thinking-architecturally
+- !Project
+  description: On writing testable systems and what testability actually means 
+    in practice. Demonstrated different approaches to automated testing, 
+    including contract and approval testing.
+  end_date:
+  entity: JavaZone
+  highlights:
+  keywords:
+  name: Modern testing — Test more and better with less friction
+  roles:
+  - Speaker
+  start_date: 2024-09
+  type: talk
+  url: https://vimeo.com/showcase/11348501/video/1006510177
 publications:
 references:
 skills:
 - !Skill
   keywords:
-  - Java/Kotlin
+  - Kotlin/Java
   - C# .NET
+  - Gleam and Erlang/OTP
   - Python
-  - Elixir
-  - SQL of various kinds
-  - Microservices
-  - Kafka
-  - Architecture
+  - SQL of various kinds and MongoDB
+  - Microservices and modular monoliths
+  - Kafka and Azure Service Bus
+  - Architecture and Domain-Driven Design
   - Contract first
   - gRPC
   level:
   name: Developer
 - !Skill
   keywords:
+  - GitHub Actions
   - TeamCity
   - Jenkins
-  - GitHub Actions
-  - Groovy
   - Docker
-  - K8s
-  - Swarm
+  - Kubernetes
+  - Helm and GitOps
+  - Azure DevOps
+  - Datadog, Grafana and OpenTelemetry
   - Solution design
   level:
   name: DevOps
+- !Skill
+  keywords:
+  - OWASP
+  - OAuth 2.0
+  - Open Policy Agent
+  - PASETO
+  level:
+  name: Security
 - !Skill
   keywords:
   - Testcontainers
@@ -141,59 +316,101 @@ skills:
   - Spock/Junit/Mockito/Nunit/etc
   level:
   name: Testing
+- !Skill
+  keywords:
+  - Claude Code
+  - Codex
+  - Gemini CLI
+  level:
+  name: AI-assisted development
 volunteer:
 work:
 - !Work
   description:
   end_date:
   highlights:
-  - Built the initialiser which serves as the golden standard within the organisation
-    while also being the fundation of any new application
-  - Created the system that allows for efficient risk analysis for our reinsurance
-    which can potentially save the business millions in years to come
-  - Headed a project which aimed at geolocating risks in the UK where we ended up
-    geolocating +90% of the UK portfolio
-  - 'Headed the adoption of various technologies and practices: OpenAPI, Unit, system
-    and integration testing, Static analysis tools such as SonarCloud, Created the
-    post-mortem process'
-  - Authored developer guidelines. Created the first pipeline implementation for GitHub
-    workflow
-  - Been part of most major technology decisions taken since I started
+  - 'Architect on a greenfield logistics platform: a modular monolith built with Domain-Driven
+    Design, event sourcing and event-driven integration, delivered by up to three
+    teams'
+  - Team lead and tech lead for the core credit-card systems at a large Nordic 
+    IT services company, where I set the test strategy, introduced contract 
+    testing and took part in the PCI audit
+  - Architect for a public health institute's move to a new Azure and Kubernetes
+    platform
+  - Brought in at the end of a critical telecom infrastructure project, after 
+    its two original developers had left, to do a security audit, fix the 
+    remaining bugs and bring it to the finish line
+  - Developer on a restaurant ordering platform, building integrations with 
+    point-of-sale systems
+  - Mentored developers, gave internal talks and held technical interviews
   location: Oslo, Norway
-  name: Protector
+  name: bspoke
+  position: Senior Consultant
+  start_date: '2023-05-01'
+  summary: Consulting as a senior backend developer, architect and tech lead in 
+    client teams, across logistics, finance, public health and telecom.
+  url: https://www.bspoke.no/
+- !Work
+  description:
+  end_date: '2023-05-31'
+  highlights:
+  - Tech lead across several teams, responsible for architecture, coaching and 
+    how the developers worked day to day
+  - Owned the test strategy and the CI/CD pipelines, including the move from 
+    TeamCity to GitHub Actions
+  - 'Introduced practices that stuck: post-incident reviews, Architecture Decision
+    Records, self-updating dependencies and DORA metrics'
+  - Built an initialiser that generates production-ready services, which became 
+    the foundation of every new application
+  - Replaced authorisation logic scattered across codebases with central 
+    policies and audit logging
+  - Led a project that geolocated more than 90% of the insured buildings in the 
+    UK, and built the reinsurance application used for risk analysis
+  - Took part in most major technology decisions during my time there
+  location: Oslo, Norway
+  name: Protector Forsikring
   position: Tech Lead
   start_date: '2020-12-01'
-  summary: Currently helping the company by improving development processes
+  summary: 'Improved how the developers worked: architecture, test strategy, CI/CD
+    and coaching.'
   url: https://protectorforsikring.no/
 - !Work
   description:
   end_date: '2020-11-30'
   highlights:
-  - Made and maintained core web systems for multiple banks
-  - Created new systems for integration testing and improved CI/CD pipelines
+  - 'Built and maintained core backend systems for multiple banks: reporting, integrations
+    and a generic changelog'
+  - Created automated integration testing that cut a week-long manual test of a 
+    bank's core systems to 15 minutes, and improved CI/CD pipelines
   - Authored developer guidelines for a cleaner and more maintainable codebase
-  - Was a team lead managing the team responsible for our PCI compliant systems
-  - Was a project architect that guided new banks, while being responsible for the
-    technical aspect of the project
+  - Team lead for the team responsible for our PCI compliant systems
+  - Project architect for new banks joining the platform, responsible for the 
+    technical side from sale to delivery
   - Worked closely with partners in India
   location: Oslo, Norway
   name: TietoEvry
   position: Senior Consultant
   start_date: '2018-05-01'
-  summary: Maintained and created core solutions for major nordic banks.
+  summary: Maintained and created core solutions for major Nordic banks.
   url: https://www.tietoevry.com/
 - !Work
   description:
-  end_date: '2018-05-01'
+  end_date: '2018-04-30'
   highlights:
-  - Was responsible for the development of the core product
+  - Responsible for the development of the core product, an electronic health 
+    record system
+  - 'Team lead: estimated, planned and followed up projects, and gathered requirements
+    from customers'
+  - Built integrations with payment terminals, accounting systems and video 
+    chat, and a system for migrating customers between vendors
   - Worked closely with the business by planning and implementing new features
-  - Worked closely with an outsourcing team in Vietnam
+  - Worked closely with an outsourcing team in Vietnam, and lived there for a 
+    few months to do it
   location: Seljord, Norway
   name: Aspit
-  position: Senior system developer
+  position: System Developer → Senior System Developer
   start_date: '2013-09-01'
-  summary: Made electronic health record systems for the privatized healthcare sector
-    in Norway. Started as a system developer for the first 3 years, eventually got
-    promoted to the position of a team lead.
+  summary: Made electronic health record systems for the privatized healthcare 
+    sector in Norway. Started as a system developer and was eventually promoted 
+    to team lead.
   url: https://www.aspit.no/
