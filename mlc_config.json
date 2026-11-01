@@ -1,0 +1,9 @@
+{
+  "ignorePatterns": [
+    { "pattern": "^https://www\\.linkedin\\.com/" },
+    { "pattern": "^https://www\\.npmjs\\.com/" }
+  ],
+  "retryOn429": true,
+  "retryCount": 3,
+  "fallbackRetryDelay": "10s"
+}
