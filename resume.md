@@ -2,7 +2,7 @@
 
 #### Senior backend developer | Tech lead
 
-###### john@lindbakk.com - [https://lindbakk.com](https://lindbakk.com) - [atomfinger@GitHub](https://github.com/atomfinger/) - [john-mikael-gundersen@LinkedIn](https://www.linkedin.com/in/john-mikael-gundersen/)
+###### [https://lindbakk.com](https://lindbakk.com) - [atomfinger@GitHub](https://github.com/atomfinger/) - [john-mikael-gundersen@LinkedIn](https://www.linkedin.com/in/john-mikael-gundersen/)
 
 Senior backend developer and tech lead who builds robust, maintainable software. Cares about architecture that can
 evolve, teams that can sustain a pace, and code the next person can actually read. More than 13 years across healthcare,
